@@ -24,22 +24,22 @@ public class JoinActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.join_main);
 
-        certifyID = (Button)findViewById(R.id.certifyID);
-        confirmJoin = (Button)findViewById(R.id.confirmJoin);
-        cancelJoin = (Button)findViewById(R.id.cancelJoin);
+        certifyID = (Button) findViewById(R.id.certifyID);
+        confirmJoin = (Button) findViewById(R.id.confirmJoin);
+        cancelJoin = (Button) findViewById(R.id.cancelJoin);
 
-        Spinner spin = (Spinner)findViewById(R.id.deptspinner);
+        Spinner spin = (Spinner) findViewById(R.id.deptspinner);
         spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                                           @Override
-                                           public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
-                                           }
+            }
 
-                                           @Override
-                                           public void onNothingSelected(AdapterView<?> adapterView) {
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
 
-                                           }
-                                       });
+            }
+        });
 
         adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, items);
