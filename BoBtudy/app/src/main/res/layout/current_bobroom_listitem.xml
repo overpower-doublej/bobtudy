@@ -10,8 +10,7 @@
         android:src="@drawable/bobroom_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:padding="8dp" />
+        android:layout_margin="7sp"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -20,16 +19,21 @@
 
         <TextView
             android:id="@+id/dataItem01"
+            android:text="Room Name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="4dp"
+            android:layout_margin="5sp"
             android:textSize="16dp"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/dataItem02"
+            android:text="Content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:layout_margin="5sp"
             android:textColor="#0000ff" />
     </LinearLayout>
 

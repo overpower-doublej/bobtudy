@@ -10,47 +10,77 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#ff6633"
-        android:padding="10sp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10sp"
-            android:text="현재 진행중인 밥터디"
-            android:textColor="#ffffff"
-            android:textSize="30sp" />
-
-        <Button
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#ffffff"
-            android:layout_marginTop="5sp"
-            android:text="menu"
-            android:textSize="20sp"/>
-    </LinearLayout>
+            android:background="#ff6633"
+            android:orientation="horizontal"
+            android:padding="10sp">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10sp"
+                android:text="현재 진행중인 밥터디"
+                android:textColor="#ffffff"
+                android:textSize="30sp" />
 
-    <ListView
-        android:id="@+id/bobroomList"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5sp"
+                android:background="#ffffff"
+                android:text="menu"
+                android:textSize="20sp" />
+        </LinearLayout>
 
-    </ListView>
-    </LinearLayout>
-
-
-        <ImageView
-            android:src="@drawable/create_bobroom"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="right||bottom"
-            android:layout_margin="20sp"
-            android:padding="8dp" />
+            android:background="#ff5533"
+            android:orientation="horizontal"
+            android:padding="2sp">
+
+            <TextView
+                android:id="@+id/BoBroomListAlign1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10sp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="등록 시간 순"
+                android:textColor="#ffffff"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/BoBroomListAlign2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10sp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="마감 시간 순"
+                android:textColor="#ffffff"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+
+        <ListView
+            android:id="@+id/bobroomList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        </ListView>
+    </LinearLayout>
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right||bottom"
+        android:layout_margin="20sp"
+        android:padding="8dp"
+        android:src="@drawable/create_bobroom" />
 
 
 </FrameLayout>
