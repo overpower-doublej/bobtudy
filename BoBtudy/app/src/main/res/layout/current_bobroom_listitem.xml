@@ -37,4 +37,16 @@
             android:textColor="#0000ff" />
     </LinearLayout>
 
+    <Space
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:id="@+id/iconItem"
+        android:src="@drawable/arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="7sp"/>
+
 </LinearLayout>

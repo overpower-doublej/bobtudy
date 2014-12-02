@@ -7,22 +7,22 @@
 
 
     <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#ff6633"
+    android:orientation="horizontal"
+    android:padding="10sp">
+
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#ff6633"
-        android:orientation="horizontal"
-        android:padding="10sp">
+        android:layout_margin="10sp"
+        android:gravity="center"
+        android:text="새로운 밥룸 만들기"
+        android:textColor="#ffffff"
+        android:textSize="30sp" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10sp"
-            android:gravity="center"
-            android:text="새로운 밥룸 만들기"
-            android:textColor="#ffffff"
-            android:textSize="30sp" />
-
-    </LinearLayout>
+</LinearLayout>
 
     <TableLayout
         android:layout_width="match_parent"
@@ -44,7 +44,7 @@
 
 
             <EditText
-                android:id="@+id/BoBroomTitle"
+                android:id="@+id/bobroomTitle"
                 android:layout_margin="10sp"
                 android:textSize="18sp"
                 android:layout_width="wrap_content"
@@ -86,7 +86,7 @@
 
 
             <EditText
-                android:id="@+id/BoBroomPlace"
+                android:id="@+id/bobroomPlace"
                 android:layout_margin="10sp"
                 android:textSize="18sp"
                 android:layout_width="wrap_content"
@@ -108,7 +108,7 @@
 
 
             <EditText
-                android:id="@+id/BoBroomGoto"
+                android:id="@+id/bobroomGoto"
                 android:layout_margin="10sp"
                 android:textSize="18sp"
                 android:layout_width="wrap_content"
@@ -130,7 +130,7 @@
 
 
             <EditText
-                android:id="@+id/BoBroomComment"
+                android:id="@+id/bobroomComment"
                 android:layout_margin="10sp"
                 android:textSize="18sp"
                 android:layout_width="wrap_content"
@@ -149,7 +149,7 @@
         android:padding="2sp">
 
         <Button
-            android:id="@+id/createBoBroomOK"
+            android:id="@+id/createbobroomOK"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10sp"
@@ -162,7 +162,7 @@
             android:textSize="20sp" />
 
         <Button
-            android:id="@+id/createBoBroomCancel"
+            android:id="@+id/createbobroomCancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10sp"
@@ -174,6 +174,5 @@
             android:textColor="#ffffff"
             android:textSize="20sp" />
     </LinearLayout>
-
 
 </LinearLayout>

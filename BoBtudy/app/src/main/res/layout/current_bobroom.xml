@@ -26,10 +26,12 @@
                 android:textSize="30sp" />
 
             <Button
+                android:id="@+id/BoBtudyMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5sp"
-                android:background="#ffffff"
+                android:background="#ff3333"
+                android:textColor="#ffffff"
                 android:text="menu"
                 android:textSize="20sp" />
         </LinearLayout>
@@ -69,7 +71,6 @@
             android:id="@+id/bobroomList"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
-
         </ListView>
     </LinearLayout>
 
@@ -77,7 +78,7 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="right||bottom"
+        android:layout_gravity="right|bottom"
         android:layout_margin="20sp"
         android:padding="8dp"
         android:src="@drawable/create_bobroom" />
