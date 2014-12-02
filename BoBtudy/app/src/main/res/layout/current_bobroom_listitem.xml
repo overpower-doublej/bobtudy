@@ -7,6 +7,7 @@
 
     <ImageView
         android:id="@+id/iconItem"
+        android:src="@drawable/bobroom_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"

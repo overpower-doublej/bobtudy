@@ -1,9 +1,14 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".JoinActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -29,10 +34,23 @@
             android:textSize="20sp"/>
     </LinearLayout>
 
+
     <ListView
         android:id="@+id/bobroomList"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"></ListView>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+    </ListView>
+    </LinearLayout>
 
 
-</LinearLayout>
+        <ImageView
+            android:src="@drawable/create_bobroom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right||bottom"
+            android:layout_margin="20sp"
+            android:padding="8dp" />
+
+
+</FrameLayout>
