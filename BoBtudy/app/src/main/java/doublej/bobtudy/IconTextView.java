@@ -1,5 +1,12 @@
 package doublej.bobtudy;
 
+import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.view.LayoutInflater;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
 /**
  * Created by YeomJi on 2014. 12. 1..
  */
@@ -30,7 +37,7 @@ public class IconTextView extends LinearLayout {
 
         // Layout Inflation
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        inflater.inflate(R.layout.listitem, this, true);
+        inflater.inflate(R.layout.current_bobroom_listitem, this, true);
 
         // Set Icon
         mIcon = (ImageView) findViewById(R.id.iconItem);
