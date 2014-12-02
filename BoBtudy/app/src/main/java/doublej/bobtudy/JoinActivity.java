@@ -51,8 +51,6 @@ public class JoinActivity extends Activity {
         certifyID = (Button) findViewById(R.id.certifyID);
         confirmJoin = (Button) findViewById(R.id.confirmJoin);
         cancelJoin = (Button) findViewById(R.id.cancelJoin);
-<<<<<<< HEAD
-=======
 
         editId = (EditText) findViewById(R.id.editId);
         editPwd1 = (EditText) findViewById(R.id.editPwd1);
@@ -60,7 +58,6 @@ public class JoinActivity extends Activity {
         editNickName = (EditText) findViewById(R.id.editNickName);
         editName = (EditText) findViewById(R.id.editName);
         editStuId = (EditText) findViewById(R.id.editStuId);
->>>>>>> FETCH_HEAD
 
         Spinner spin = (Spinner) findViewById(R.id.deptspinner);
         spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
