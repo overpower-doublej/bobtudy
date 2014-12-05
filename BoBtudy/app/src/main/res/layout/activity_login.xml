@@ -3,22 +3,62 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ff6633"
     android:gravity="center">
 
-    <EditText
+    <ImageView
+        android:src="@drawable/ricemain"
+        android:layout_width="match_parent"
+        android:layout_height="230sp" />
+
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        android:text="B o B t u d y"/>
+
+    <EditText
+        android:id="@+id/loginID"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#ffffff"
         android:hint="아이디" />
 
     <EditText
+        android:id="@+id/loginPW"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="비밀번호"
+        android:textColor="#ffffff"
         android:inputType="textPassword" />
 
-    <Button
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="로그인" />
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/enterLogin"
+            android:layout_width="150sp"
+            android:layout_height="wrap_content"
+            android:background="#ff5433"
+            android:layout_margin="10sp"
+            android:text="로그인" />
+
+        <Button
+            android:id="@+id/createID"
+            android:layout_width="150sp"
+            android:layout_height="wrap_content"
+            android:background="#ff5433"
+            android:layout_margin="10sp"
+            android:text="아이디 만들기" />
+
+
+        </LinearLayout>
+
+
 
 </LinearLayout>

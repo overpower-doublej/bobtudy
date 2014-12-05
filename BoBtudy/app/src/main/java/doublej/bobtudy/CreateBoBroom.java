@@ -1,4 +1,4 @@
-package doublej.bobtudy.http;
+package doublej.bobtudy;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -25,13 +25,13 @@ public class CreateBoBroom extends Activity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.create_bobroom);
 
-        createBoBroomOK = (Button) findViewById(R.id.createBoBroomOK);
-        createBoBroomCancel = (Button) findViewById(R.id.createBoBroomCancel);
+        createBoBroomOK = (Button) findViewById(R.id.createbobroomOK);
+        createBoBroomCancel = (Button) findViewById(R.id.createbobroomCancel);
 
-        BoBroomTitle = (EditText) findViewById(R.id.BoBroomTitle);
-        BoBroomPlace = (EditText) findViewById(R.id.BoBroomPlace);
-        BoBroomGoto = (EditText) findViewById(R.id.BoBroomGoto);
-        BoBroomComment = (EditText) findViewById(R.id.BoBroomComment);
+        BoBroomTitle = (EditText) findViewById(R.id.bobroomTitle);
+        BoBroomPlace = (EditText) findViewById(R.id.bobroomPlace);
+        BoBroomGoto = (EditText) findViewById(R.id.bobroomGoto);
+        BoBroomComment = (EditText) findViewById(R.id.bobroomComment);
 
         bobroomTime = (TimePicker) findViewById(R.id.bobroomTime);
 

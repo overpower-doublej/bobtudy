@@ -71,7 +71,7 @@
         android:padding="2sp">
 
         <Button
-            android:id="@+id/voteSuggestionOK"
+            android:id="@+id/voteResponseYes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10sp"
@@ -84,7 +84,7 @@
             android:textSize="20sp" />
 
         <Button
-            android:id="@+id/voteSuggestionCancel"
+            android:id="@+id/voteResponseNo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10sp"
