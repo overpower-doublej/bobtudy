@@ -9,16 +9,19 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".LoginActivity"
-            android:label="LoginActivity">
+            android:label="BoBtudy">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".CurrentBoBroom"
-            android:label="@string/title_activity_main" >
-        </activity>
+        <activity android:name=".JoinActivity" android:label="BoBtudy" > </activity>
+        <activity android:name=".ModifyInfoActivtiy" android:label="BoBtudy" > </activity>
+        <activity android:name=".MyInfoActivity" android:label="BoBtudy" > </activity>
+        <activity android:name=".CurrentBoBroom" android:label="BoBtudy" > </activity>
+        <activity android:name=".CreateBoBroom" android:label="BoBtudy" > </activity>
+        <activity android:name=".VoteSuggestionActivity" android:label="BoBtudy" > </activity>
+
     </application>
 
 </manifest>

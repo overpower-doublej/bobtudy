@@ -39,12 +39,16 @@ public class CreateBoBroom extends Activity {
             @Override
             public void onClick(View v) {
 
+                finish();
+
             }
         });
 
         createBoBroomCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                finish();
 
             }
         });
