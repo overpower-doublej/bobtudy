@@ -27,8 +27,7 @@
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="15sp"
-        android:layout_marginTop="10sp"
+        android:layout_margin="20sp"
         android:layout_gravity="center" >
 
         <TableRow
@@ -36,21 +35,21 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="100sp"
                 android:layout_height="wrap_content"
                 android:layout_margin="5sp"
                 android:gravity="center"
-                android:text="시간 : "
-                android:textSize="20sp" />
+                android:text="닉네임 : "
+                android:textSize="25sp" />
 
             <TextView
-                android:id="@+id/mybobroomTime"
-                android:layout_width="wrap_content"
+                android:id="@+id/myNickName"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="5sp"
                 android:gravity="center"
-                android:text="time"
-                android:textSize="20sp" />
+                android:text="aaaaa"
+                android:textSize="25sp" />
         </TableRow>
 
         <TableRow
@@ -58,21 +57,85 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="100sp"
                 android:layout_height="wrap_content"
                 android:layout_margin="5sp"
                 android:gravity="center"
-                android:text="장소 : "
-                android:textSize="20sp" />
+                android:text="출석률 : "
+                android:textSize="25sp" />
 
             <TextView
-                android:id="@+id/mybobroomPlace"
+                android:id="@+id/MyParticipate"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="5sp"
+                android:gravity="center"
+                android:text="bbbbb"
+                android:textSize="25sp" />
+        </TableRow>
+
+    </TableLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="10sp"
+        android:orientation="horizontal"
+        android:background="#ff6633"
+        android:layout_marginTop="10sp"
+        android:padding="2sp">
+    </LinearLayout>
+
+
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20sp"
+        android:layout_gravity="center" >
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="100sp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5sp"
+                android:gravity="center"
+                android:text="ID : "
+                android:textSize="25sp" />
+
+            <TextView
+                android:id="@+id/myinfoID"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5sp"
+                android:gravity="center"
+                android:text="ccccc"
+                android:textSize="25sp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="100sp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5sp"
+                android:gravity="center"
+                android:text="이름 : "
+                android:textSize="25sp" />
+
+            <TextView
+                android:id="@+id/myinfoName"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_margin="5sp"
                 android:gravity="center"
                 android:text="place"
-                android:textSize="20sp" />
+                android:textSize="25sp" />
         </TableRow>
 
         <TableRow
@@ -80,21 +143,21 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="100sp"
                 android:layout_height="wrap_content"
                 android:layout_margin="5sp"
                 android:gravity="center"
-                android:text="밥집 : "
-                android:textSize="20sp" />
+                android:text="학과 : "
+                android:textSize="25sp" />
 
             <TextView
-                android:id="@+id/mybobroomGoto"
+                android:id="@+id/myinfoDept"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_margin="5sp"
                 android:gravity="center"
                 android:text="goto"
-                android:textSize="20sp" />
+                android:textSize="25sp" />
         </TableRow>
 
         <TableRow
@@ -102,24 +165,34 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="100sp"
                 android:layout_height="wrap_content"
                 android:layout_margin="5sp"
                 android:gravity="center"
-                android:text="남길 말 : "
-                android:textSize="20sp" />
+                android:text="학번 : "
+                android:textSize="25sp" />
 
             <TextView
-                android:id="@+id/mybobroomComment"
+                android:id="@+id/myinfoStuID"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_margin="5sp"
                 android:gravity="center"
                 android:text="Comment"
-                android:textSize="20sp" />
+                android:textSize="25sp" />
         </TableRow>
 
     </TableLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="10sp"
+        android:orientation="horizontal"
+        android:background="#ff6633"
+        android:layout_marginBottom="10sp"
+        android:padding="2sp">
+    </LinearLayout>
+
 
 
     <LinearLayout
@@ -129,7 +202,7 @@
         android:padding="2sp">
 
         <Button
-            android:id="@+id/voteResponseYes"
+            android:id="@+id/myinfoModify"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10sp"
@@ -142,7 +215,7 @@
             android:textSize="20sp" />
 
         <Button
-            android:id="@+id/voteResponseNo"
+            android:id="@+id/myinfoConfirm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10sp"
