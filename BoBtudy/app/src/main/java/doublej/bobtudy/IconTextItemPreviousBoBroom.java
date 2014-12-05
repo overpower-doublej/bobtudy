@@ -2,11 +2,10 @@ package doublej.bobtudy;
 
 import android.graphics.drawable.Drawable;
 
-
 /**
- * Created by YeomJi on 2014. 12. 1..
+ * Created by YeomJi on 2014. 12. 5..
  */
-public class IconTextItem {
+public class IconTextItemPreviousBoBroom {
 
     /**
      * Icon
@@ -29,7 +28,7 @@ public class IconTextItem {
      * @param icon
      * @param obj
      */
-    public IconTextItem(Drawable icon, String[] obj) {
+    public IconTextItemPreviousBoBroom(Drawable icon, String[] obj) {
         mIcon = icon;
         mData = obj;
     }
@@ -42,7 +41,7 @@ public class IconTextItem {
      * @param obj02
      * @param obj03
      */
-    public IconTextItem(Drawable icon, String obj01, String obj02, String obj03) {
+    public IconTextItemPreviousBoBroom(Drawable icon, String obj01, String obj02, String obj03) {
         mIcon = icon;
 
         mData = new String[3];
@@ -118,7 +117,7 @@ public class IconTextItem {
      * @param other
      * @return
      */
-    public int compareTo(IconTextItem other) {
+    public int compareTo(IconTextItemBoBroom other) {
         if (mData != null) {
             String[] otherData = other.getData();
             if (mData.length == otherData.length) {

@@ -6,7 +6,7 @@
     android:orientation="horizontal" >
 
     <ImageView
-        android:id="@+id/iconItem"
+        android:id="@+id/iconItemBoBroom"
         android:src="@drawable/bobroom_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -18,7 +18,7 @@
         android:orientation="vertical" >
 
         <TextView
-            android:id="@+id/dataItem01"
+            android:id="@+id/dataItem01BoBroom"
             android:text="Room Name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -28,7 +28,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/dataItem02"
+            android:id="@+id/dataItem02BoBroom"
             android:text="Content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -43,7 +43,6 @@
         android:layout_height="wrap_content" />
 
     <ImageView
-        android:id="@+id/iconItem"
         android:src="@drawable/arrow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

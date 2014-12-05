@@ -40,7 +40,7 @@
                 android:layout_margin="5sp"
                 android:gravity="center"
                 android:text="닉네임 : "
-                android:textSize="25sp" />
+                android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/myNickName"
@@ -49,7 +49,7 @@
                 android:layout_margin="5sp"
                 android:gravity="center"
                 android:text="aaaaa"
-                android:textSize="25sp" />
+                android:textSize="15sp" />
         </TableRow>
 
         <TableRow
@@ -62,7 +62,7 @@
                 android:layout_margin="5sp"
                 android:gravity="center"
                 android:text="출석률 : "
-                android:textSize="25sp" />
+                android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/MyParticipate"
@@ -71,7 +71,7 @@
                 android:layout_margin="5sp"
                 android:gravity="center"
                 android:text="bbbbb"
-                android:textSize="25sp" />
+                android:textSize="15sp" />
         </TableRow>
 
     </TableLayout>
@@ -104,7 +104,7 @@
                 android:layout_margin="5sp"
                 android:gravity="center"
                 android:text="ID : "
-                android:textSize="25sp" />
+                android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/myinfoID"
@@ -113,7 +113,7 @@
                 android:layout_margin="5sp"
                 android:gravity="center"
                 android:text="ccccc"
-                android:textSize="25sp" />
+                android:textSize="15sp" />
         </TableRow>
 
         <TableRow
@@ -126,7 +126,7 @@
                 android:layout_margin="5sp"
                 android:gravity="center"
                 android:text="이름 : "
-                android:textSize="25sp" />
+                android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/myinfoName"
@@ -135,7 +135,7 @@
                 android:layout_margin="5sp"
                 android:gravity="center"
                 android:text="place"
-                android:textSize="25sp" />
+                android:textSize="15sp" />
         </TableRow>
 
         <TableRow
@@ -148,7 +148,7 @@
                 android:layout_margin="5sp"
                 android:gravity="center"
                 android:text="학과 : "
-                android:textSize="25sp" />
+                android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/myinfoDept"
@@ -157,7 +157,7 @@
                 android:layout_margin="5sp"
                 android:gravity="center"
                 android:text="goto"
-                android:textSize="25sp" />
+                android:textSize="15sp" />
         </TableRow>
 
         <TableRow
@@ -170,7 +170,7 @@
                 android:layout_margin="5sp"
                 android:gravity="center"
                 android:text="학번 : "
-                android:textSize="25sp" />
+                android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/myinfoStuID"
@@ -179,7 +179,7 @@
                 android:layout_margin="5sp"
                 android:gravity="center"
                 android:text="Comment"
-                android:textSize="25sp" />
+                android:textSize="15sp" />
         </TableRow>
 
     </TableLayout>

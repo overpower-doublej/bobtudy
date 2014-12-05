@@ -1,7 +1,6 @@
 package doublej.bobtudy;
 
 import android.app.Activity;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -16,7 +15,7 @@ import android.view.View.OnClickListener;
 /**
  * Created by YeomJi on 2014. 12. 1..
  */
-public class CurrentBoBroom extends Activity implements OnClickListener{
+public class CurrentBoBroom extends Activity implements View.OnClickListener {
 
     public static final int REQUEST_CODE_ANOTHER = 1001;
 
@@ -25,6 +24,7 @@ public class CurrentBoBroom extends Activity implements OnClickListener{
     Button BoBtudyMenu;
     ImageView CreateRoomImage;
 
+    TextView BoBroomListAlign1, BoBroomListAlign2;
     TextView currentBoBtudy, BoBtudyHistory, myInfo, logout;
 
     @Override
@@ -34,22 +34,26 @@ public class CurrentBoBroom extends Activity implements OnClickListener{
         setContentView(R.layout.current_bobroom);
 
 
+        BoBtudyMenu = (Button) findViewById(R.id.BoBtudyMenu);
+        CreateRoomImage = (ImageView) findViewById(R.id.CreateRoomImage);
+
+        BoBroomListAlign1 = (TextView) findViewById(R.id.BoBroomListAlign1);
+        BoBroomListAlign2 = (TextView) findViewById(R.id.BoBroomListAlign2);
+
+
+        mNav = new SimpleSideDrawer(this);
+        mNav.setRightBehindContentView(R.layout.bobtudy_menu);
+
+
         currentBoBtudy = (TextView) findViewById(R.id.currentBoBtudy);
         BoBtudyHistory = (TextView) findViewById(R.id.BoBtudyHistory);
         myInfo = (TextView) findViewById(R.id.myInfo);
         logout = (TextView) findViewById(R.id.logout);
 
-
-        BoBtudyMenu = (Button) findViewById(R.id.BoBtudyMenu);
-        CreateRoomImage = (ImageView) findViewById(R.id.CreateRoomImage);
-
         currentBoBtudy.setOnClickListener(this);
         BoBtudyHistory.setOnClickListener(this);
         myInfo.setOnClickListener(this);
         logout.setOnClickListener(this);
-
-        mNav = new SimpleSideDrawer(this);
-        mNav.setLeftBehindContentView(R.layout.bobtudy_menu);
 
 
         CreateRoomImage.setOnClickListener(new View.OnClickListener() {
@@ -67,8 +71,23 @@ public class CurrentBoBroom extends Activity implements OnClickListener{
             @Override
             public void onClick(View v) {
 
-                //mNav.toggleRightDrawer();
-                mNav.toggleLeftDrawer();
+                mNav.toggleRightDrawer();
+
+
+            }
+        });
+
+        BoBroomListAlign1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+            }
+        });
+
+        BoBroomListAlign2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
 
             }
@@ -79,18 +98,24 @@ public class CurrentBoBroom extends Activity implements OnClickListener{
 
     @Override
     public void onClick(View v) {
-        if (v == currentBoBtudy) {
+        if (v.getId() == R.id.currentBoBtudy) {
+            Intent intent = new Intent(getBaseContext(),
+                    MyBoBRoomActivity.class);
+            startActivityForResult(intent, REQUEST_CODE_ANOTHER);
+
+        } else if (v.getId() == R.id.BoBtudyHistory) {
+
+            Intent intent = new Intent(getBaseContext(),
+                    PreviousBoBtudyActivity.class);
+            startActivityForResult(intent, REQUEST_CODE_ANOTHER);
 
 
-        } else if (v == BoBtudyHistory) {
-
-
-        } else if (v == myInfo) {
+        } else if (v.getId() == R.id.myInfo) {
             Intent intent = new Intent(getBaseContext(),
                     MyInfoActivity.class);
             startActivityForResult(intent, REQUEST_CODE_ANOTHER);
 
-        } else if (v == logout) {
+        } else if (v.getId() == R.id.logout) {
             finish();
         }
     }

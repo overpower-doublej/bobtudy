@@ -40,14 +40,15 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5sp"
                 android:text="닉네임 : "
-                android:textSize="25sp" />
+                android:textSize="15sp" />
 
             <EditText
                 android:id="@+id/modifyinfoNickName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:textSize="25sp" />
+                android:textSize="15sp"
+                android:ems="10"/>
         </TableRow>
 
 
@@ -60,14 +61,15 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5sp"
                 android:text="기존 PW : "
-                android:textSize="25sp" />
+                android:textSize="15sp" />
 
             <EditText
                 android:id="@+id/modifyinfoPWOriginal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:textSize="25sp" />
+                android:textSize="15sp"
+                android:ems="10"/>
         </TableRow>
 
         <TableRow
@@ -79,14 +81,15 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5sp"
                 android:text="새 PW : "
-                android:textSize="25sp" />
+                android:textSize="15sp" />
 
             <EditText
                 android:id="@+id/modifyinfoPWNew"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:textSize="25sp" />
+                android:textSize="15sp"
+                android:ems="10"/>
         </TableRow>
 
         <TableRow
@@ -98,14 +101,15 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5sp"
                 android:text="PW 확인"
-                android:textSize="25sp" />
+                android:textSize="15sp" />
 
             <EditText
                 android:id="@+id/modifyinfoPWNew2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:textSize="25sp" />
+                android:textSize="15sp"
+                android:ems="10"/>
         </TableRow>
 
     </TableLayout>

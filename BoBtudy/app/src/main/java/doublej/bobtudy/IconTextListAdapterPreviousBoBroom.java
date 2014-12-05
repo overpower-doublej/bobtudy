@@ -1,32 +1,31 @@
 package doublej.bobtudy;
 
-import java.util.ArrayList;
-import java.util.List;
-
-
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- * Created by YeomJi on 2014. 12. 1..
+ * Created by YeomJi on 2014. 12. 5..
  */
-public class IconTextListAdapter extends BaseAdapter {
+public class IconTextListAdapterPreviousBoBroom  extends BaseAdapter {
 
     private Context mContext;
 
-    private List<IconTextItem> mItems = new ArrayList<IconTextItem>();
+    private List<IconTextItemBoBroom> mItems = new ArrayList<IconTextItemBoBroom>();
 
-    public IconTextListAdapter(Context context) {
+    public IconTextListAdapterPreviousBoBroom(Context context) {
         mContext = context;
     }
 
-    public void addItem(IconTextItem it) {
+    public void addItem(IconTextItemBoBroom it) {
         mItems.add(it);
     }
 
-    public void setListItems(List<IconTextItem> lit) {
+    public void setListItems(List<IconTextItemBoBroom> lit) {
         mItems = lit;
     }
 
@@ -55,11 +54,11 @@ public class IconTextListAdapter extends BaseAdapter {
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
-        IconTextView itemView;
+        IconTextViewBoBroom itemView;
         if (convertView == null) {
-            itemView = new IconTextView(mContext, mItems.get(position));
+            itemView = new IconTextViewBoBroom(mContext, mItems.get(position));
         } else {
-            itemView = (IconTextView) convertView;
+            itemView = (IconTextViewBoBroom) convertView;
 
             itemView.setIcon(mItems.get(position).getIcon());
             itemView.setText(0, mItems.get(position).getData(0));
@@ -70,3 +69,4 @@ public class IconTextListAdapter extends BaseAdapter {
         return itemView;
     }
 }
+

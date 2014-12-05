@@ -37,7 +37,6 @@ public class LoginActivity extends Activity {
                 Intent intent = new Intent(getBaseContext(),
                         CurrentBoBroom.class);
                 startActivityForResult(intent, REQUEST_CODE_ANOTHER);
-                finish();
 
             }
         });

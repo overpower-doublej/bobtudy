@@ -8,9 +8,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 /**
- * Created by YeomJi on 2014. 12. 1..
+ * Created by YeomJi on 2014. 12. 5..
  */
-public class IconTextView extends LinearLayout {
+public class IconTextViewPreviousBoBroom extends LinearLayout {
 
     /**
      * Icon
@@ -32,7 +32,7 @@ public class IconTextView extends LinearLayout {
      */
     private TextView mText03;
 
-    public IconTextView(Context context, IconTextItem aItem) {
+    public IconTextViewPreviousBoBroom(Context context, IconTextItemBoBroom aItem) {
         super(context);
 
         // Layout Inflation
@@ -40,15 +40,15 @@ public class IconTextView extends LinearLayout {
         inflater.inflate(R.layout.current_bobroom_listitem, this, true);
 
         // Set Icon
-        mIcon = (ImageView) findViewById(R.id.iconItem);
+        mIcon = (ImageView) findViewById(R.id.iconItemBoBroom);
         mIcon.setImageDrawable(aItem.getIcon());
 
         // Set Text 01
-        mText01 = (TextView) findViewById(R.id.dataItem01);
+        mText01 = (TextView) findViewById(R.id.dataItem01BoBroom);
         mText01.setText(aItem.getData(0));
 
         // Set Text 02
-        mText02 = (TextView) findViewById(R.id.dataItem02);
+        mText02 = (TextView) findViewById(R.id.dataItem02BoBroom);
         mText02.setText(aItem.getData(1));
 
     }

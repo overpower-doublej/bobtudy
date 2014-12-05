@@ -90,6 +90,7 @@ public class JoinActivity extends Activity {
             @Override
             public void onClick(View view) {
                 RequestParams params = new RequestParams();
+                finish();
             }
         });
 
