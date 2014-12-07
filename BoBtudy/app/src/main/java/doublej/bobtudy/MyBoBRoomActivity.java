@@ -2,15 +2,20 @@ package doublej.bobtudy;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 
 public class MyBoBRoomActivity extends Activity {
 
     public static final int REQUEST_CODE_ANOTHER = 1001;
+
+    ListView list;
+    IconTextListAdapterBoBroomMember adapter;
 
     TextView mybobroomTime, mybobroomPlace, mybobroomGoto, mybobroomComment;
     Button getOutBoBtudy, chattingRoom, voteSuggestion;
@@ -29,6 +34,16 @@ public class MyBoBRoomActivity extends Activity {
         getOutBoBtudy = (Button) findViewById(R.id.getOutBoBtudy);
         chattingRoom = (Button) findViewById(R.id.chattingRoom);
         voteSuggestion = (Button) findViewById(R.id.voteSuggestion);
+
+        list = (ListView) findViewById(R.id.bobroomMemberList);
+
+        adapter = new IconTextListAdapterBoBroomMember(this);
+
+        Resources res = getResources();
+        adapter.addItem(new IconTextItemBoBroomMember(res.getDrawable(R.drawable.member),"김태준", "아싸킹"));
+        adapter.addItem(new IconTextItemBoBroomMember(res.getDrawable(R.drawable.member),"염은지", "염징ㅎㅎㅎㅎㅎ"));
+
+        list.setAdapter(adapter);
 
         getOutBoBtudy.setOnClickListener(new View.OnClickListener() {
             @Override

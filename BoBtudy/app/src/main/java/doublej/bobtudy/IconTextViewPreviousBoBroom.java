@@ -13,8 +13,8 @@ import android.widget.TextView;
 public class IconTextViewPreviousBoBroom extends LinearLayout {
 
     /**
-     * Icon
-     */
+    * Icon
+    */
     private ImageView mIcon;
 
     /**
@@ -32,23 +32,23 @@ public class IconTextViewPreviousBoBroom extends LinearLayout {
      */
     private TextView mText03;
 
-    public IconTextViewPreviousBoBroom(Context context, IconTextItemBoBroom aItem) {
+    public IconTextViewPreviousBoBroom(Context context, IconTextItemPreviousBoBroom aItem) {
         super(context);
 
         // Layout Inflation
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        inflater.inflate(R.layout.current_bobroom_listitem, this, true);
+        inflater.inflate(R.layout.previousbobtudy_listitem, this, true);
 
         // Set Icon
-        mIcon = (ImageView) findViewById(R.id.iconItemBoBroom);
+        mIcon = (ImageView) findViewById(R.id.iconItemPreviousBoBroom);
         mIcon.setImageDrawable(aItem.getIcon());
 
         // Set Text 01
-        mText01 = (TextView) findViewById(R.id.dataItem01BoBroom);
+        mText01 = (TextView) findViewById(R.id.dataItem01PreviousBoBroom);
         mText01.setText(aItem.getData(0));
 
         // Set Text 02
-        mText02 = (TextView) findViewById(R.id.dataItem02BoBroom);
+        mText02 = (TextView) findViewById(R.id.dataItem02PreviousBoBroom);
         mText02.setText(aItem.getData(1));
 
     }

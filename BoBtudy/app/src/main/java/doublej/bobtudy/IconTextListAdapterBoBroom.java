@@ -64,7 +64,6 @@ public class IconTextListAdapterBoBroom extends BaseAdapter {
             itemView.setIcon(mItems.get(position).getIcon());
             itemView.setText(0, mItems.get(position).getData(0));
             itemView.setText(1, mItems.get(position).getData(1));
-            itemView.setText(2, mItems.get(position).getData(2));
         }
 
         return itemView;

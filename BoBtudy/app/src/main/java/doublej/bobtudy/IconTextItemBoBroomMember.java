@@ -38,15 +38,13 @@ public class IconTextItemBoBroomMember {
      * @param icon
      * @param obj01
      * @param obj02
-     * @param obj03
      */
-    public IconTextItemBoBroomMember(Drawable icon, String obj01, String obj02, String obj03) {
+    public IconTextItemBoBroomMember(Drawable icon, String obj01, String obj02) {
         mIcon = icon;
 
         mData = new String[3];
         mData[0] = obj01;
         mData[1] = obj02;
-        mData[2] = obj03;
     }
 
     /**
@@ -116,7 +114,7 @@ public class IconTextItemBoBroomMember {
      * @param other
      * @return
      */
-    public int compareTo(IconTextItemBoBroom other) {
+    public int compareTo(IconTextItemBoBroomMember other) {
         if (mData != null) {
             String[] otherData = other.getData();
             if (mData.length == otherData.length) {

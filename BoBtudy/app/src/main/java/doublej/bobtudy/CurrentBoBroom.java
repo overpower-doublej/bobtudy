@@ -2,6 +2,7 @@ package doublej.bobtudy;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.view.View.OnClickListener;
 
@@ -18,6 +20,9 @@ import android.view.View.OnClickListener;
 public class CurrentBoBroom extends Activity implements View.OnClickListener {
 
     public static final int REQUEST_CODE_ANOTHER = 1001;
+
+    ListView list;
+    IconTextListAdapterBoBroom adapter;
 
     SimpleSideDrawer mNav;
 
@@ -39,6 +44,16 @@ public class CurrentBoBroom extends Activity implements View.OnClickListener {
 
         BoBroomListAlign1 = (TextView) findViewById(R.id.BoBroomListAlign1);
         BoBroomListAlign2 = (TextView) findViewById(R.id.BoBroomListAlign2);
+
+        list = (ListView) findViewById(R.id.bobroomList);
+
+        adapter = new IconTextListAdapterBoBroom(this);
+
+        Resources res = getResources();
+        adapter.addItem(new IconTextItemBoBroom(res.getDrawable(R.drawable.bobroom_image),"밥먹자 애드라", "오후 1시 돈부리집입니다."));
+        adapter.addItem(new IconTextItemBoBroom(res.getDrawable(R.drawable.bobroom_image),"난 아싸가 아니야", "정문 칼리앤메리 12시"));
+
+        list.setAdapter(adapter);
 
 
         mNav = new SimpleSideDrawer(this);
