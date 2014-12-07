@@ -45,11 +45,18 @@ public class PreviousBoBtudyActivity extends Activity {
             public void onClick(View v) {
 
                 Intent intent = new Intent(getBaseContext(),
-                        MyBoBRoomActivity.class);
+                        CurrentBoBroom.class);
                 startActivityForResult(intent, REQUEST_CODE_ANOTHER);
+                finish();
 
             }
         });
 
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        finish();
     }
 }

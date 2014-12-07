@@ -36,4 +36,10 @@ public class ChattingActivity extends Activity {
         });
 
     }
+
+    @Override
+    public void onBackPressed() {
+
+        finish();
+    }
 }

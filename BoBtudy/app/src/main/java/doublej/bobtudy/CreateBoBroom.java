@@ -62,4 +62,10 @@ public class CreateBoBroom extends Activity {
         });
 
     }
+
+    @Override
+    public void onBackPressed() {
+
+        finish();
+    }
 }

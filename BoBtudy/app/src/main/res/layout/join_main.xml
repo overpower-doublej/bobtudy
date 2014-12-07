@@ -9,18 +9,26 @@
         android:layout_height="wrap_content"
         android:background="#ff6633"
         android:orientation="horizontal"
-        android:padding="10sp" >
+        android:padding="5sp" >
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10sp"
+            android:layout_margin="5sp"
             android:gravity="center"
             android:text="아이디 만들기"
             android:textColor="#ffffff"
-            android:textSize="30sp" />
+            android:textSize="25sp" />
 
     </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ff4433"
+        android:orientation="horizontal"
+        android:padding="7sp"></LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -46,6 +54,7 @@
             android:id="@+id/certifyID"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="#ffffff"
             android:textSize="20sp"
             android:layout_margin="5sp"
             android:background="#ff5433"
@@ -186,6 +195,7 @@
             android:id="@+id/confirmJoin"
             android:layout_width="150sp"
             android:layout_height="wrap_content"
+            android:textColor="#ffffff"
             android:layout_margin="10sp"
             android:background="#ff5433"
             android:text="가입" />
@@ -194,6 +204,7 @@
             android:id="@+id/cancelJoin"
             android:layout_width="150sp"
             android:layout_height="wrap_content"
+            android:textColor="#ffffff"
             android:layout_margin="10sp"
             android:background="#ff5433"
             android:text="취소" />

@@ -50,4 +50,10 @@ public class ModifyInfoActivtiy extends Activity {
         });
 
     }
+
+    @Override
+    public void onBackPressed() {
+
+        finish();
+    }
 }

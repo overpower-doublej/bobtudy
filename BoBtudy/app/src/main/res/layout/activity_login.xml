@@ -15,9 +15,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:textSize="40sp"
+        android:textSize="50sp"
         android:textStyle="bold"
-        android:text="B o B t u d y"/>
+        android:typeface="monospace"
+        android:text="BoBtudy"/>
 
     <EditText
         android:id="@+id/loginID"
@@ -44,6 +45,7 @@
             android:id="@+id/enterLogin"
             android:layout_width="150sp"
             android:layout_height="wrap_content"
+            android:textColor="#ffffff"
             android:background="#ff5433"
             android:layout_margin="10sp"
             android:text="로그인" />
@@ -52,6 +54,7 @@
             android:id="@+id/createID"
             android:layout_width="150sp"
             android:layout_height="wrap_content"
+            android:textColor="#ffffff"
             android:background="#ff5433"
             android:layout_margin="10sp"
             android:text="아이디 만들기" />

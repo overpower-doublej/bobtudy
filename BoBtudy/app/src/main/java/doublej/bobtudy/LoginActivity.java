@@ -15,6 +15,8 @@ public class LoginActivity extends Activity {
 
     public static final int REQUEST_CODE_ANOTHER = 1001;
 
+    private BackPressCloseHandler backPressCloseHandler;
+
 
     EditText loginID, loginPW;
     Button enterLogin, createID;
@@ -24,6 +26,9 @@ public class LoginActivity extends Activity {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_login);
+
+        backPressCloseHandler = new BackPressCloseHandler(this);
+
 
         loginID = (EditText) findViewById(R.id.loginID);
         loginPW = (EditText) findViewById(R.id.loginPW);
@@ -37,6 +42,7 @@ public class LoginActivity extends Activity {
                 Intent intent = new Intent(getBaseContext(),
                         CurrentBoBroom.class);
                 startActivityForResult(intent, REQUEST_CODE_ANOTHER);
+                overridePendingTransition(R.anim.leftin, R.anim.leftout);
 
             }
         });
@@ -51,5 +57,11 @@ public class LoginActivity extends Activity {
 
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        backPressCloseHandler.onBackPressed();
     }
 }

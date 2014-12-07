@@ -78,4 +78,10 @@ public class MyBoBRoomActivity extends Activity {
 
 
     }
+
+    @Override
+    public void onBackPressed() {
+
+        finish();
+    }
 }
