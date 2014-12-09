@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="doublej.bobtudy">
 
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -15,6 +16,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+<<<<<<< HEAD
         <activity android:name=".UI.JoinActivity" android:label="BoBtudy" > </activity>
         <activity android:name=".UI.ModifyInfoActivtiy" android:label="BoBtudy" > </activity>
         <activity android:name=".UI.MyInfoActivity" android:label="BoBtudy" > </activity>
@@ -24,6 +26,35 @@
         <activity android:name=".UI.ChattingActivity" android:label="BoBtudy" > </activity>
         <activity android:name=".UI.MyBoBRoomActivity" android:label="BoBtudy" > </activity>
         <activity android:name=".UI.PreviousBoBtudyActivity" android:label="BoBtudy" > </activity>
+=======
+        <activity
+            android:name=".JoinActivity"
+            android:label="BoBtudy"></activity>
+        <activity
+            android:name=".ModifyInfoActivtiy"
+            android:label="BoBtudy"></activity>
+        <activity
+            android:name=".MyInfoActivity"
+            android:label="BoBtudy"></activity>
+        <activity
+            android:name=".CurrentBoBroom"
+            android:label="BoBtudy"></activity>
+        <activity
+            android:name=".CreateBoBroom"
+            android:label="BoBtudy"></activity>
+        <activity
+            android:name=".VoteSuggestionActivity"
+            android:label="BoBtudy"></activity>
+        <activity
+            android:name=".ChattingActivity"
+            android:label="BoBtudy"></activity>
+        <activity
+            android:name=".MyBoBRoomActivity"
+            android:label="BoBtudy"></activity>
+        <activity
+            android:name=".PreviousBoBtudyActivity"
+            android:label="BoBtudy"></activity>
+>>>>>>> FETCH_HEAD
 
     </application>
 
