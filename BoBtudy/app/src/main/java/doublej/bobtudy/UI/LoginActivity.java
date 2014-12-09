@@ -72,13 +72,16 @@ public class LoginActivity extends Activity {
         createID.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Intent intent = new Intent(getBaseContext(),
+                Intent intent = new Intent(getApplicationContext(),
                         JoinActivity.class);
                 startActivityForResult(intent, REQUEST_CODE_ANOTHER);
-
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        //Log.d(tag, "RequestCode: ", Integer.toString(requestCode));
     }
 
     @Override
