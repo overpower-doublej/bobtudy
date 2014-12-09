@@ -1,4 +1,4 @@
-package doublej.bobtudy;
+package doublej.bobtudy.Control;
 
 /**
  * Created by YeomJi on 14. 12. 8..

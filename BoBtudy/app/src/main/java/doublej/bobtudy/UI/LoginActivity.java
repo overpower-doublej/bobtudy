@@ -1,4 +1,4 @@
-package doublej.bobtudy;
+package doublej.bobtudy.UI;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -15,6 +15,8 @@ import doublej.bobtudy.form.post.Post;
 import doublej.bobtudy.http.NewPost;
 import doublej.bobtudy.http.PostHttp;
 import doublej.bobtudy.util.ISODate;
+import doublej.bobtudy.Control.BackPressCloseHandler;
+import doublej.bobtudy.R;
 
 /**
  * Created by YeomJi on 2014. 12. 5..

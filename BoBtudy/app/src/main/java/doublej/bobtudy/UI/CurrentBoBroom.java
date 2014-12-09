@@ -1,18 +1,22 @@
-package doublej.bobtudy;
+package doublej.bobtudy.UI;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.view.View.OnClickListener;
+
+import doublej.bobtudy.ListView.IconTextItemBoBroom;
+import doublej.bobtudy.ListView.IconTextListAdapterBoBroom;
+import doublej.bobtudy.R;
+import doublej.bobtudy.Control.SimpleSideDrawer;
 
 /**
  * Created by YeomJi on 2014. 12. 1..
@@ -107,6 +111,21 @@ public class CurrentBoBroom extends Activity implements View.OnClickListener {
 
             }
         });
+
+
+
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View v,
+                                    int position, long id) {
+                // TODO Auto-generated method stub
+                IconTextItemBoBroom curItem = (IconTextItemBoBroom) adapter.getItem(position);
+                String[] curData = curItem.getData();
+
+            }
+        });
+
 
 
     }
