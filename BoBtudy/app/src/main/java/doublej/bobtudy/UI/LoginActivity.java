@@ -1,4 +1,4 @@
-package doublej.bobtudy;
+package doublej.bobtudy.UI;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -7,6 +7,9 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+
+import doublej.bobtudy.Control.BackPressCloseHandler;
+import doublej.bobtudy.R;
 
 /**
  * Created by YeomJi on 2014. 12. 5..

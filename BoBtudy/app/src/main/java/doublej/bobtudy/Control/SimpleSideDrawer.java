@@ -1,4 +1,4 @@
-package doublej.bobtudy;
+package doublej.bobtudy.Control;
 
 /**
  * Created by YeomJi on 2014. 12. 5..
@@ -6,20 +6,13 @@ package doublej.bobtudy;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.res.XmlResourceParser;
 import android.graphics.Rect;
-import android.graphics.drawable.GradientDrawable.Orientation;
-import android.util.AttributeSet;
-import android.util.DisplayMetrics;
-import android.util.Xml;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
-import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Interpolator;
 import android.widget.FrameLayout;

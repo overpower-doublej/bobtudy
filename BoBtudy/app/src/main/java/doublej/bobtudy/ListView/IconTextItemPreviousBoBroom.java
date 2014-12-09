@@ -1,11 +1,12 @@
-package doublej.bobtudy;
+package doublej.bobtudy.ListView;
 
 import android.graphics.drawable.Drawable;
 
 /**
  * Created by YeomJi on 2014. 12. 5..
  */
-public class IconTextItemBoBroomMember {
+public class IconTextItemPreviousBoBroom {
+
     /**
      * Icon
      */
@@ -27,7 +28,7 @@ public class IconTextItemBoBroomMember {
      * @param icon
      * @param obj
      */
-    public IconTextItemBoBroomMember(Drawable icon, String[] obj) {
+    public IconTextItemPreviousBoBroom(Drawable icon, String[] obj) {
         mIcon = icon;
         mData = obj;
     }
@@ -39,7 +40,7 @@ public class IconTextItemBoBroomMember {
      * @param obj01
      * @param obj02
      */
-    public IconTextItemBoBroomMember(Drawable icon, String obj01, String obj02) {
+    public IconTextItemPreviousBoBroom(Drawable icon, String obj01, String obj02) {
         mIcon = icon;
 
         mData = new String[3];
@@ -114,7 +115,7 @@ public class IconTextItemBoBroomMember {
      * @param other
      * @return
      */
-    public int compareTo(IconTextItemBoBroomMember other) {
+    public int compareTo(IconTextItemPreviousBoBroom other) {
         if (mData != null) {
             String[] otherData = other.getData();
             if (mData.length == otherData.length) {

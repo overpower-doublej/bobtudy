@@ -1,4 +1,4 @@
-package doublej.bobtudy;
+package doublej.bobtudy.ListView;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import doublej.bobtudy.R;
 
 /**
  * Created by YeomJi on 2014. 12. 5..

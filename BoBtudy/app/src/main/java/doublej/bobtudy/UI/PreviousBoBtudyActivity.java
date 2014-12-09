@@ -1,4 +1,4 @@
-package doublej.bobtudy;
+package doublej.bobtudy.UI;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -6,8 +6,14 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+
+import doublej.bobtudy.ListView.IconTextItemPreviousBoBroom;
+import doublej.bobtudy.ListView.IconTextListAdapterPreviousBoBroom;
+import doublej.bobtudy.R;
+import doublej.bobtudy.UI.CurrentBoBroom;
 
 /**
  * Created by YeomJi on 2014. 12. 5..
@@ -48,6 +54,19 @@ public class PreviousBoBtudyActivity extends Activity {
                         CurrentBoBroom.class);
                 startActivityForResult(intent, REQUEST_CODE_ANOTHER);
                 finish();
+
+            }
+        });
+
+
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View v,
+                                    int position, long id) {
+                // TODO Auto-generated method stub
+                IconTextItemPreviousBoBroom curItem = (IconTextItemPreviousBoBroom) adapter.getItem(position);
+                String[] curData = curItem.getData();
 
             }
         });

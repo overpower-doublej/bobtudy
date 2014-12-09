@@ -1,18 +1,30 @@
-package doublej.bobtudy;
+package doublej.bobtudy.UI;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import doublej.bobtudy.ListView.IconTextItemBoBroomMember;
+import doublej.bobtudy.ListView.IconTextListAdapterBoBroomMember;
+import doublej.bobtudy.Control.MyDatabase;
+import doublej.bobtudy.R;
+
 public class MyBoBRoomActivity extends Activity {
 
     public static final int REQUEST_CODE_ANOTHER = 1001;
+
+    private final String tag = "MyInfoActivity";
+
+    MyDatabase myDB = new MyDatabase(this);
+    final SQLiteDatabase db = myDB.getReadableDatabase();
 
     ListView list;
     IconTextListAdapterBoBroomMember adapter;
@@ -72,6 +84,19 @@ public class MyBoBRoomActivity extends Activity {
                 Intent intent = new Intent(getBaseContext(),
                         VoteSuggestionActivity.class);
                 startActivityForResult(intent, REQUEST_CODE_ANOTHER);
+
+            }
+        });
+
+
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View v,
+                                    int position, long id) {
+                // TODO Auto-generated method stub
+                IconTextItemBoBroomMember curItem = (IconTextItemBoBroomMember) adapter.getItem(position);
+                String[] curData = curItem.getData();
 
             }
         });

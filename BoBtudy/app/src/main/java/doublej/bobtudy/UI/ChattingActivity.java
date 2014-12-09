@@ -1,4 +1,4 @@
-package doublej.bobtudy;
+package doublej.bobtudy.UI;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -7,6 +7,8 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import doublej.bobtudy.R;
 
 /**
  * Created by YeomJi on 2014. 12. 5..

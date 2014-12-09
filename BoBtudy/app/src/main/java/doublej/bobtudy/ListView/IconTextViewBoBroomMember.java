@@ -1,4 +1,4 @@
-package doublej.bobtudy;
+package doublej.bobtudy.ListView;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -7,10 +7,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import doublej.bobtudy.R;
+
 /**
- * Created by YeomJi on 2014. 12. 1..
+ * Created by YeomJi on 2014. 12. 5..
  */
-public class IconTextViewBoBroom extends LinearLayout {
+public class IconTextViewBoBroomMember extends LinearLayout {
 
     /**
      * Icon
@@ -32,23 +34,23 @@ public class IconTextViewBoBroom extends LinearLayout {
      */
     private TextView mText03;
 
-    public IconTextViewBoBroom(Context context, IconTextItemBoBroom aItem) {
+    public IconTextViewBoBroomMember(Context context, IconTextItemBoBroomMember aItem) {
         super(context);
 
         // Layout Inflation
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        inflater.inflate(R.layout.current_bobroom_listitem, this, true);
+        inflater.inflate(R.layout.mybobroom_member_listitem, this, true);
 
         // Set Icon
-        mIcon = (ImageView) findViewById(R.id.iconItemBoBroom);
+        mIcon = (ImageView) findViewById(R.id.iconItemMember);
         mIcon.setImageDrawable(aItem.getIcon());
 
         // Set Text 01
-        mText01 = (TextView) findViewById(R.id.dataItem01BoBroom);
+        mText01 = (TextView) findViewById(R.id.dataItem01Member);
         mText01.setText(aItem.getData(0));
 
         // Set Text 02
-        mText02 = (TextView) findViewById(R.id.dataItem02BoBroom);
+        mText02 = (TextView) findViewById(R.id.dataItem02Member);
         mText02.setText(aItem.getData(1));
 
     }
@@ -78,3 +80,4 @@ public class IconTextViewBoBroom extends LinearLayout {
         mIcon.setImageDrawable(icon);
     }
 }
+
