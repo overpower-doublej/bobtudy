@@ -44,34 +44,6 @@
         <activity
             android:name=".UI.PreviousBoBtudyActivity"
             android:label="BoBtudy"></activity>
-        =======
-        <activity
-            android:name=".JoinActivity"
-            android:label="BoBtudy"></activity>
-        <activity
-            android:name=".ModifyInfoActivtiy"
-            android:label="BoBtudy"></activity>
-        <activity
-            android:name=".MyInfoActivity"
-            android:label="BoBtudy"></activity>
-        <activity
-            android:name=".CurrentBoBroom"
-            android:label="BoBtudy"></activity>
-        <activity
-            android:name=".CreateBoBroom"
-            android:label="BoBtudy"></activity>
-        <activity
-            android:name=".VoteSuggestionActivity"
-            android:label="BoBtudy"></activity>
-        <activity
-            android:name=".ChattingActivity"
-            android:label="BoBtudy"></activity>
-        <activity
-            android:name=".MyBoBRoomActivity"
-            android:label="BoBtudy"></activity>
-        <activity
-            android:name=".PreviousBoBtudyActivity"
-            android:label="BoBtudy"></activity>
 
 
     </application>
