@@ -2,15 +2,20 @@ package doublej.bobtudy.UI;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import java.nio.charset.MalformedInputException;
 import java.util.Date;
 
+import doublej.bobtudy.Control.MyDatabase;
 import doublej.bobtudy.form.post.Post;
 import doublej.bobtudy.http.NewPost;
 import doublej.bobtudy.http.PostHttp;
@@ -27,7 +32,6 @@ public class LoginActivity extends Activity {
     private static final String tag = "LoginActivity";
 
     private BackPressCloseHandler backPressCloseHandler;
-
 
     EditText loginID, loginPW;
     Button enterLogin, createID;
@@ -51,20 +55,58 @@ public class LoginActivity extends Activity {
 
         backPressCloseHandler = new BackPressCloseHandler(this);
 
-
         loginID = (EditText) findViewById(R.id.loginID);
         loginPW = (EditText) findViewById(R.id.loginPW);
         enterLogin = (Button) findViewById(R.id.enterLogin);
         createID = (Button) findViewById(R.id.createID);
 
+        MyDatabase myDB = new MyDatabase(this);
+        final SQLiteDatabase db = myDB.getReadableDatabase();
+
         enterLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                String searchId = loginID.getText().toString();
+
+                Cursor cursor = db.rawQuery("SELECT * FROM myInfo WHERE id LIKE ?", new String[]{searchId});
+
+                int loginIDCol = cursor.getColumnIndex("id");
+                int loginPWCol = cursor.getColumnIndex("pwd");
+
+                if (cursor.getCount() != 0) {
+
+                    while (cursor.moveToNext()) {
+
+                        String PW = cursor.getString(loginPWCol);
+
+                        if (loginPW.getText().toString().equals(PW)) {
+
+                            cursor.close();
+
+                            Intent intent = new Intent(getBaseContext(),
+                                    CurrentBoBroom.class);
+                            startActivityForResult(intent, REQUEST_CODE_ANOTHER);
+                            overridePendingTransition(R.anim.leftin, R.anim.leftout);
+                        } else {
+                            Toast.makeText(LoginActivity.this, "PW가 일치하지 않습니다.",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                } else {
+                    Toast.makeText(LoginActivity.this, "ID가 일치하지 않습니다.",
+                            Toast.LENGTH_SHORT).show();
+                }
+
+
+
+                /*int logbinPWCol = cursorID.getColumnIndex("pwd");
+
+
                 Intent intent = new Intent(getBaseContext(),
                         CurrentBoBroom.class);
                 startActivityForResult(intent, REQUEST_CODE_ANOTHER);
-                overridePendingTransition(R.anim.leftin, R.anim.leftout);
+                overridePendingTransition(R.anim.leftin, R.anim.leftout);*/
 
             }
         });

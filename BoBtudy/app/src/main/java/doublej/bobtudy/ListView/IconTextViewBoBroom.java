@@ -53,6 +53,10 @@ public class IconTextViewBoBroom extends LinearLayout {
         mText02 = (TextView) findViewById(R.id.dataItem02BoBroom);
         mText02.setText(aItem.getData(1));
 
+        // Set Text 02
+        mText03 = (TextView) findViewById(R.id.dataItem03BoBroom);
+        mText03.setText(aItem.getData(2));
+
     }
 
     /**
@@ -66,7 +70,9 @@ public class IconTextViewBoBroom extends LinearLayout {
             mText01.setText(data);
         } else if (index == 1) {
             mText02.setText(data);
-        } else {
+        } else if (index == 2) {
+            mText03.setText(data);
+        }else {
             throw new IllegalArgumentException();
         }
     }

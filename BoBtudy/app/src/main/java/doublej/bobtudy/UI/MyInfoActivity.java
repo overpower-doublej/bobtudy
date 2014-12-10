@@ -43,7 +43,7 @@ public class MyInfoActivity extends Activity {
         myinfoComment = (TextView) findViewById(R.id.myinfoComment);
 
         MyDatabase myDB = new MyDatabase(this);
-        final SQLiteDatabase db = myDB.getReadableDatabase();
+        SQLiteDatabase db = myDB.getReadableDatabase();
 
 
         String sql = "SELECT * FROM myInfo";

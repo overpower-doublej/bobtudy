@@ -3,7 +3,10 @@ package doublej.bobtudy.UI;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -13,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import doublej.bobtudy.Control.MyDatabase;
 import doublej.bobtudy.ListView.IconTextItemBoBroom;
 import doublej.bobtudy.ListView.IconTextListAdapterBoBroom;
 import doublej.bobtudy.R;
@@ -24,6 +28,8 @@ import doublej.bobtudy.Control.SimpleSideDrawer;
 public class CurrentBoBroom extends Activity implements View.OnClickListener {
 
     public static final int REQUEST_CODE_ANOTHER = 1001;
+    private final String tag = "CurrentBoBroom";
+
 
     ListView list;
     IconTextListAdapterBoBroom adapter;
@@ -35,6 +41,7 @@ public class CurrentBoBroom extends Activity implements View.OnClickListener {
 
     TextView BoBroomListAlign1, BoBroomListAlign2;
     TextView currentBoBtudy, BoBtudyHistory, myInfo, logout;
+    TextView CurrentBoBRoomName, CurrentBoBRoomPlace, CurrentBoBRoomTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,16 +53,44 @@ public class CurrentBoBroom extends Activity implements View.OnClickListener {
         BoBtudyMenu = (Button) findViewById(R.id.BoBtudyMenu);
         CreateRoomImage = (ImageView) findViewById(R.id.CreateRoomImage);
 
+        CurrentBoBRoomName = (TextView) findViewById(R.id.dataItem01BoBroom);
+        CurrentBoBRoomPlace = (TextView) findViewById(R.id.dataItem02BoBroom);
+        CurrentBoBRoomTime = (TextView) findViewById(R.id.dataItem03BoBroom);
+
         BoBroomListAlign1 = (TextView) findViewById(R.id.BoBroomListAlign1);
         BoBroomListAlign2 = (TextView) findViewById(R.id.BoBroomListAlign2);
 
-        list = (ListView) findViewById(R.id.bobroomList);
 
+        MyDatabase myDB = new MyDatabase(this);
+        SQLiteDatabase db = myDB.getReadableDatabase();
+
+        list = (ListView) findViewById(R.id.bobroomList);
         adapter = new IconTextListAdapterBoBroom(this);
 
+        String sql = "SELECT title, date, place  FROM post";
+        Cursor cursor = db.rawQuery(sql, null);
+
+        int recordCount = cursor.getCount();
+        Log.d(tag, "cursor count : " + recordCount + "\n");
+
+        int titleCol = cursor.getColumnIndex("title");
+        int dateCol = cursor.getColumnIndex("date");
+        int placeCol = cursor.getColumnIndex("place");
+
         Resources res = getResources();
-        adapter.addItem(new IconTextItemBoBroom(res.getDrawable(R.drawable.bobroom_image),"밥먹자 애드라", "오후 1시 돈부리집입니다."));
-        adapter.addItem(new IconTextItemBoBroom(res.getDrawable(R.drawable.bobroom_image),"난 아싸가 아니야", "정문 칼리앤메리 12시"));
+
+        for (int i = 0; i < cursor.getCount(); i++) {
+            while (cursor.moveToNext()) {
+                String title = cursor.getString(titleCol);
+                String date = cursor.getString(dateCol);
+                String place = cursor.getString(placeCol);
+
+                adapter.addItem(new IconTextItemBoBroom(res.getDrawable(R.drawable.bobroom_image), title, date, place));
+
+            }
+        }
+
+        cursor.close();
 
         list.setAdapter(adapter);
 
@@ -113,7 +148,6 @@ public class CurrentBoBroom extends Activity implements View.OnClickListener {
         });
 
 
-
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
@@ -121,11 +155,18 @@ public class CurrentBoBroom extends Activity implements View.OnClickListener {
                                     int position, long id) {
                 // TODO Auto-generated method stub
                 IconTextItemBoBroom curItem = (IconTextItemBoBroom) adapter.getItem(position);
-                String[] curData = curItem.getData();
+
+                Bundle bundle = new Bundle();
+                bundle.putString("title", curItem.getData(0));
+
+                Intent intent = new Intent(getApplicationContext(), MyBoBRoomActivity.class);
+                intent.putExtras(bundle);
+
+                startActivity(intent);
+
 
             }
         });
-
 
 
     }

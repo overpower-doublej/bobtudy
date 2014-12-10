@@ -27,6 +27,12 @@
             android:textSize="16dp"
             android:textStyle="bold" />
 
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
         <TextView
             android:id="@+id/dataItem02BoBroom"
             android:text="Content"
@@ -35,6 +41,18 @@
             android:padding="4dp"
             android:layout_margin="5sp"
             android:textColor="#0000ff" />
+
+            <TextView
+                android:id="@+id/dataItem03BoBroom"
+                android:text="Content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:layout_margin="5sp"
+                android:textColor="#0000ff" />
+
+        </LinearLayout>
+
     </LinearLayout>
 
     <Space

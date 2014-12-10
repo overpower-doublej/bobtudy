@@ -25,8 +25,6 @@ public class JoinActivity extends Activity {
 
     Button certifyID, confirmJoin, cancelJoin;
 
-    private final String tag = "JoinActivity";
-
     ArrayAdapter<String> adapter;
 
     static int isIDvalid = 0;
@@ -74,6 +72,7 @@ public class JoinActivity extends Activity {
         final SQLiteDatabase db = myDB.getWritableDatabase();
 
         final String[] dept = new String[1];
+        dept[0] = null;
 
         Spinner spin = (Spinner) findViewById(R.id.deptspinner);
         adapter = new ArrayAdapter<String>(this,
@@ -125,32 +124,55 @@ public class JoinActivity extends Activity {
 
 
                 if (isIDvalid == 1) {
-                    if (editPwd1.getText().toString()
-                            .equals(editPwd2.getText().toString())) {
+                    if (!(editPwd1.getText().toString().equals(null)) || !(editPwd2.getText().toString().equals(null)) ||
+                            !(editNickName.getText().toString().equals(null)) || !(editName.getText().toString().equals(null)) ||
+                            !(editStuId.getText().toString().equals(null)) || dept[0] != null) {
+                        if (editPwd1.getText().toString()
+                                .equals(editPwd2.getText().toString())) {
+                            if (editPwd1.getText().toString()
+                                    .equals(editPwd2.getText().toString())) {
 
-                        ContentValues values = new ContentValues();
-                        values.put("id", editId.getText().toString());
-                        values.put("pwd", editPwd1.getText().toString());
-                        values.put("nickName", editNickName.getText().toString());
-                        values.put("name", editName.getText().toString());
-                        values.put("dept", dept[0]);
-                        values.put("stuId", editStuId.getText().toString());
 
-                        db.insert("myInfo", null, values);
+                                //쿼리
+                                /*
+                                db.execSQL("INSERT INTO myInfo VALUES ('"+ editNickName.getText().toString() +"', '"+ editId.getText().toString()+"', '"+
+                                        editPwd1.getText().toString()+"', '"+ editName.getText().toString()+"', '"+
+                                        dept[0]+"', '"+ editStuId.getText().toString() +"', null, 0, 0 );");
 
-                        RequestParams params = new RequestParams();
-                        finish();
+                                db.execSQL("INSERT INTO user VALUES ('"+ editId.getText().toString() +"', '"+ editNickName.getText().toString() +"' );");
 
-                        Toast.makeText(JoinActivity.this, "가입이 완료되었습니다.",
-                                Toast.LENGTH_SHORT).show();
+                                        */
 
-                        finish();
 
+                                /*
+
+                                ContentValues values = new ContentValues();
+                                values.put("id", editId.getText().toString());
+                                values.put("pwd", editPwd1.getText().toString());
+                                values.put("nickName", editNickName.getText().toString());
+                                values.put("name", editName.getText().toString());
+                                values.put("dept", dept[0]);
+                                values.put("stuId", editStuId.getText().toString());
+
+                                db.insert("myInfo", null, values); */
+
+                                RequestParams params = new RequestParams();
+                                finish();
+
+                                /*Toast.makeText(JoinActivity.this, "가입이 완료되었습니다.",
+                                        Toast.LENGTH_SHORT).show();*/
+
+                            }
+
+                        } else {
+                            Toast.makeText(JoinActivity.this, "비밀번호가 일치하지 않습니다.",
+                                    Toast.LENGTH_SHORT).show();
+                        }
                     } else {
-                        Toast.makeText(JoinActivity.this, "비밀번호가 일치하지 않습니다.",
+                        Toast.makeText(JoinActivity.this, "모든 정보를 입력해 주세요.",
                                 Toast.LENGTH_SHORT).show();
                     }
-                } else {
+                }else {
                     Toast.makeText(JoinActivity.this, "아이디 중복체크를 해 주세요.",
                             Toast.LENGTH_SHORT).show();
                 }

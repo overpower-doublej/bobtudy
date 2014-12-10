@@ -2,6 +2,7 @@ package doublej.bobtudy.UI;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -9,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TimePicker;
 
+import doublej.bobtudy.Control.MyDatabase;
 import doublej.bobtudy.R;
 
 
@@ -39,10 +41,17 @@ public class CreateBoBroom extends Activity {
 
         bobroomTime = (TimePicker) findViewById(R.id.bobroomTime);
 
+        MyDatabase myDB = new MyDatabase(this);
+        final SQLiteDatabase db = myDB.getWritableDatabase();
+
         createBoBroomOK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+/*
+                db.execSQL("INSERT INTO post VALUES ( null, '"+ BoBroomTitle.getText().toString() +"', '"+ bobroomTime.getText().toString()+"', '"+
+                        BoBroomGoto.getText().toString()+"', '"+ BoBroomPlace.getText().toString()+"', '"+
+                        BoBroomComment.getText().toString()+"', '"+ editStuId.getText().toString() +"' );");
+*/
                 Intent intent = new Intent(getBaseContext(),
                         MyBoBRoomActivity.class);
                 startActivityForResult(intent, REQUEST_CODE_ANOTHER);
