@@ -14,11 +14,13 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 
 import doublej.bobtudy.Control.MyDatabase;
 import doublej.bobtudy.form.post.Post;
-import doublej.bobtudy.http.NewPost;
+import doublej.bobtudy.http.post.NewPost;
 import doublej.bobtudy.http.post.PostHttp;
+import doublej.bobtudy.http.post.PostIdHttp;
 import doublej.bobtudy.util.ISODate;
 import doublej.bobtudy.Control.BackPressCloseHandler;
 import doublej.bobtudy.R;
@@ -53,6 +55,25 @@ public class LoginActivity extends Activity {
                     Post post = posts.get(i);
                     Log.i(tag, post.getId() + ": " + post.getTitle() + " - " + post.getDate().toString() + " - " + post.getPostedDate().toString());
                 }
+            }
+        });
+
+        PostIdHttp.getPost("548537f493e2661812a0ff07", new PostIdHttp.PostHandler() {
+            @Override
+            public void onSuccess(Post post) {
+                Log.i(tag, "Post title: " + post.getTitle());
+                Log.i(tag, "Post accesses");
+
+                PostIdHttp.listAccess(post, new PostIdHttp.PostHandler() {
+                    @Override
+                    public void onSuccess(Post post) {
+                        Iterator<String> it = post.getAccesses().keySet().iterator();
+                        while (it.hasNext()) {
+                            String id = it.next();
+                            Log.i(tag, post.getAccesses().get(id).toString());
+                        }
+                    }
+                });
             }
         });
     }

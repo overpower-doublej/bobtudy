@@ -13,11 +13,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import doublej.bobtudy.form.post.Post;
-import doublej.bobtudy.form.user.User;
 import doublej.bobtudy.http.Config;
 import doublej.bobtudy.http.Http;
-import doublej.bobtudy.http.NewPost;
-import doublej.bobtudy.util.ISODate;
 
 /**
  * Created by Jun on 2014-12-02.
@@ -40,20 +37,7 @@ public class PostHttp extends Http {
                         ArrayList<Post> posts = new ArrayList<Post>();
                         for (int i = 0; i < postJsonArr.length(); i++) {
                             JSONObject postObj = postJsonArr.getJSONObject(i);
-
-                            String id = postObj.getString("_id");
-                            String title = postObj.getString("title");
-                            String dateString = postObj.getString("date");
-                            ISODate date = ISODate.getInstanceByIsoString(dateString);
-                            String menu = postObj.getString("menu");
-                            //String place = postObj.getString("place");
-                            //String content = postObj.getString("content");
-                            String bossId = postObj.getString("boss");
-                            String postedDateString = postObj.getString("postedDate");
-                            ISODate postedDate = ISODate.getInstanceByIsoString(postedDateString);
-
-                            Post post = new Post(id, title, date, menu, bossId, postedDate);
-
+                            Post post = Post.parseJsonObject(postObj);
                             posts.add(post);
                         }
                         // Callback
@@ -102,29 +86,19 @@ public class PostHttp extends Http {
         JsonHttpResponseHandler handler = new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                Post post = null;
                 try {
                     int success = response.getInt("success");
                     int failure = response.getInt("failure");
                     JSONObject data = response.getJSONObject("data");
 
-                    String id = data.getString("_id");
-                    String title = data.getString("title");
-                    String dateString = data.getString("date");
-                    ISODate date = ISODate.getInstanceByIsoString(dateString);
-                    String menu = data.getString("menu");
-                    String place = data.getString("place");
-                    String content = data.getString("content");
-                    String bossId = data.getString("boss");
-                    String postedDateString = data.getString("postedDate");
-                    ISODate postedDate = ISODate.getInstanceByIsoString(postedDateString);
+                    if (success == 1) {
+                        Post post = Post.parseJsonObject(data);
+                        postHandler.onSuccess(post);
+                    }
 
-                    post = new Post(id, title, date, menu, place, content, bossId, postedDate);
-                    post.addUser(User.getUser(bossId));
                 } catch (JSONException ex) {
                     ex.printStackTrace();
                 }
-                postHandler.onSuccess(post);
             }
         };
 

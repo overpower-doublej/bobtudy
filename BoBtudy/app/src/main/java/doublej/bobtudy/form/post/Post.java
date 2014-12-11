@@ -22,7 +22,7 @@ public class Post {
     private ISODate postedDate;
 
     private HashSet<User> users;
-    private HashSet<Access> accesses;
+    private HashMap<String, Access> accesses;
     //private ArrayList<Chat> chats;
 
     private static HashMap postMap = new HashMap();
@@ -36,7 +36,7 @@ public class Post {
         this.postedDate = postedDate;
 
         this.users = new HashSet<User>();
-        this.accesses = new HashSet<Access>();
+        this.accesses = new HashMap<String, Access>();
 
         postMap.put(id, this);
     }
@@ -52,13 +52,17 @@ public class Post {
         this.postedDate = postedDate;
 
         this.users = new HashSet<User>();
-        this.accesses = new HashSet<Access>();
+        this.accesses = new HashMap<String, Access>();
 
         postMap.put(id, this);
     }
 
     public void addUser(User user) {
         this.users.add(user);
+    }
+
+    public void addAccess(Access access) {
+        this.accesses.put(access.getId(), access);
     }
 
     public String getId() {
@@ -93,28 +97,36 @@ public class Post {
         return this.bossId;
     }
 
+    public HashMap<String, Access> getAccesses() {
+        return this.accesses;
+    }
+
+
     public static Post getPost(String postId) {
         return (Post) postMap.get(postId);
     }
 
+    /**
+     * If key of jsonObject is empty, that property of key is empty string
+     *
+     * @param jsonObject
+     * @return
+     */
     public static Post parseJsonObject(JSONObject jsonObject) {
-        Post post = null;
-        try {
-            String id = jsonObject.getString("_id");
-            String title = jsonObject.getString("title");
-            String dateString = jsonObject.getString("date");
-            ISODate date = ISODate.getInstanceByIsoString(dateString);
-            String menu = jsonObject.getString("menu");
-            String place = jsonObject.getString("place");
-            String content = jsonObject.getString("content");
-            String bossId = jsonObject.getString("boss");
-            String postedDateString = jsonObject.getString("postedDate");
-            ISODate postedDate = ISODate.getInstanceByIsoString(postedDateString);
+        String id = jsonObject.optString("_id");
+        String title = jsonObject.optString("title");
+        String menu = jsonObject.optString("menu");
+        String place = jsonObject.optString("place");
+        String content = jsonObject.optString("content");
+        String bossId = jsonObject.optString("boss");
 
-            post = new Post(id, title, date, menu, place, content, bossId, postedDate);
-        } catch (JSONException ex) {
-            ex.printStackTrace();
-        }
+        String dateString = jsonObject.optString("date");
+        ISODate date = ISODate.getInstanceByIsoString(dateString);
+
+        String postedDateString = jsonObject.optString("postedDate");
+        ISODate postedDate = ISODate.getInstanceByIsoString(postedDateString);
+
+        Post post = new Post(id, title, date, menu, place, content, bossId, postedDate);
 
         return post;
     }

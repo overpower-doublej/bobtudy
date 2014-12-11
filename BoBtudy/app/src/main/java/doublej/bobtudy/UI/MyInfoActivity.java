@@ -54,7 +54,7 @@ public class MyInfoActivity extends Activity {
         Log.d(tag, "cursor count : " + recordCount + "\n");
 
 
-        // get column index
+        // getPost column index
         int nickNameCol = cursor.getColumnIndex("nickName");
         int meetCol = cursor.getColumnIndex("meet");
         int totalMeetCol = cursor.getColumnIndex("totalMeet");

@@ -1,4 +1,4 @@
-package doublej.bobtudy.http;
+package doublej.bobtudy.http.user;
 
 import doublej.bobtudy.form.user.User;
 

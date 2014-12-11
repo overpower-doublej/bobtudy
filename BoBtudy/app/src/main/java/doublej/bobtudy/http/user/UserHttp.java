@@ -1,6 +1,9 @@
-package doublej.bobtudy.http;
+package doublej.bobtudy.http.user;
 
 import com.loopj.android.http.*;
+
+import doublej.bobtudy.http.Config;
+import doublej.bobtudy.http.Http;
 
 /**
  * Created by Jun on 2014-12-01.

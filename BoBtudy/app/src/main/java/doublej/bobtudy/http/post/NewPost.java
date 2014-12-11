@@ -1,4 +1,4 @@
-package doublej.bobtudy.http;
+package doublej.bobtudy.http.post;
 
 import doublej.bobtudy.form.post.Post;
 import doublej.bobtudy.util.ISODate;
