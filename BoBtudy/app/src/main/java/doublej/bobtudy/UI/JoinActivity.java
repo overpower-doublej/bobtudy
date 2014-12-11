@@ -133,6 +133,15 @@ public class JoinActivity extends Activity {
                                     .equals(editPwd2.getText().toString())) {
 
 
+
+                                /* 임시 쿼리 */
+
+                                db.execSQL("INSERT INTO myInfo VALUES ('"+ editId.getText().toString() +"', '"+ editPwd1.getText().toString()+"', '"+
+                                        editName.getText().toString()+"', '"+ dept[0]+"', '"+
+                                        editStuId.getText().toString()+"', null, 0, 0 );");
+
+                                db.execSQL("INSERT INTO user VALUES ('"+ editId.getText().toString() +"', '"+ editNickName.getText().toString() +"' );");
+
                                 //쿼리
                                 /*
                                 db.execSQL("INSERT INTO myInfo VALUES ('"+ editNickName.getText().toString() +"', '"+ editId.getText().toString()+"', '"+

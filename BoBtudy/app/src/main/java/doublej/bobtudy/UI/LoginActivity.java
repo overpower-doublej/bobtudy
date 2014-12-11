@@ -128,8 +128,11 @@ public class LoginActivity extends Activity {
 
                 Cursor cursor = db.rawQuery("SELECT * FROM myInfo WHERE id LIKE ?", new String[]{searchId});
 
-                int loginIDCol = cursor.getColumnIndex("id");
                 int loginPWCol = cursor.getColumnIndex("pwd");
+                //int loginPWCol = cursor.getColumnIndex("nickName");
+                //bundle을 닉네임으로 하도록 바꿔야됨
+
+
 
                 if (cursor.getCount() != 0) {
 
@@ -141,10 +144,13 @@ public class LoginActivity extends Activity {
 
                             cursor.close();
 
-                            Intent intent = new Intent(getBaseContext(),
-                                    CurrentBoBroom.class);
-                            startActivityForResult(intent, REQUEST_CODE_ANOTHER);
-                            overridePendingTransition(R.anim.leftin, R.anim.leftout);
+                            Bundle bundle = new Bundle();
+                            //bundle.putString("user", ID);
+
+                            Intent intent = new Intent(getApplicationContext(), CurrentBoBroom.class);
+                            intent.putExtras(bundle);
+
+                            startActivity(intent);
                         } else {
                             Toast.makeText(LoginActivity.this, "PW가 일치하지 않습니다.",
                                     Toast.LENGTH_SHORT).show();

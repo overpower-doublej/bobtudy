@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import doublej.bobtudy.Control.MyDatabase;
 import doublej.bobtudy.ListView.IconTextItemBoBroom;
@@ -33,6 +34,8 @@ public class CurrentBoBroom extends Activity implements View.OnClickListener {
 
     ListView list;
     IconTextListAdapterBoBroom adapter;
+
+    static String ID;
 
     SimpleSideDrawer mNav;
 
@@ -59,6 +62,10 @@ public class CurrentBoBroom extends Activity implements View.OnClickListener {
 
         BoBroomListAlign1 = (TextView) findViewById(R.id.BoBroomListAlign1);
         BoBroomListAlign2 = (TextView) findViewById(R.id.BoBroomListAlign2);
+
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        ID = bundle.getString("user");
 
 
         MyDatabase myDB = new MyDatabase(this);
@@ -114,9 +121,14 @@ public class CurrentBoBroom extends Activity implements View.OnClickListener {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(getBaseContext(),
-                        CreateBoBroom.class);
-                startActivityForResult(intent, REQUEST_CODE_ANOTHER);
+                Bundle bundle = new Bundle();
+                bundle.putString("user", ID);
+
+                Intent intent = new Intent(getApplicationContext(), CreateBoBroom.class);
+                intent.putExtras(bundle);
+
+                startActivity(intent);
+
 
             }
         });
@@ -158,6 +170,7 @@ public class CurrentBoBroom extends Activity implements View.OnClickListener {
 
                 Bundle bundle = new Bundle();
                 bundle.putString("title", curItem.getData(0));
+                bundle.putString("user", ID);
 
                 Intent intent = new Intent(getApplicationContext(), MyBoBRoomActivity.class);
                 intent.putExtras(bundle);
