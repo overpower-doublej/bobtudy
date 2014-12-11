@@ -12,13 +12,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.nio.charset.MalformedInputException;
+import java.util.ArrayList;
 import java.util.Date;
 
 import doublej.bobtudy.Control.MyDatabase;
 import doublej.bobtudy.form.post.Post;
 import doublej.bobtudy.http.NewPost;
-import doublej.bobtudy.http.PostHttp;
+import doublej.bobtudy.http.post.PostHttp;
 import doublej.bobtudy.util.ISODate;
 import doublej.bobtudy.Control.BackPressCloseHandler;
 import doublej.bobtudy.R;
@@ -41,7 +41,18 @@ public class LoginActivity extends Activity {
         PostHttp.create(newPost, new PostHttp.PostHandler() {
             @Override
             public void onSuccess(Post post) {
-                Log.i(tag, post.getId());
+                Log.i(tag, "New Post ID: " + post.getId());
+            }
+        });
+
+        PostHttp.list(new PostHttp.PostListHandler() {
+            @Override
+            public void onSuccess(ArrayList<Post> posts) {
+                Log.i(tag, "Post List");
+                for (int i = 0; i < posts.size(); i++) {
+                    Post post = posts.get(i);
+                    Log.i(tag, post.getId() + ": " + post.getTitle());
+                }
             }
         });
     }

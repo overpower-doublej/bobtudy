@@ -24,6 +24,20 @@ public class Post {
 
     private static HashMap postMap = new HashMap();
 
+    public Post(String id, String title, ISODate date, String menu, String bossId, ISODate postedDate) {
+        this.id = id;
+        this.title = title;
+        this.date = date;
+        this.menu = menu;
+        this.bossId = bossId;
+        this.postedDate = postedDate;
+
+        this.users = new HashSet<User>();
+        this.accesses = new HashSet<Access>();
+
+        postMap.put(id, this);
+    }
+
     public Post(String id, String title, ISODate date, String menu, String place, String content, String bossId, ISODate postedDate) {
         this.id = id;
         this.title = title;

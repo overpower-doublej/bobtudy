@@ -1,4 +1,4 @@
-package doublej.bobtudy.http;
+package doublej.bobtudy.http.post;
 
 import android.util.Log;
 
@@ -6,11 +6,17 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
 import org.apache.http.Header;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 import doublej.bobtudy.form.post.Post;
 import doublej.bobtudy.form.user.User;
+import doublej.bobtudy.http.Config;
+import doublej.bobtudy.http.Http;
+import doublej.bobtudy.http.NewPost;
 import doublej.bobtudy.util.ISODate;
 
 /**
@@ -20,8 +26,45 @@ public class PostHttp extends Http {
     private static final String tag = "PostHttp";
     private static final String url = Config.SERVER_URL + "/post";
 
-    public static void list(JsonHttpResponseHandler handler) {
-        client.get(url, handler);
+    public static void list(final PostListHandler handler) {
+        client.get(url, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject res) {
+                try {
+                    int success = res.getInt("success");
+                    int failure = res.getInt("failure");
+
+                    if (success == 1) {
+                        JSONArray postJsonArr = res.getJSONArray("data");
+
+                        ArrayList<Post> posts = new ArrayList<Post>();
+                        for (int i = 0; i < postJsonArr.length(); i++) {
+                            JSONObject postObj = postJsonArr.getJSONObject(i);
+
+                            String id = postObj.getString("_id");
+                            String title = postObj.getString("title");
+                            String dateString = postObj.getString("date");
+                            ISODate date = ISODate.getInstanceByIsoString(dateString);
+                            String menu = postObj.getString("menu");
+                            //String place = postObj.getString("place");
+                            //String content = postObj.getString("content");
+                            String bossId = postObj.getString("boss");
+                            String postedDateString = postObj.getString("postedDate");
+                            ISODate postedDate = ISODate.getInstanceByIsoString(postedDateString);
+
+                            Post post = new Post(id, title, date, menu, bossId, postedDate);
+
+                            posts.add(post);
+                        }
+                        // Callback
+                        handler.onSuccess(posts);
+                    } else if (failure == 1)
+                        Log.e(tag, "list failure");
+                } catch (JSONException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
     }
 
     /**
@@ -90,5 +133,9 @@ public class PostHttp extends Http {
 
     public interface PostHandler {
         void onSuccess(Post post);
+    }
+
+    public interface PostListHandler {
+        void onSuccess(ArrayList<Post> posts);
     }
 }
