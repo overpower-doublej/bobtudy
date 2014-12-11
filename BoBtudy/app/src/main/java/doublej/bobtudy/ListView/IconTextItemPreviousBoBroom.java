@@ -39,13 +39,15 @@ public class IconTextItemPreviousBoBroom {
      * @param icon
      * @param obj01
      * @param obj02
+     * @param obj03
      */
-    public IconTextItemPreviousBoBroom(Drawable icon, String obj01, String obj02) {
+    public IconTextItemPreviousBoBroom(Drawable icon, String obj01, String obj02, String obj03) {
         mIcon = icon;
 
         mData = new String[3];
         mData[0] = obj01;
         mData[1] = obj02;
+        mData[1] = obj03;
     }
 
     /**

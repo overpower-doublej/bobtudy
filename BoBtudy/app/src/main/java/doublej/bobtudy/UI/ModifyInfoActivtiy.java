@@ -23,6 +23,9 @@ public class ModifyInfoActivtiy extends Activity {
     EditText modifyinfoNickName, modifyinfoPWOriginal, modifyinfoPWNew, modifyinfoPWNew2;
     Button confirmModify, cancelModify;
 
+    static String ID;
+
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -35,18 +38,21 @@ public class ModifyInfoActivtiy extends Activity {
         modifyinfoPWNew = (EditText) findViewById(R.id.modifyinfoPWNew);
         modifyinfoPWNew2 = (EditText) findViewById(R.id.modifyinfoPWNew2);
 
-        MyDatabase myDB = new MyDatabase(this);
-        SQLiteDatabase db = myDB.getWritableDatabase();
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        ID = bundle.getString("user");
 
 
         confirmModify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                /* 쿼리
-        db.execSQL("UPDATE INTO myInfo SET nickName = '"+ modifyinfoNickName.getText().toString()
-                +"', pwd = '"+ modifyinfoPWNew.getText().toString()+"' WHERE id = '"+ +"' );");
-*/
+                MyDatabase myDB = new MyDatabase(ModifyInfoActivtiy.this);
+                SQLiteDatabase db = myDB.getWritableDatabase();
+
+                db.execSQL("UPDATE myInfo SET nickName ="+modifyinfoNickName.getText().toString()+
+                        ", pwd="+modifyinfoPWNew.getText().toString()+" WHERE id = "+ID+";");
+                db.execSQL("UPDATE user SET nickName ="+modifyinfoNickName.getText().toString()+" WHERE id = "+ID+";");
 
                 finish();
 

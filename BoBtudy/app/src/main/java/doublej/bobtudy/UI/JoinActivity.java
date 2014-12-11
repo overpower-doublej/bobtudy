@@ -138,9 +138,10 @@ public class JoinActivity extends Activity {
 
                                 db.execSQL("INSERT INTO myInfo VALUES ('"+ editId.getText().toString() +"', '"+ editPwd1.getText().toString()+"', '"+
                                         editName.getText().toString()+"', '"+ dept[0]+"', '"+
-                                        editStuId.getText().toString()+"', null, 0, 0 );");
+                                        editStuId.getText().toString()+"', 0, 0 );");
 
-                                db.execSQL("INSERT INTO user VALUES ('"+ editId.getText().toString() +"', '"+ editNickName.getText().toString() +"' );");
+                                db.execSQL("INSERT INTO user VALUES ('"+ editId.getText().toString()
+                                        +"', '"+ editNickName.getText().toString() +"' );");
 
                                 //쿼리
                                 /*

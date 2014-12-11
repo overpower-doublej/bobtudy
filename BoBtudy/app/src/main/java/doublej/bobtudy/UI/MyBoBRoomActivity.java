@@ -26,6 +26,10 @@ public class MyBoBRoomActivity extends Activity {
 
     private final String tag = "MyBoBRoomActivity";
 
+
+    static String ID;
+
+
     ListView list;
     IconTextListAdapterBoBroomMember adapter;
 
@@ -51,6 +55,9 @@ public class MyBoBRoomActivity extends Activity {
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         String bobRoomTitle = bundle.getString("title");
+        ID = bundle.getString("user");
+
+
 
         MyDatabase myDB = new MyDatabase(this);
         SQLiteDatabase db = myDB.getReadableDatabase();
@@ -58,8 +65,7 @@ public class MyBoBRoomActivity extends Activity {
         list = (ListView) findViewById(R.id.bobroomMemberList);
         adapter = new IconTextListAdapterBoBroomMember(this);
 
-        /* 수정 필요 */
-        String sql = "SELECT * content FROM post WHERE title LIKE ?";
+        String sql = "SELECT * FROM post WHERE title LIKE ?";
         Cursor cursor = db.rawQuery(sql, new String[]{bobRoomTitle});
 
         int idCol = cursor.getColumnIndex("id");
@@ -94,34 +100,47 @@ public class MyBoBRoomActivity extends Activity {
         cursor.close();
 
 
-        sql = "SELECT * content FROM post_user WHERE postId LIKE ?";
+        sql = "SELECT * FROM post_user ps, myInfo my  WHERE ps.userId = my.id and id LIKE ?";
         cursor = db.rawQuery(sql, new String[]{id});
 
-        int userIdCol = cursor.getColumnIndex("userId");
+        int recordCount = cursor.getCount();
+        Log.d(tag, "cursor count : " + recordCount + "\n");
+
+        int nickNameCol = cursor.getColumnIndex("nickName");
         int meetCol = cursor.getColumnIndex("meet");
+        int totalMeetCol = cursor.getColumnIndex("totalMeet");
 
 
         Resources res = getResources();
 
         for(int i=0;i<cursor.getCount();i++) {
             while (cursor.moveToNext()) {
-                String userId = cursor.getString(userIdCol);
-                String meet = cursor.getString(meetCol);
+                String nickName = cursor.getString(nickNameCol);
+                int meet = cursor.getInt(meetCol);
+                int totalMeet = cursor.getInt(totalMeetCol);
 
-                adapter.addItem(new IconTextItemBoBroomMember(res.getDrawable(R.drawable.member),userId, meet));
+                String participate = (meet / totalMeet) + "%";
+
+                adapter.addItem(new IconTextItemBoBroomMember(res.getDrawable(R.drawable.member),nickName, participate));
 
             }
         }
 
         cursor.close();
+        myDB.close();
 
         list.setAdapter(adapter);
 
-        list.setAdapter(adapter);
 
         getOutBoBtudy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                MyDatabase myDB = new MyDatabase(MyBoBRoomActivity.this);
+                SQLiteDatabase db = myDB.getReadableDatabase();
+
+                db.execSQL("DELETE FROM  post_user WHERE userId = "+ ID +";");
+
+                myDB.close();
 
                 finish();
 

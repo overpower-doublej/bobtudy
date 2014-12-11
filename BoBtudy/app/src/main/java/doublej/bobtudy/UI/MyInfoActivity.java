@@ -22,6 +22,7 @@ public class MyInfoActivity extends Activity {
     public static final int REQUEST_CODE_ANOTHER = 1001;
 
     private final String tag = "MyInfoActivity";
+    static String ID;
 
 
     Button myinfoModify, myinfoConfirm;
@@ -41,6 +42,10 @@ public class MyInfoActivity extends Activity {
         myinfoDept = (TextView) findViewById(R.id.myinfoDept);
         myinfoStuID = (TextView) findViewById(R.id.myinfoStuID);
         myinfoComment = (TextView) findViewById(R.id.myinfoComment);
+
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        ID = bundle.getString("user");
 
         MyDatabase myDB = new MyDatabase(this);
         SQLiteDatabase db = myDB.getReadableDatabase();
@@ -95,9 +100,12 @@ public class MyInfoActivity extends Activity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(getBaseContext(),
-                        ModifyInfoActivtiy.class);
-                startActivityForResult(intent, REQUEST_CODE_ANOTHER);
+                Bundle bundle = new Bundle();
+                bundle.putString("user", ID);
+                Intent intent = new Intent(getApplicationContext(), ModifyInfoActivtiy.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
+
                 finish();
 
             }

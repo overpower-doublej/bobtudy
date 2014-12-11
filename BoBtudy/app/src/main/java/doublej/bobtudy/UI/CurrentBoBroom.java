@@ -187,16 +187,21 @@ public class CurrentBoBroom extends Activity implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.currentBoBtudy) {
-            Intent intent = new Intent(getBaseContext(),
-                    MyBoBRoomActivity.class);
-            startActivityForResult(intent, REQUEST_CODE_ANOTHER);
+
+            Bundle bundle = new Bundle();
+            bundle.putString("user", ID);
+            Intent intent = new Intent(getApplicationContext(), MyBoBRoomActivity.class);
+            intent.putExtras(bundle);
+            startActivity(intent);
+
 
         } else if (v.getId() == R.id.BoBtudyHistory) {
 
-            Intent intent = new Intent(getBaseContext(),
-                    PreviousBoBtudyActivity.class);
-            startActivityForResult(intent, REQUEST_CODE_ANOTHER);
-
+            Bundle bundle = new Bundle();
+            bundle.putString("user", ID);
+            Intent intent = new Intent(getApplicationContext(), PreviousBoBtudyActivity.class);
+            intent.putExtras(bundle);
+            startActivity(intent);
 
         } else if (v.getId() == R.id.myInfo) {
             Intent intent = new Intent(getBaseContext(),

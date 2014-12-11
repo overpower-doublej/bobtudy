@@ -81,11 +81,10 @@ public class CreateBoBroom extends Activity {
                         BoBroomGoto.getText().toString()+"', '"+ BoBroomPlace.getText().toString()+"', '"+
                         BoBroomComment.getText().toString()+"', '"+ ID +"' );");
 
-/*
-                db.execSQL("INSERT INTO post VALUES ( null, '"+ BoBroomTitle.getText().toString() +"', '"+ bobroomTime.getText().toString()+"', '"+
-                        BoBroomGoto.getText().toString()+"', '"+ BoBroomPlace.getText().toString()+"', '"+
-                        BoBroomComment.getText().toString()+"', '"+ editStuId.getText().toString() +"' );");
-*/
+                db.execSQL("INSERT INTO post_user VALUES ( '"+ BoBroomTitle.getText().toString() +"', '"+ ID+"', '"+
+                        BoBroomGoto.getText().toString()+"' );");
+
+
                 Intent intent = new Intent(getBaseContext(),
                         MyBoBRoomActivity.class);
                 startActivityForResult(intent, REQUEST_CODE_ANOTHER);
