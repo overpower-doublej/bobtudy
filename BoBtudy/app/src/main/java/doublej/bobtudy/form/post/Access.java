@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import doublej.bobtudy.http.handler.AccessHandler;
+import doublej.bobtudy.http.handler.ResponseHandler;
 import doublej.bobtudy.http.post.PostIdHttp;
 import doublej.bobtudy.util.ISODate;
 
@@ -36,22 +38,12 @@ public class Access {
         return this.id;
     }
 
-    public void refresh(final Post.ResponseHandler handler) {
-        PostIdHttp.getAccess(this.postId, this.id, new PostIdHttp.AccessHandler() {
-            @Override
-            public void onSuccess(Access access) {
-                handler.onResponse();
-            }
-        });
+    public void refresh(final AccessHandler handler) {
+        PostIdHttp.getAccess(this.postId, this.id, handler);
     }
 
-    public void vote(String userId, boolean result, final Post.ResponseHandler handler) {
-        PostIdHttp.voteAccess(this.postId, this.id, userId, result, new PostIdHttp.PlainHandler() {
-            @Override
-            public void onSuccess(JSONObject response) {
-                handler.onResponse();
-            }
-        });
+    public void vote(String userId, boolean result, final ResponseHandler handler) {
+        PostIdHttp.voteAccess(this.postId, this.id, userId, result, handler);
     }
 
     @Override

@@ -1,14 +1,28 @@
 package doublej.bobtudy.http.user;
 
+import android.util.Log;
+
 import com.loopj.android.http.*;
 
+import org.apache.http.Header;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+
+import doublej.bobtudy.form.post.Post;
+import doublej.bobtudy.form.user.User;
 import doublej.bobtudy.http.Config;
 import doublej.bobtudy.http.Http;
+import doublej.bobtudy.http.handler.ResponseHandler;
+import doublej.bobtudy.http.handler.UserHandler;
 
 /**
  * Created by Jun on 2014-12-01.
  */
 public class UserHttp extends Http {
+    private static final String tag = "UserHttp";
     private static final String url = Config.SERVER_URL + "/user";
 
     /**
@@ -18,7 +32,7 @@ public class UserHttp extends Http {
      * @param newUser
      * @param handler
      */
-    public static void join(NewUser newUser, JsonHttpResponseHandler handler) {
+    public static void join(NewUser newUser, final ResponseHandler handler) {
         RequestParams params = new RequestParams();
         params.put("_id", newUser.getId());
         params.put("pwd", newUser.getPwd());
@@ -28,7 +42,23 @@ public class UserHttp extends Http {
         params.put("info", newUser.getInfo());
         params.put("regId", newUser.getRegId());
 
-        client.post(url, params, handler);
+        client.post(url, params, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject res) {
+                try {
+                    int success = res.getInt("success");
+                    int failure = res.getInt("failure");
+
+                    if (success == 1) {
+                        // Callback
+                        handler.onResponse(res);
+                    } else if (failure == 1)
+                        Log.e(tag, "Internal server failure");
+                } catch (JSONException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
     }
 
     /**
@@ -58,8 +88,25 @@ public class UserHttp extends Http {
      * @param id
      * @param handler
      */
-    public static void getUser(String id, JsonHttpResponseHandler handler) {
-        client.get(url + "/" + id, handler);
+    public static void getUser(String id, final UserHandler handler) {
+        client.get(url + "/" + id, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject res) {
+                try {
+                    int success = res.getInt("success");
+                    int failure = res.getInt("failure");
+
+                    if (success == 1) {
+                        JSONObject userJsonObj = res.getJSONObject("data");
+                        User user = User.parseJsonObj(userJsonObj);
+                        handler.onResponse(user);
+                    } else if (failure == 1)
+                        Log.e(tag, "Internal server failure");
+                } catch (JSONException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
     }
 
     /**

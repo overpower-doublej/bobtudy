@@ -9,6 +9,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 import doublej.bobtudy.form.user.User;
+import doublej.bobtudy.http.handler.PostHandler;
+import doublej.bobtudy.http.handler.ResponseHandler;
 import doublej.bobtudy.http.post.PostIdHttp;
 import doublej.bobtudy.util.ISODate;
 
@@ -58,31 +60,16 @@ public class Post {
         postMap.put(id, this);
     }
 
-    public void refresh(final ResponseHandler handler) {
-        PostIdHttp.getPost(this.id, new PostIdHttp.PostHandler() {
-            @Override
-            public void onSuccess(Post post) {
-                handler.onResponse();
-            }
-        });
+    public void refresh(final PostHandler handler) {
+        PostIdHttp.getPost(this.id, handler);
     }
 
-    public void listAccess(final ResponseHandler handler) {
-        PostIdHttp.listAccess(this, new PostIdHttp.PostHandler() {
-            @Override
-            public void onSuccess(Post post) {
-                handler.onResponse();
-            }
-        });
+    public void listAccess(final PostHandler handler) {
+        PostIdHttp.listAccess(this, handler);
     }
 
     public void createAccess(String userId, final ResponseHandler handler) {
-        PostIdHttp.createAccess(this, userId, new PostIdHttp.PlainHandler() {
-            @Override
-            public void onSuccess(JSONObject response) {
-                handler.onResponse();
-            }
-        });
+        PostIdHttp.createAccess(this, userId, handler);
     }
 
     public void addUser(User user) {
@@ -157,9 +144,5 @@ public class Post {
         Post post = new Post(id, title, date, menu, place, content, bossId, postedDate);
 
         return post;
-    }
-
-    public interface ResponseHandler {
-        void onResponse();
     }
 }

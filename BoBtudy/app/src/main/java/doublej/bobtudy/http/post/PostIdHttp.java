@@ -10,14 +10,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-
 import doublej.bobtudy.form.post.Access;
 import doublej.bobtudy.form.post.Post;
 import doublej.bobtudy.form.user.User;
 import doublej.bobtudy.http.Config;
 import doublej.bobtudy.http.Http;
-import doublej.bobtudy.util.ISODate;
+import doublej.bobtudy.http.handler.AccessHandler;
+import doublej.bobtudy.http.handler.PostHandler;
+import doublej.bobtudy.http.handler.ResponseHandler;
 
 /**
  * Created by Jun on 2014-12-11.
@@ -38,7 +38,7 @@ public class PostIdHttp extends Http {
                         JSONObject postJsonObj = res.getJSONObject("data");
                         Post post = Post.parseJsonObject(postJsonObj);
 
-                        handler.onSuccess(post);
+                        handler.onResponse(post);
                     } else if (failure == 1)
                         Log.e(tag, "list failure");
                 } catch (JSONException ex) {
@@ -65,7 +65,7 @@ public class PostIdHttp extends Http {
 
                     if (success == 1) {
                         Access access = Access.parseJsonAccess(postId, res.getJSONObject("data"));
-                        handler.onSuccess(access);
+                        handler.onResponse(access);
                     } else if (failure == 1)
                         Log.e(tag, "Internal server failure");
                 } catch (JSONException ex) {
@@ -97,7 +97,7 @@ public class PostIdHttp extends Http {
                             post.addAccess(acs);
                         }
 
-                        handler.onSuccess(post);
+                        handler.onResponse(post);
                     } else if (failure == 1)
                         Log.e(tag, "list failure");
                 } catch (JSONException ex) {
@@ -107,7 +107,7 @@ public class PostIdHttp extends Http {
         });
     }
 
-    public static void voteAccess(String postId, String accessId, String userId, boolean vote, final PlainHandler handler) {
+    public static void voteAccess(String postId, String accessId, String userId, boolean vote, final ResponseHandler handler) {
         RequestParams params = new RequestParams();
         params.put("userId", userId);
         params.put("vote", vote);
@@ -120,7 +120,7 @@ public class PostIdHttp extends Http {
                     int failure = res.getInt("failure");
 
                     if (success == 1) {
-                        handler.onSuccess(res);
+                        handler.onResponse(res);
                     } else if (failure == 1)
                         Log.e(tag, "Internal server failure");
                 } catch (JSONException ex) {
@@ -130,7 +130,7 @@ public class PostIdHttp extends Http {
         });
     }
 
-    public static void createAccess(Post post, User user, final PlainHandler handler) {
+    public static void createAccess(Post post, User user, final ResponseHandler handler) {
         RequestParams params = new RequestParams();
         params.put("userId", user.getId());
         client.post(url + "/" + post.getId() + "/acs", params, new JsonHttpResponseHandler() {
@@ -141,7 +141,7 @@ public class PostIdHttp extends Http {
                     int failure = res.getInt("failure");
 
                     if (success == 1) {
-                        handler.onSuccess(res);
+                        handler.onResponse(res);
                     } else if (failure == 1)
                         Log.e(tag, "Internal server failure");
                 } catch (JSONException ex) {
@@ -151,7 +151,7 @@ public class PostIdHttp extends Http {
         });
     }
 
-    public static void createAccess(Post post, String userId, final PlainHandler handler) {
+    public static void createAccess(Post post, String userId, final ResponseHandler handler) {
         RequestParams params = new RequestParams();
         params.put("userId", userId);
         client.post(url + "/" + post.getId() + "/acs", params, new JsonHttpResponseHandler() {
@@ -162,7 +162,7 @@ public class PostIdHttp extends Http {
                     int failure = res.getInt("failure");
 
                     if (success == 1) {
-                        handler.onSuccess(res);
+                        handler.onResponse(res);
                     } else if (failure == 1)
                         Log.e(tag, "Internal server failure");
                 } catch (JSONException ex) {
@@ -170,17 +170,5 @@ public class PostIdHttp extends Http {
                 }
             }
         });
-    }
-
-    public interface PlainHandler {
-        void onSuccess(JSONObject response);
-    }
-
-    public interface PostHandler {
-        void onSuccess(Post post);
-    }
-
-    public interface AccessHandler {
-        void onSuccess(Access access);
     }
 }

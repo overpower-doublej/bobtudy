@@ -1,5 +1,8 @@
 package doublej.bobtudy.form.user;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.HashMap;
 
 /**
@@ -21,6 +24,24 @@ public class User {
 
     public String getId() {
         return this.id;
+    }
+
+    public void setMeetLog(int[] meetLog) {
+        this.meetLog = meetLog;
+    }
+
+    public static User parseJsonObj(JSONObject jsonObject) {
+        String id = jsonObject.optString("_id");
+        String name = jsonObject.optString("name");
+
+        JSONArray meetLogJsonArr = jsonObject.optJSONArray("meetLog");
+        int meetSuccess = meetLogJsonArr.optInt(0);
+        int totalMeet = meetLogJsonArr.optInt(1);
+
+        User user = new User(id, name);
+        user.setMeetLog(new int[]{meetSuccess, totalMeet});
+
+        return user;
     }
 
     public static User getUser(String id) {

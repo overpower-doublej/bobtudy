@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import doublej.bobtudy.form.post.Post;
 import doublej.bobtudy.http.Config;
 import doublej.bobtudy.http.Http;
+import doublej.bobtudy.http.handler.PostHandler;
+import doublej.bobtudy.http.handler.PostListHandler;
 
 /**
  * Created by Jun on 2014-12-02.
@@ -41,7 +43,7 @@ public class PostHttp extends Http {
                             posts.add(post);
                         }
                         // Callback
-                        handler.onSuccess(posts);
+                        handler.onResponse(posts);
                     } else if (failure == 1)
                         Log.e(tag, "list failure");
                 } catch (JSONException ex) {
@@ -93,7 +95,7 @@ public class PostHttp extends Http {
 
                     if (success == 1) {
                         Post post = Post.parseJsonObject(data);
-                        postHandler.onSuccess(post);
+                        postHandler.onResponse(post);
                     }
 
                 } catch (JSONException ex) {
@@ -103,13 +105,5 @@ public class PostHttp extends Http {
         };
 
         client.post(url, params, handler);
-    }
-
-    public interface PostHandler {
-        void onSuccess(Post post);
-    }
-
-    public interface PostListHandler {
-        void onSuccess(ArrayList<Post> posts);
     }
 }
