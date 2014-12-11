@@ -1,5 +1,8 @@
 package doublej.bobtudy.form.post;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -70,6 +73,10 @@ public class Post {
         return this.date;
     }
 
+    public ISODate getPostedDate() {
+        return this.postedDate;
+    }
+
     public String getMenu() {
         return this.menu;
     }
@@ -88,5 +95,27 @@ public class Post {
 
     public static Post getPost(String postId) {
         return (Post) postMap.get(postId);
+    }
+
+    public static Post parseJsonObject(JSONObject jsonObject) {
+        Post post = null;
+        try {
+            String id = jsonObject.getString("_id");
+            String title = jsonObject.getString("title");
+            String dateString = jsonObject.getString("date");
+            ISODate date = ISODate.getInstanceByIsoString(dateString);
+            String menu = jsonObject.getString("menu");
+            String place = jsonObject.getString("place");
+            String content = jsonObject.getString("content");
+            String bossId = jsonObject.getString("boss");
+            String postedDateString = jsonObject.getString("postedDate");
+            ISODate postedDate = ISODate.getInstanceByIsoString(postedDateString);
+
+            post = new Post(id, title, date, menu, place, content, bossId, postedDate);
+        } catch (JSONException ex) {
+            ex.printStackTrace();
+        }
+
+        return post;
     }
 }

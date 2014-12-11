@@ -51,7 +51,7 @@ public class LoginActivity extends Activity {
                 Log.i(tag, "Post List");
                 for (int i = 0; i < posts.size(); i++) {
                     Post post = posts.get(i);
-                    Log.i(tag, post.getId() + ": " + post.getTitle());
+                    Log.i(tag, post.getId() + ": " + post.getTitle() + " - " + post.getDate().toString() + " - " + post.getPostedDate().toString());
                 }
             }
         });
