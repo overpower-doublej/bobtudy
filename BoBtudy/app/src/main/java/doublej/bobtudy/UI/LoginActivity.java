@@ -12,12 +12,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 
 import doublej.bobtudy.Control.MyDatabase;
+import doublej.bobtudy.form.post.Access;
 import doublej.bobtudy.form.post.Post;
+import doublej.bobtudy.form.user.User;
 import doublej.bobtudy.http.post.NewPost;
 import doublej.bobtudy.http.post.PostHttp;
 import doublej.bobtudy.http.post.PostIdHttp;
@@ -72,6 +76,27 @@ public class LoginActivity extends Activity {
                             String id = it.next();
                             Log.i(tag, post.getAccesses().get(id).toString());
                         }
+                    }
+                });
+
+                PostIdHttp.createAccess(post, "userNEW", new PostIdHttp.PlainHandler() {
+                    @Override
+                    public void onSuccess(JSONObject res) {
+                        Log.i(tag, res.toString());
+                    }
+                });
+
+                PostIdHttp.getAccess("548537f493e2661812a0ff07", "54896efd0707d4125df4ffe8", new PostIdHttp.AccessHandler() {
+                    @Override
+                    public void onSuccess(Access access) {
+                        Log.i(tag, "get access: " + access.toString());
+                    }
+                });
+
+                PostIdHttp.voteAccess("548537f493e2661812a0ff07", "54896efd0707d4125df4ffe8", "user3", true, new PostIdHttp.PlainHandler() {
+                    @Override
+                    public void onSuccess(JSONObject response) {
+                        Log.i(tag, "vote access: " + response.toString());
                     }
                 });
             }

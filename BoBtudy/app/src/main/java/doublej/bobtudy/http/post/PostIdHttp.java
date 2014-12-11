@@ -3,6 +3,7 @@ package doublej.bobtudy.http.post;
 import android.util.Log;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 
 import org.apache.http.Header;
 import org.json.JSONArray;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 
 import doublej.bobtudy.form.post.Access;
 import doublej.bobtudy.form.post.Post;
+import doublej.bobtudy.form.user.User;
 import doublej.bobtudy.http.Config;
 import doublej.bobtudy.http.Http;
 import doublej.bobtudy.util.ISODate;
@@ -46,6 +48,39 @@ public class PostIdHttp extends Http {
         });
     }
 
+    /**
+     * Fetch one access object.
+     *
+     * @param postId
+     * @param accessId
+     * @param handler
+     */
+    public static void getAccess(final String postId, String accessId, final AccessHandler handler) {
+        client.get(url + "/" + postId + "/acs/" + accessId, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject res) {
+                try {
+                    int success = res.getInt("success");
+                    int failure = res.getInt("failure");
+
+                    if (success == 1) {
+                        Access access = Access.parseJsonAccess(postId, res.getJSONObject("data"));
+                        handler.onSuccess(access);
+                    } else if (failure == 1)
+                        Log.e(tag, "Internal server failure");
+                } catch (JSONException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
+    }
+
+    /**
+     * Fetch every accesses that post has
+     *
+     * @param post
+     * @param handler
+     */
     public static void listAccess(final Post post, final PostHandler handler) {
         client.get(url + "/" + post.getId() + "/acs", new JsonHttpResponseHandler() {
             @Override
@@ -58,7 +93,7 @@ public class PostIdHttp extends Http {
                         JSONArray acsJsonArr = res.getJSONArray("data");
                         for (int i = 0; i < acsJsonArr.length(); i++) {
                             JSONObject acsJsonObj = acsJsonArr.getJSONObject(i);
-                            Access acs = Access.parseJsonAccess(acsJsonObj);
+                            Access acs = Access.parseJsonAccess(post.getId(), acsJsonObj);
                             post.addAccess(acs);
                         }
 
@@ -72,11 +107,80 @@ public class PostIdHttp extends Http {
         });
     }
 
-    public static void createAccess(){
+    public static void voteAccess(String postId, String accessId, String userId, boolean vote, final PlainHandler handler) {
+        RequestParams params = new RequestParams();
+        params.put("userId", userId);
+        params.put("vote", vote);
 
+        client.post(url + "/" + postId + "/acs/" + accessId, params, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject res) {
+                try {
+                    int success = res.getInt("success");
+                    int failure = res.getInt("failure");
+
+                    if (success == 1) {
+                        handler.onSuccess(res);
+                    } else if (failure == 1)
+                        Log.e(tag, "Internal server failure");
+                } catch (JSONException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
+    }
+
+    public static void createAccess(Post post, User user, final PlainHandler handler) {
+        RequestParams params = new RequestParams();
+        params.put("userId", user.getId());
+        client.post(url + "/" + post.getId() + "/acs", params, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject res) {
+                try {
+                    int success = res.getInt("success");
+                    int failure = res.getInt("failure");
+
+                    if (success == 1) {
+                        handler.onSuccess(res);
+                    } else if (failure == 1)
+                        Log.e(tag, "Internal server failure");
+                } catch (JSONException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
+    }
+
+    public static void createAccess(Post post, String userId, final PlainHandler handler) {
+        RequestParams params = new RequestParams();
+        params.put("userId", userId);
+        client.post(url + "/" + post.getId() + "/acs", params, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject res) {
+                try {
+                    int success = res.getInt("success");
+                    int failure = res.getInt("failure");
+
+                    if (success == 1) {
+                        handler.onSuccess(res);
+                    } else if (failure == 1)
+                        Log.e(tag, "Internal server failure");
+                } catch (JSONException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
+    }
+
+    public interface PlainHandler {
+        void onSuccess(JSONObject response);
     }
 
     public interface PostHandler {
         void onSuccess(Post post);
+    }
+
+    public interface AccessHandler {
+        void onSuccess(Access access);
     }
 }

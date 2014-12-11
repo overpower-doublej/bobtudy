@@ -19,6 +19,10 @@ public class User {
         userMap.put(id, this);
     }
 
+    public String getId() {
+        return this.id;
+    }
+
     public static User getUser(String id) {
         return (User) userMap.get(id);
     }
