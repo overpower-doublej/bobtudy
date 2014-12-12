@@ -5,6 +5,9 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 
+import doublej.bobtudy.http.handler.BoolResultHandler;
+import doublej.bobtudy.http.user.UserHttp;
+
 /**
  * Created by Jun on 2014-12-08.
  */
@@ -24,6 +27,14 @@ public class User {
 
     public String getId() {
         return this.id;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public int[] getMeetLog() {
+        return this.meetLog;
     }
 
     public void setMeetLog(int[] meetLog) {
