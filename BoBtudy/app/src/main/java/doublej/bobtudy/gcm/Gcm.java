@@ -18,6 +18,10 @@ import java.util.concurrent.atomic.AtomicInteger;
  * Created by Jun on 2014-12-12.
  */
 public class Gcm {
+    public static final int CODE_ACCESS_JOIN = 0;
+    public static final int CODE_VOTE_FINISH = 1;
+    public static final int CODE_NEW_CHAT = 2;
+
     private static final String EXTRA_MESSAGE = "message";
     private static final String PROPERTY_REG_ID = "registration_id";
     private static final String PROPERTY_APP_VERSION = "appVersion2";
@@ -60,10 +64,7 @@ public class Gcm {
         } else {
             Log.i(tag, "No valid Google Play Services APK found.");
         }
-
-
     }
-
 
     /**
      * Check the device to make sure it has the Google Play Services APK. If

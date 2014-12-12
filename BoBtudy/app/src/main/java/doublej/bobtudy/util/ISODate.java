@@ -7,8 +7,12 @@ import java.util.Date;
 import java.util.TimeZone;
 
 public class ISODate extends Date {
-    private static TimeZone tz = TimeZone.getTimeZone("UTC");
-    private static DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+    private static SimpleDateFormat sdf;
+
+    static {
+        sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+        sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+    }
 
     public ISODate(long milliseconds) {
         super(milliseconds);
@@ -19,17 +23,18 @@ public class ISODate extends Date {
     }
 
     public String toISOString() {
-        df.setTimeZone(tz);
-        return df.format(this);
+        return sdf.format(this);
     }
 
-    public static ISODate getInstanceByIsoString(String IsoDateString) {
+    public static ISODate getInstanceByIsoString(String isoDateString) {
+        Date date = null;
+
         try {
-            Date date = df.parse(IsoDateString);
-            return new ISODate(date.getTime());
-        } catch (ParseException ex) {
-            ex.printStackTrace();
+            date = sdf.parse(isoDateString);
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
-        return null;
+
+        return new ISODate(date);
     }
 }

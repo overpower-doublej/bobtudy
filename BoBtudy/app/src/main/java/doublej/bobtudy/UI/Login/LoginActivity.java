@@ -22,16 +22,19 @@ import doublej.bobtudy.Control.MyDatabase;
 import doublej.bobtudy.UI.CurrentBoBRoom.CurrentBoBroom;
 import doublej.bobtudy.UI.Join.JoinActivity;
 import doublej.bobtudy.form.post.Access;
+import doublej.bobtudy.form.post.Chat;
 import doublej.bobtudy.form.post.Post;
 import doublej.bobtudy.form.user.User;
 import doublej.bobtudy.gcm.Gcm;
 import doublej.bobtudy.http.handler.AccessHandler;
 import doublej.bobtudy.http.handler.BoolResultHandler;
+import doublej.bobtudy.http.handler.ChatListHandler;
 import doublej.bobtudy.http.handler.PostHandler;
 import doublej.bobtudy.http.handler.PostListHandler;
 import doublej.bobtudy.http.handler.ResponseHandler;
 import doublej.bobtudy.http.handler.UserHandler;
 import doublej.bobtudy.http.post.NewPost;
+import doublej.bobtudy.http.post.PostChatHttp;
 import doublej.bobtudy.http.post.PostHttp;
 import doublej.bobtudy.http.post.PostIdHttp;
 import doublej.bobtudy.http.user.NewUser;
@@ -167,6 +170,31 @@ public class LoginActivity extends Activity {
                     @Override
                     public void onResponse(JSONObject jsonObject) {
                         Log.i(tag, "User created with registration id: " + jsonObject.toString());
+                    }
+                });
+            }
+        });
+
+        PostChatHttp.listChatAfter("548aa6cea3c1132141d15842", ISODate.getInstanceByIsoString("2014-12-12T08:26:54.607Z"), new ChatListHandler() {
+            @Override
+            public void onResponse(ArrayList<Chat> chats) {
+                for (int i = 0; i < chats.size(); i++) {
+                    Chat chat = chats.get(i);
+                    Log.i(tag, chat.toString());
+                }
+            }
+        });
+
+        PostChatHttp.sendChat("548aa6cea3c1132141d15842", "user3", "유저3의 메세지", new ResponseHandler() {
+            @Override
+            public void onResponse(JSONObject jsonObject) {
+                PostChatHttp.listChatAfter("548aa6cea3c1132141d15842", ISODate.getInstanceByIsoString("2014-12-12T08:26:54.607Z"), new ChatListHandler() {
+                    @Override
+                    public void onResponse(ArrayList<Chat> chats) {
+                        for (int i = 0; i < chats.size(); i++) {
+                            Chat chat = chats.get(i);
+                            Log.i(tag, chat.toString());
+                        }
                     }
                 });
             }

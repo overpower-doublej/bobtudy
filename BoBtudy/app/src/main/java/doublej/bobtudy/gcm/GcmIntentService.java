@@ -19,6 +19,7 @@ package doublej.bobtudy.gcm;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
 import android.app.IntentService;
+import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -75,7 +76,7 @@ public class GcmIntentService extends IntentService {
             } else if (GoogleCloudMessaging.MESSAGE_TYPE_MESSAGE
                     .equals(messageType)) {
                 // If it's a regular GCM message, do some work.
-				/*
+                /*
 				 * @@@ REGULAR GCM MESSAGE HANDLER
 				 */
                 // Post notification of received message.
