@@ -22,6 +22,10 @@ import doublej.bobtudy.Control.MyDatabase;
 import doublej.bobtudy.form.post.Access;
 import doublej.bobtudy.form.post.Post;
 import doublej.bobtudy.form.user.User;
+import doublej.bobtudy.http.handler.AccessHandler;
+import doublej.bobtudy.http.handler.PostHandler;
+import doublej.bobtudy.http.handler.PostListHandler;
+import doublej.bobtudy.http.handler.ResponseHandler;
 import doublej.bobtudy.http.post.NewPost;
 import doublej.bobtudy.http.post.PostHttp;
 import doublej.bobtudy.http.post.PostIdHttp;
@@ -44,16 +48,16 @@ public class LoginActivity extends Activity {
 
     private void test() {
         NewPost newPost = new NewPost("sdfsad", new ISODate(new Date()), "sadf", "asdf", "asdf", "asdf");
-        PostHttp.create(newPost, new PostHttp.PostHandler() {
+        PostHttp.create(newPost, new PostHandler() {
             @Override
-            public void onSuccess(Post post) {
+            public void onResponse(Post post) {
                 Log.i(tag, "New Post ID: " + post.getId());
             }
         });
 
-        PostHttp.list(new PostHttp.PostListHandler() {
+        PostHttp.list(new PostListHandler() {
             @Override
-            public void onSuccess(ArrayList<Post> posts) {
+            public void onResponse(ArrayList<Post> posts) {
                 Log.i(tag, "Post List");
                 for (int i = 0; i < posts.size(); i++) {
                     Post post = posts.get(i);
@@ -62,15 +66,15 @@ public class LoginActivity extends Activity {
             }
         });
 
-        PostIdHttp.getPost("548537f493e2661812a0ff07", new PostIdHttp.PostHandler() {
+        PostIdHttp.getPost("548537f493e2661812a0ff07", new PostHandler() {
             @Override
-            public void onSuccess(Post post) {
+            public void onResponse(Post post) {
                 Log.i(tag, "Post title: " + post.getTitle());
                 Log.i(tag, "Post accesses");
 
-                PostIdHttp.listAccess(post, new PostIdHttp.PostHandler() {
+                PostIdHttp.listAccess(post, new PostHandler() {
                     @Override
-                    public void onSuccess(Post post) {
+                    public void onResponse(Post post) {
                         Iterator<String> it = post.getAccesses().keySet().iterator();
                         while (it.hasNext()) {
                             String id = it.next();
@@ -79,23 +83,23 @@ public class LoginActivity extends Activity {
                     }
                 });
 
-                PostIdHttp.createAccess(post, "userNEW", new PostIdHttp.PlainHandler() {
+                PostIdHttp.createAccess(post, "userNEW", new ResponseHandler() {
                     @Override
-                    public void onSuccess(JSONObject res) {
+                    public void onResponse(JSONObject res) {
                         Log.i(tag, res.toString());
                     }
                 });
 
-                PostIdHttp.getAccess("548537f493e2661812a0ff07", "54896efd0707d4125df4ffe8", new PostIdHttp.AccessHandler() {
+                PostIdHttp.getAccess("548537f493e2661812a0ff07", "54896efd0707d4125df4ffe8", new AccessHandler() {
                     @Override
-                    public void onSuccess(Access access) {
+                    public void onResponse(Access access) {
                         Log.i(tag, "get access: " + access.toString());
                     }
                 });
 
-                PostIdHttp.voteAccess("548537f493e2661812a0ff07", "54896efd0707d4125df4ffe8", "user3", true, new PostIdHttp.PlainHandler() {
+                PostIdHttp.voteAccess("548537f493e2661812a0ff07", "54896efd0707d4125df4ffe8", "user3", true, new ResponseHandler() {
                     @Override
-                    public void onSuccess(JSONObject response) {
+                    public void onResponse(JSONObject response) {
                         Log.i(tag, "vote access: " + response.toString());
                     }
                 });
@@ -131,7 +135,6 @@ public class LoginActivity extends Activity {
                 int loginPWCol = cursor.getColumnIndex("pwd");
                 //int loginPWCol = cursor.getColumnIndex("nickName");
                 //bundle을 닉네임으로 하도록 바꿔야됨
-
 
 
                 if (cursor.getCount() != 0) {
