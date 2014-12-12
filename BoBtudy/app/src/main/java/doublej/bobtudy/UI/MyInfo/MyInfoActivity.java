@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import doublej.bobtudy.Control.MyDatabase;
 import doublej.bobtudy.R;
@@ -27,7 +28,7 @@ public class MyInfoActivity extends Activity {
 
 
     Button myinfoModify, myinfoConfirm;
-    TextView myNickName, MyParticipate, myinfoID, myinfoName, myinfoDept, myinfoStuID, myinfoComment;
+    TextView myNickName, MyParticipate, myinfoID, myinfoName, myinfoDept, myinfoStuID;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,31 +68,32 @@ public class MyInfoActivity extends Activity {
         int nameCol = cursor.getColumnIndex("name");
         int deptCol = cursor.getColumnIndex("dept");
         int stuIdCol = cursor.getColumnIndex("stuId");
-        int infoCol = cursor.getColumnIndex("info");
 
 
-        while (cursor.moveToNext()) {
+            while (cursor.moveToNext()) {
+                String nickName = cursor.getString(nickNameCol);
+                int meet = cursor.getInt(meetCol);
+                int totalMeet = cursor.getInt(totalMeetCol);
+                String id = cursor.getString(idCol);
+                String name = cursor.getString(nameCol);
+                String dept = cursor.getString(deptCol);
+                String stuId = cursor.getString(stuIdCol);
 
-            String nickName = cursor.getString(nickNameCol);
-            int meet = cursor.getInt(meetCol);
-            int totalMeet = cursor.getInt(totalMeetCol);
-            String id = cursor.getString(idCol);
-            String name = cursor.getString(nameCol);
-            String dept = cursor.getString(deptCol);
-            String stuId = cursor.getString(stuIdCol);
-            String info = cursor.getString(infoCol);
+                String participate;
+                if(totalMeet == 0) {
+                    participate = "없음";
+                } else {
+                    participate = (meet / totalMeet)*100 + "%";
+                }
 
-            String participate = (meet / totalMeet) + "%";
+                myNickName.setText(nickName);
+                MyParticipate.setText(participate);
+                myinfoID.setText(id);
+                myinfoName.setText(name);
+                myinfoDept.setText(dept);
+                myinfoStuID.setText(stuId);
 
-            myNickName.setText(nickName);
-            MyParticipate.setText(participate);
-            myinfoID.setText(id);
-            myinfoName.setText(name);
-            myinfoDept.setText(dept);
-            myinfoStuID.setText(stuId);
-            myinfoComment.setText(info);
-
-        }
+            }
 
 
         cursor.close();

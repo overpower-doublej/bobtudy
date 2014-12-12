@@ -216,7 +216,7 @@ public class LoginActivity extends Activity {
         createID = (Button) findViewById(R.id.createID);
 
         MyDatabase myDB = new MyDatabase(this);
-        final SQLiteDatabase db = myDB.getReadableDatabase();
+        final SQLiteDatabase db = myDB.getWritableDatabase();
 
         enterLogin.setOnClickListener(new View.OnClickListener() {
             @Override

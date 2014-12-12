@@ -131,27 +131,12 @@ public class JoinActivity extends Activity {
                             if (editPwd1.getText().toString()
                                     .equals(editPwd2.getText().toString())) {
 
+                                db.execSQL("INSERT INTO myInfo VALUES ('" + editNickName.getText().toString() + "', '" + editId.getText().toString() + "', '" +
+                                        editPwd1.getText().toString() + "', '" + editName.getText().toString() + "', '" +
+                                        dept[0] + "', '" + editStuId.getText().toString() + "' , 0, 0 );");
 
-
-                                /* 임시 쿼리 */
-
-                                db.execSQL("INSERT INTO myInfo VALUES ('"+ editId.getText().toString() +"', '"+ editPwd1.getText().toString()+"', '"+
-                                        editName.getText().toString()+"', '"+ dept[0]+"', '"+
-                                        editStuId.getText().toString()+"', 0, 0 );");
-
-                                db.execSQL("INSERT INTO user VALUES ('"+ editId.getText().toString()
-                                        +"', '"+ editNickName.getText().toString() +"' );");
-
-                                //쿼리
-                                /*
-                                db.execSQL("INSERT INTO myInfo VALUES ('"+ editNickName.getText().toString() +"', '"+ editId.getText().toString()+"', '"+
-                                        editPwd1.getText().toString()+"', '"+ editName.getText().toString()+"', '"+
-                                        dept[0]+"', '"+ editStuId.getText().toString() +"', null, 0, 0 );");
-
-                                db.execSQL("INSERT INTO user VALUES ('"+ editId.getText().toString() +"', '"+ editNickName.getText().toString() +"' );");
-
-                                        */
-
+                                db.execSQL("INSERT INTO user VALUES ('" + editId.getText().toString() + "', '" + editNickName.getText().toString()
+                                        + "', '" + editName.getText().toString() + "' );");
 
                                 /*
 
@@ -168,8 +153,8 @@ public class JoinActivity extends Activity {
                                 RequestParams params = new RequestParams();
                                 finish();
 
-                                /*Toast.makeText(JoinActivity.this, "가입이 완료되었습니다.",
-                                        Toast.LENGTH_SHORT).show();*/
+                                Toast.makeText(JoinActivity.this, "가입이 완료되었습니다.",
+                                        Toast.LENGTH_SHORT).show();
 
                             }
 
@@ -181,7 +166,7 @@ public class JoinActivity extends Activity {
                         Toast.makeText(JoinActivity.this, "모든 정보를 입력해 주세요.",
                                 Toast.LENGTH_SHORT).show();
                     }
-                }else {
+                } else {
                     Toast.makeText(JoinActivity.this, "아이디 중복체크를 해 주세요.",
                             Toast.LENGTH_SHORT).show();
                 }
