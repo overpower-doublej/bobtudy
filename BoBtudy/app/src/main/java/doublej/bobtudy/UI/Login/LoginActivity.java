@@ -221,8 +221,33 @@ public class LoginActivity extends Activity {
         enterLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                enterLogin.setEnabled(false);
 
-                String searchId = loginID.getText().toString();
+                final String userId = loginID.getText().toString();
+                String pwd = loginPW.getText().toString();
+
+                UserHttp.login(userId, pwd, new BoolResultHandler() {
+                    @Override
+                    public void onResponse(Boolean result) {
+                        if (result) {
+                            Bundle bundle = new Bundle();
+                            bundle.putString("user", userId);
+
+                            Intent intent = new Intent(getApplicationContext(), CurrentBoBroom.class);
+                            intent.putExtras(bundle);
+
+                            startActivity(intent);
+                        } else {
+                            Toast.makeText(LoginActivity.this, "PW가 일치하지 않습니다.",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+
+                        enterLogin.setEnabled(true);
+                    }
+                });
+
+
+                /*String searchId = loginID.getText().toString();
 
                 Cursor cursor = db.rawQuery("SELECT * FROM myInfo WHERE id LIKE ?", new String[]{searchId});
 
@@ -253,7 +278,7 @@ public class LoginActivity extends Activity {
                 } else {
                     Toast.makeText(LoginActivity.this, "ID가 일치하지 않습니다.",
                             Toast.LENGTH_SHORT).show();
-                }
+                }*/
 
 
 
