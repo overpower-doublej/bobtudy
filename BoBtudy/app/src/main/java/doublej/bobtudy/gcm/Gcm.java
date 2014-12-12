@@ -160,7 +160,6 @@ public class Gcm {
                     // The request to your server should be authenticated if your app
                     // is using accounts.
                     //sendRegistrationIdToBackend();
-                    handler.onResponse(regId);
 
                     // For this demo: we don't need to send it because the device
                     // will send upstream messages to a server that echo back the
@@ -180,6 +179,7 @@ public class Gcm {
             @Override
             protected void onPostExecute(String msg) {
                 // Activity task
+                handler.onResponse(regId);
                 Log.i(tag, msg);
             }
         }.execute(null, null, null);
