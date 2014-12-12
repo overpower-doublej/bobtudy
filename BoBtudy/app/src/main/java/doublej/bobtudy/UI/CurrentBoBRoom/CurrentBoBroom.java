@@ -1,4 +1,4 @@
-package doublej.bobtudy.UI;
+package doublej.bobtudy.UI.CurrentBoBRoom;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -15,13 +15,14 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import doublej.bobtudy.Control.MyDatabase;
-import doublej.bobtudy.ListView.IconTextItemBoBroom;
-import doublej.bobtudy.ListView.IconTextListAdapterBoBroom;
 import doublej.bobtudy.R;
 import doublej.bobtudy.Control.SimpleSideDrawer;
+import doublej.bobtudy.UI.CreateBoBRoom.CreateBoBroom;
+import doublej.bobtudy.UI.MyBoBRoom.MyBoBRoomActivity;
+import doublej.bobtudy.UI.MyInfo.MyInfoActivity;
+import doublej.bobtudy.UI.PreviousBoBRoom.PreviousBoBtudyActivity;
 
 /**
  * Created by YeomJi on 2014. 12. 1..
@@ -123,7 +124,6 @@ public class CurrentBoBroom extends Activity implements View.OnClickListener {
 
                 Bundle bundle = new Bundle();
                 bundle.putString("user", ID);
-
                 Intent intent = new Intent(getApplicationContext(), CreateBoBroom.class);
                 intent.putExtras(bundle);
 
@@ -172,6 +172,7 @@ public class CurrentBoBroom extends Activity implements View.OnClickListener {
                 bundle.putString("title", curItem.getData(0));
                 bundle.putString("user", ID);
 
+
                 Intent intent = new Intent(getApplicationContext(), MyBoBRoomActivity.class);
                 intent.putExtras(bundle);
 
@@ -204,9 +205,12 @@ public class CurrentBoBroom extends Activity implements View.OnClickListener {
             startActivity(intent);
 
         } else if (v.getId() == R.id.myInfo) {
-            Intent intent = new Intent(getBaseContext(),
-                    MyInfoActivity.class);
-            startActivityForResult(intent, REQUEST_CODE_ANOTHER);
+
+            Bundle bundle = new Bundle();
+            bundle.putString("user", ID);
+            Intent intent = new Intent(getApplicationContext(), MyInfoActivity.class);
+            intent.putExtras(bundle);
+            startActivity(intent);
 
         } else if (v.getId() == R.id.logout) {
             finish();

@@ -1,4 +1,4 @@
-package doublej.bobtudy.UI;
+package doublej.bobtudy.UI.ModifyInfo;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import doublej.bobtudy.Control.MyDatabase;
 import doublej.bobtudy.R;

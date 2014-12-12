@@ -1,4 +1,4 @@
-package doublej.bobtudy.UI;
+package doublej.bobtudy.UI.PreviousBoBRoom;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -14,12 +14,8 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import doublej.bobtudy.Control.MyDatabase;
-import doublej.bobtudy.ListView.IconTextItemBoBroom;
-import doublej.bobtudy.ListView.IconTextItemBoBroomMember;
-import doublej.bobtudy.ListView.IconTextItemPreviousBoBroom;
-import doublej.bobtudy.ListView.IconTextListAdapterPreviousBoBroom;
 import doublej.bobtudy.R;
-import doublej.bobtudy.UI.CurrentBoBroom;
+import doublej.bobtudy.UI.MyBoBRoom.MyBoBRoomActivity;
 
 /**
  * Created by YeomJi on 2014. 12. 5..

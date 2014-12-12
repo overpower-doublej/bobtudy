@@ -1,32 +1,31 @@
-package doublej.bobtudy.ListView;
-
-import java.util.ArrayList;
-import java.util.List;
-
+package doublej.bobtudy.UI.MyBoBRoom;
 
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- * Created by YeomJi on 2014. 12. 1..
+ * Created by YeomJi on 2014. 12. 5..
  */
-public class IconTextListAdapterBoBroom extends BaseAdapter {
+public class IconTextListAdapterBoBroomMember extends BaseAdapter {
 
     private Context mContext;
 
-    private List<IconTextItemBoBroom> mItems = new ArrayList<IconTextItemBoBroom>();
+    private List<IconTextItemBoBroomMember> mItems = new ArrayList<IconTextItemBoBroomMember>();
 
-    public IconTextListAdapterBoBroom(Context context) {
+    public IconTextListAdapterBoBroomMember(Context context) {
         mContext = context;
     }
 
-    public void addItem(IconTextItemBoBroom it) {
+    public void addItem(IconTextItemBoBroomMember it) {
         mItems.add(it);
     }
 
-    public void setListItems(List<IconTextItemBoBroom> lit) {
+    public void setListItems(List<IconTextItemBoBroomMember> lit) {
         mItems = lit;
     }
 
@@ -55,16 +54,15 @@ public class IconTextListAdapterBoBroom extends BaseAdapter {
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
-        IconTextViewBoBroom itemView;
+        IconTextViewBoBroomMember itemView;
         if (convertView == null) {
-            itemView = new IconTextViewBoBroom(mContext, mItems.get(position));
+            itemView = new IconTextViewBoBroomMember(mContext, mItems.get(position));
         } else {
-            itemView = (IconTextViewBoBroom) convertView;
+            itemView = (IconTextViewBoBroomMember) convertView;
 
             itemView.setIcon(mItems.get(position).getIcon());
             itemView.setText(0, mItems.get(position).getData(0));
             itemView.setText(1, mItems.get(position).getData(1));
-            itemView.setText(1, mItems.get(position).getData(2));
         }
 
         return itemView;

@@ -1,4 +1,4 @@
-package doublej.bobtudy.UI;
+package doublej.bobtudy.UI.MyBoBRoom;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -9,16 +9,15 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import doublej.bobtudy.ListView.IconTextItemBoBroom;
-import doublej.bobtudy.ListView.IconTextItemBoBroomMember;
-import doublej.bobtudy.ListView.IconTextListAdapterBoBroomMember;
 import doublej.bobtudy.Control.MyDatabase;
 import doublej.bobtudy.R;
+import doublej.bobtudy.UI.Chatting.ChattingActivity;
+import doublej.bobtudy.UI.VoteSuggestion.VoteSuggestionActivity;
 
 public class MyBoBRoomActivity extends Activity {
 
@@ -57,8 +56,6 @@ public class MyBoBRoomActivity extends Activity {
         String bobRoomTitle = bundle.getString("title");
         ID = bundle.getString("user");
 
-
-
         MyDatabase myDB = new MyDatabase(this);
         SQLiteDatabase db = myDB.getReadableDatabase();
 
@@ -76,11 +73,6 @@ public class MyBoBRoomActivity extends Activity {
         int contentCol = cursor.getColumnIndex("content");
         int bossCol = cursor.getColumnIndex("boss");
 
-        cursor.moveToNext();
-        String id = cursor.getString(idCol);
-        String boss = cursor.getString(bossCol);
-        cursor.moveToFirst();
-
         while (cursor.moveToNext()) {
 
             String title = cursor.getString(titleCol);
@@ -89,26 +81,32 @@ public class MyBoBRoomActivity extends Activity {
             String place = cursor.getString(placeCol);
             String content = cursor.getString(contentCol);
 
-
-
             mybobroomTitle.setText(title);
             mybobroomTime.setText(date);
             mybobroomPlace.setText(menu);
             mybobroomGoto.setText(place);
             mybobroomComment.setText(content);
         }
+        cursor.moveToFirst();
+
+        String id = cursor.getString(idCol);
+        String boss = cursor.getString(bossCol);
+
+        Toast.makeText(MyBoBRoomActivity.this, id+"   "+boss,
+                Toast.LENGTH_SHORT).show();
+
         cursor.close();
 
 
-        sql = "SELECT * FROM post_user ps, myInfo my  WHERE ps.userId = my.id and id LIKE ?";
+        sql = "SELECT * FROM post_user ps, user u  WHERE ps.userId = u.id and id LIKE ?";
         cursor = db.rawQuery(sql, new String[]{id});
 
         int recordCount = cursor.getCount();
         Log.d(tag, "cursor count : " + recordCount + "\n");
 
         int nickNameCol = cursor.getColumnIndex("nickName");
-        int meetCol = cursor.getColumnIndex("meet");
-        int totalMeetCol = cursor.getColumnIndex("totalMeet");
+        //int meetCol = cursor.getColumnIndex("meet");
+        //int totalMeetCol = cursor.getColumnIndex("totalMeet");
 
 
         Resources res = getResources();
@@ -116,12 +114,9 @@ public class MyBoBRoomActivity extends Activity {
         for(int i=0;i<cursor.getCount();i++) {
             while (cursor.moveToNext()) {
                 String nickName = cursor.getString(nickNameCol);
-                int meet = cursor.getInt(meetCol);
-                int totalMeet = cursor.getInt(totalMeetCol);
 
-                String participate = (meet / totalMeet) + "%";
-
-                adapter.addItem(new IconTextItemBoBroomMember(res.getDrawable(R.drawable.member),nickName, participate));
+                /* 출석률 값 입력 --> 수정*/
+                adapter.addItem(new IconTextItemBoBroomMember(res.getDrawable(R.drawable.member),nickName, "출석률 값 입력"));
 
             }
         }

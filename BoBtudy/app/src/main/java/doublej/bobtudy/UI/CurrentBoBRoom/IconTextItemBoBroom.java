@@ -1,4 +1,4 @@
-package doublej.bobtudy.ListView;
+package doublej.bobtudy.UI.CurrentBoBRoom;
 
 import android.graphics.drawable.Drawable;
 
@@ -48,7 +48,7 @@ public class IconTextItemBoBroom {
         mData = new String[3];
         mData[0] = obj01;
         mData[1] = obj02;
-        mData[1] = obj03;
+        mData[2] = obj03;
     }
 
     /**

@@ -1,4 +1,4 @@
-package doublej.bobtudy.UI;
+package doublej.bobtudy.UI.Login;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -19,9 +19,10 @@ import java.util.Date;
 import java.util.Iterator;
 
 import doublej.bobtudy.Control.MyDatabase;
+import doublej.bobtudy.UI.CurrentBoBRoom.CurrentBoBroom;
+import doublej.bobtudy.UI.Join.JoinActivity;
 import doublej.bobtudy.form.post.Access;
 import doublej.bobtudy.form.post.Post;
-import doublej.bobtudy.form.user.User;
 import doublej.bobtudy.http.handler.AccessHandler;
 import doublej.bobtudy.http.handler.BoolResultHandler;
 import doublej.bobtudy.http.handler.PostHandler;
@@ -181,9 +182,6 @@ public class LoginActivity extends Activity {
                 Cursor cursor = db.rawQuery("SELECT * FROM myInfo WHERE id LIKE ?", new String[]{searchId});
 
                 int loginPWCol = cursor.getColumnIndex("pwd");
-                //int loginPWCol = cursor.getColumnIndex("nickName");
-                //bundle을 닉네임으로 하도록 바꿔야됨
-
 
                 if (cursor.getCount() != 0) {
 
@@ -196,7 +194,7 @@ public class LoginActivity extends Activity {
                             cursor.close();
 
                             Bundle bundle = new Bundle();
-                            //bundle.putString("user", ID);
+                            bundle.putString("user", searchId);
 
                             Intent intent = new Intent(getApplicationContext(), CurrentBoBroom.class);
                             intent.putExtras(bundle);

@@ -1,4 +1,4 @@
-package doublej.bobtudy.UI;
+package doublej.bobtudy.UI.Chatting;
 
 import android.app.Activity;
 import android.os.Bundle;

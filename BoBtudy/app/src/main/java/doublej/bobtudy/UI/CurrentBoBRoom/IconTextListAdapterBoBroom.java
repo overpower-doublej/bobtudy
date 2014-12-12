@@ -1,31 +1,32 @@
-package doublej.bobtudy.ListView;
+package doublej.bobtudy.UI.CurrentBoBRoom;
+
+import java.util.ArrayList;
+import java.util.List;
+
 
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
- * Created by YeomJi on 2014. 12. 5..
+ * Created by YeomJi on 2014. 12. 1..
  */
-public class IconTextListAdapterPreviousBoBroom  extends BaseAdapter {
+public class IconTextListAdapterBoBroom extends BaseAdapter {
 
     private Context mContext;
 
-    private List<IconTextItemPreviousBoBroom> mItems = new ArrayList<IconTextItemPreviousBoBroom>();
+    private List<IconTextItemBoBroom> mItems = new ArrayList<IconTextItemBoBroom>();
 
-    public IconTextListAdapterPreviousBoBroom(Context context) {
+    public IconTextListAdapterBoBroom(Context context) {
         mContext = context;
     }
 
-    public void addItem(IconTextItemPreviousBoBroom it) {
+    public void addItem(IconTextItemBoBroom it) {
         mItems.add(it);
     }
 
-    public void setListItems(List<IconTextItemPreviousBoBroom> lit) {
+    public void setListItems(List<IconTextItemBoBroom> lit) {
         mItems = lit;
     }
 
@@ -54,11 +55,11 @@ public class IconTextListAdapterPreviousBoBroom  extends BaseAdapter {
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
-        IconTextViewPreviousBoBroom itemView;
+        IconTextViewBoBroom itemView;
         if (convertView == null) {
-            itemView = new IconTextViewPreviousBoBroom(mContext, mItems.get(position));
+            itemView = new IconTextViewBoBroom(mContext, mItems.get(position));
         } else {
-            itemView = (IconTextViewPreviousBoBroom) convertView;
+            itemView = (IconTextViewBoBroom) convertView;
 
             itemView.setIcon(mItems.get(position).getIcon());
             itemView.setText(0, mItems.get(position).getData(0));
@@ -69,4 +70,3 @@ public class IconTextListAdapterPreviousBoBroom  extends BaseAdapter {
         return itemView;
     }
 }
-

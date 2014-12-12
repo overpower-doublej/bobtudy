@@ -1,4 +1,4 @@
-package doublej.bobtudy.ListView;
+package doublej.bobtudy.UI.PreviousBoBRoom;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -12,11 +12,11 @@ import doublej.bobtudy.R;
 /**
  * Created by YeomJi on 2014. 12. 5..
  */
-public class IconTextViewBoBroomMember extends LinearLayout {
+public class IconTextViewPreviousBoBroom extends LinearLayout {
 
     /**
-     * Icon
-     */
+    * Icon
+    */
     private ImageView mIcon;
 
     /**
@@ -34,24 +34,28 @@ public class IconTextViewBoBroomMember extends LinearLayout {
      */
     private TextView mText03;
 
-    public IconTextViewBoBroomMember(Context context, IconTextItemBoBroomMember aItem) {
+    public IconTextViewPreviousBoBroom(Context context, IconTextItemPreviousBoBroom aItem) {
         super(context);
 
         // Layout Inflation
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        inflater.inflate(R.layout.mybobroom_member_listitem, this, true);
+        inflater.inflate(R.layout.previousbobtudy_listitem, this, true);
 
         // Set Icon
-        mIcon = (ImageView) findViewById(R.id.iconItemMember);
+        mIcon = (ImageView) findViewById(R.id.iconItemPreviousBoBroom);
         mIcon.setImageDrawable(aItem.getIcon());
 
         // Set Text 01
-        mText01 = (TextView) findViewById(R.id.dataItem01Member);
+        mText01 = (TextView) findViewById(R.id.dataItem01PreviousBoBroom);
         mText01.setText(aItem.getData(0));
 
         // Set Text 02
-        mText02 = (TextView) findViewById(R.id.dataItem02Member);
+        mText02 = (TextView) findViewById(R.id.dataItem02PreviousBoBroom);
         mText02.setText(aItem.getData(1));
+        // Set Text 03
+        mText03 = (TextView) findViewById(R.id.dataItem03PreviousBoBroom);
+        mText03.setText(aItem.getData(2));
+
 
     }
 
@@ -66,6 +70,8 @@ public class IconTextViewBoBroomMember extends LinearLayout {
             mText01.setText(data);
         } else if (index == 1) {
             mText02.setText(data);
+        } else if (index == 2) {
+            mText03.setText(data);
         } else {
             throw new IllegalArgumentException();
         }
@@ -80,4 +86,3 @@ public class IconTextViewBoBroomMember extends LinearLayout {
         mIcon.setImageDrawable(icon);
     }
 }
-

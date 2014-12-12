@@ -1,4 +1,4 @@
-package doublej.bobtudy.UI;
+package doublej.bobtudy.UI.CreateBoBRoom;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -9,10 +9,10 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
 import doublej.bobtudy.Control.MyDatabase;
 import doublej.bobtudy.R;
+import doublej.bobtudy.UI.MyBoBRoom.MyBoBRoomActivity;
 
 
 public class CreateBoBroom extends Activity {
@@ -75,19 +75,23 @@ public class CreateBoBroom extends Activity {
             public void onClick(View v) {
 
 
-                /* 임시 쿼리 */
+                /* 임시 쿼리
+                 * post.id = null --> 수정
+                 * 출석률 값 입력 --> 수정*/
 
-                db.execSQL("INSERT INTO post VALUES ( null, '"+ BoBroomTitle.getText().toString() +"', '"+ Time+"', '"+
+                db.execSQL("INSERT INTO post VALUES ( 3, '"+ BoBroomTitle.getText().toString() +"', '"+ Time+"', '"+
                         BoBroomGoto.getText().toString()+"', '"+ BoBroomPlace.getText().toString()+"', '"+
                         BoBroomComment.getText().toString()+"', '"+ ID +"' );");
 
                 db.execSQL("INSERT INTO post_user VALUES ( '"+ BoBroomTitle.getText().toString() +"', '"+ ID+"', '"+
-                        BoBroomGoto.getText().toString()+"' );");
+                        "출석률 값 입력"+"' );");
 
 
-                Intent intent = new Intent(getBaseContext(),
-                        MyBoBRoomActivity.class);
-                startActivityForResult(intent, REQUEST_CODE_ANOTHER);
+                Bundle bundle = new Bundle();
+                bundle.putString("title", BoBroomTitle.getText().toString());
+                Intent intent = new Intent(getApplicationContext(), MyBoBRoomActivity.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
 
                 finish();
 

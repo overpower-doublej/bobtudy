@@ -1,7 +1,6 @@
-package doublej.bobtudy.UI;
+package doublej.bobtudy.UI.Join;
 
 import android.app.Activity;
-import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;

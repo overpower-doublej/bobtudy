@@ -1,4 +1,4 @@
-package doublej.bobtudy.ListView;
+package doublej.bobtudy.UI.CurrentBoBRoom;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -8,15 +8,16 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import doublej.bobtudy.R;
+import doublej.bobtudy.UI.CurrentBoBRoom.IconTextItemBoBroom;
 
 /**
- * Created by YeomJi on 2014. 12. 5..
+ * Created by YeomJi on 2014. 12. 1..
  */
-public class IconTextViewPreviousBoBroom extends LinearLayout {
+public class IconTextViewBoBroom extends LinearLayout {
 
     /**
-    * Icon
-    */
+     * Icon
+     */
     private ImageView mIcon;
 
     /**
@@ -34,28 +35,28 @@ public class IconTextViewPreviousBoBroom extends LinearLayout {
      */
     private TextView mText03;
 
-    public IconTextViewPreviousBoBroom(Context context, IconTextItemPreviousBoBroom aItem) {
+    public IconTextViewBoBroom(Context context, IconTextItemBoBroom aItem) {
         super(context);
 
         // Layout Inflation
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        inflater.inflate(R.layout.previousbobtudy_listitem, this, true);
+        inflater.inflate(R.layout.current_bobroom_listitem, this, true);
 
         // Set Icon
-        mIcon = (ImageView) findViewById(R.id.iconItemPreviousBoBroom);
+        mIcon = (ImageView) findViewById(R.id.iconItemBoBroom);
         mIcon.setImageDrawable(aItem.getIcon());
 
         // Set Text 01
-        mText01 = (TextView) findViewById(R.id.dataItem01PreviousBoBroom);
+        mText01 = (TextView) findViewById(R.id.dataItem01BoBroom);
         mText01.setText(aItem.getData(0));
 
         // Set Text 02
-        mText02 = (TextView) findViewById(R.id.dataItem02PreviousBoBroom);
+        mText02 = (TextView) findViewById(R.id.dataItem02BoBroom);
         mText02.setText(aItem.getData(1));
-        // Set Text 03
-        mText03 = (TextView) findViewById(R.id.dataItem03PreviousBoBroom);
-        mText03.setText(aItem.getData(2));
 
+        // Set Text 02
+        mText03 = (TextView) findViewById(R.id.dataItem03BoBroom);
+        mText03.setText(aItem.getData(2));
 
     }
 
@@ -72,7 +73,7 @@ public class IconTextViewPreviousBoBroom extends LinearLayout {
             mText02.setText(data);
         } else if (index == 2) {
             mText03.setText(data);
-        } else {
+        }else {
             throw new IllegalArgumentException();
         }
     }

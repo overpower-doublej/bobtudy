@@ -9,7 +9,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".UI.LoginActivity"
+            android:name=".UI.Login.LoginActivity"
             android:label="BoBtudy">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,31 +18,31 @@
         </activity>
 
         <activity
-            android:name=".UI.JoinActivity"
+            android:name=".UI.Join.JoinActivity"
             android:label="BoBtudy"></activity>
         <activity
-            android:name=".UI.ModifyInfoActivtiy"
+            android:name=".UI.ModifyInfo.ModifyInfoActivtiy"
             android:label="BoBtudy"></activity>
         <activity
-            android:name=".UI.MyInfoActivity"
+            android:name=".UI.MyInfo.MyInfoActivity"
             android:label="BoBtudy"></activity>
         <activity
-            android:name=".UI.CurrentBoBroom"
+            android:name=".UI.CurrentBoBRoom.CurrentBoBroom"
             android:label="BoBtudy"></activity>
         <activity
-            android:name=".UI.CreateBoBroom"
+            android:name=".UI.CreateBoBRoom.CreateBoBroom"
             android:label="BoBtudy"></activity>
         <activity
-            android:name=".UI.VoteSuggestionActivity"
+            android:name=".UI.VoteSuggestion.VoteSuggestionActivity"
             android:label="BoBtudy"></activity>
         <activity
-            android:name=".UI.ChattingActivity"
+            android:name=".UI.Chatting.ChattingActivity"
             android:label="BoBtudy"></activity>
         <activity
-            android:name=".UI.MyBoBRoomActivity"
+            android:name=".UI.MyBoBRoom.MyBoBRoomActivity"
             android:label="BoBtudy"></activity>
         <activity
-            android:name=".UI.PreviousBoBtudyActivity"
+            android:name=".UI.PreviousBoBRoom.PreviousBoBtudyActivity"
             android:label="BoBtudy"></activity>
 
 

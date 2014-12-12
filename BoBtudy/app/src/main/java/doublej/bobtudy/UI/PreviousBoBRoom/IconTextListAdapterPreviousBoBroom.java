@@ -1,4 +1,4 @@
-package doublej.bobtudy.ListView;
+package doublej.bobtudy.UI.PreviousBoBRoom;
 
 import android.content.Context;
 import android.view.View;
@@ -11,21 +11,21 @@ import java.util.List;
 /**
  * Created by YeomJi on 2014. 12. 5..
  */
-public class IconTextListAdapterBoBroomMember extends BaseAdapter {
+public class IconTextListAdapterPreviousBoBroom  extends BaseAdapter {
 
     private Context mContext;
 
-    private List<IconTextItemBoBroomMember> mItems = new ArrayList<IconTextItemBoBroomMember>();
+    private List<IconTextItemPreviousBoBroom> mItems = new ArrayList<IconTextItemPreviousBoBroom>();
 
-    public IconTextListAdapterBoBroomMember(Context context) {
+    public IconTextListAdapterPreviousBoBroom(Context context) {
         mContext = context;
     }
 
-    public void addItem(IconTextItemBoBroomMember it) {
+    public void addItem(IconTextItemPreviousBoBroom it) {
         mItems.add(it);
     }
 
-    public void setListItems(List<IconTextItemBoBroomMember> lit) {
+    public void setListItems(List<IconTextItemPreviousBoBroom> lit) {
         mItems = lit;
     }
 
@@ -54,17 +54,19 @@ public class IconTextListAdapterBoBroomMember extends BaseAdapter {
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
-        IconTextViewBoBroomMember itemView;
+        IconTextViewPreviousBoBroom itemView;
         if (convertView == null) {
-            itemView = new IconTextViewBoBroomMember(mContext, mItems.get(position));
+            itemView = new IconTextViewPreviousBoBroom(mContext, mItems.get(position));
         } else {
-            itemView = (IconTextViewBoBroomMember) convertView;
+            itemView = (IconTextViewPreviousBoBroom) convertView;
 
             itemView.setIcon(mItems.get(position).getIcon());
             itemView.setText(0, mItems.get(position).getData(0));
             itemView.setText(1, mItems.get(position).getData(1));
+            itemView.setText(1, mItems.get(position).getData(2));
         }
 
         return itemView;
     }
 }
+

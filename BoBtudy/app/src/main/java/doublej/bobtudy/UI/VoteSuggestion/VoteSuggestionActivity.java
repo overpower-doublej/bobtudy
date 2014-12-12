@@ -1,4 +1,4 @@
-package doublej.bobtudy.UI;
+package doublej.bobtudy.UI.VoteSuggestion;
 
 import android.app.Activity;
 import android.content.Intent;

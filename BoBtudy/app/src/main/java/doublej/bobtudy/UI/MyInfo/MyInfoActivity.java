@@ -1,4 +1,4 @@
-package doublej.bobtudy.UI;
+package doublej.bobtudy.UI.MyInfo;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import doublej.bobtudy.Control.MyDatabase;
 import doublej.bobtudy.R;
+import doublej.bobtudy.UI.ModifyInfo.ModifyInfoActivtiy;
 
 /**
  * Created by YeomJi on 2014. 12. 5..
