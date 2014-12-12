@@ -7,7 +7,6 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.util.Log;
-
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
@@ -21,7 +20,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class Gcm {
     private static final String EXTRA_MESSAGE = "message";
     private static final String PROPERTY_REG_ID = "registration_id";
-    private static final String PROPERTY_APP_VERSION = "appVersion";
+    private static final String PROPERTY_APP_VERSION = "appVersion2";
     private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
     private final static String tag = "GCM";
 
