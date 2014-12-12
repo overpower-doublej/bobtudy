@@ -6,7 +6,7 @@
     android:orientation="horizontal" >
 
     <ImageView
-        android:id="@+id/iconItemMember"
+        android:id="@+id/iconItemNewMember"
         android:src="@drawable/member"
         android:layout_width="60sp"
         android:layout_height="60sp"
@@ -18,23 +18,15 @@
         android:orientation="vertical" >
 
         <TextView
-            android:id="@+id/dataItem01Member"
-            android:text="Room Name"
+            android:id="@+id/dataItem01NewMember"
+            android:text="user nickName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="4dp"
-            android:layout_margin="5sp"
-            android:textSize="16dp"
+            android:layout_margin="15sp"
+            android:textSize="20dp"
             android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/dataItem02Member"
-            android:text="Content"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="4dp"
-            android:layout_margin="5sp"
-            android:textColor="#0000ff" />
     </LinearLayout>
 
     <Space
@@ -42,10 +34,11 @@
         android:layout_weight="1"
         android:layout_height="wrap_content" />
 
-    <ImageView
-        android:src="@drawable/arrow"
+    <CheckBox
+        android:id="@+id/participationCheck"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="7sp" />
+        android:layout_margin="15sp"
+        android:text="출석 여부"/>
 
 </LinearLayout>

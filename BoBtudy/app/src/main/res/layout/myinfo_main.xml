@@ -189,27 +189,6 @@
                 android:textSize="15sp" />
         </TableRow>
 
-        <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:layout_width="100sp"
-                android:layout_height="wrap_content"
-                android:layout_margin="5sp"
-                android:gravity="center"
-                android:text="하고 싶은 말 : "
-                android:textSize="15sp" />
-
-            <TextView
-                android:id="@+id/myinfoComment"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_margin="5sp"
-                android:gravity="center"
-                android:text="ggggg"
-                android:textSize="15sp" />
-        </TableRow>
 
     </TableLayout>
 
