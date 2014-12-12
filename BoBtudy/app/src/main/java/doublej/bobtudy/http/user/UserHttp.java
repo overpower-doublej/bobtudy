@@ -15,6 +15,7 @@ import doublej.bobtudy.form.post.Post;
 import doublej.bobtudy.form.user.User;
 import doublej.bobtudy.http.Config;
 import doublej.bobtudy.http.Http;
+import doublej.bobtudy.http.handler.BoolResultHandler;
 import doublej.bobtudy.http.handler.ResponseHandler;
 import doublej.bobtudy.http.handler.UserHandler;
 
@@ -65,12 +66,79 @@ public class UserHttp extends Http {
      * res:
      * 존재하는 ID --> { success: 1, failure: 0, data: { exists: 1 } }
      * 존재하지 않는 ID --> { success: 1, failure: 0, data: { exists: 0 } }
+     * <p/>
+     * ID가 존재하면 true.
      *
      * @param id
      * @param handler
      */
-    public static void checkId(String id, JsonHttpResponseHandler handler) {
-        client.get(url + "/check/" + id, handler);
+    public static void checkIdExists(String id, final BoolResultHandler handler) {
+        client.get(url + "/check/" + id, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject res) {
+                try {
+                    int success = res.getInt("success");
+                    int failure = res.getInt("failure");
+
+                    if (success == 1) {
+                        JSONObject jsonObject = res.getJSONObject("data");
+                        int exists = jsonObject.optInt("exists");
+
+                        Boolean result;
+                        if (exists == 1)
+                            result = true;
+                        else
+                            result = false;
+
+                        handler.onResponse(result);
+                    } else if (failure == 1)
+                        Log.e(tag, "Internal server failure");
+                } catch (JSONException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
+    }
+
+
+    /**
+     * res:
+     * 비밀번호 일치 --> { success: 1, failure: 0, data: { correct: 1 } }
+     * 비밀번호 틀림 --> { success: 1, failure: 0, data: { correct: 0 } }
+     *
+     * @param id
+     * @param pwd
+     * @param handler
+     */
+    public static void login(String id, String pwd, final BoolResultHandler handler) {
+        RequestParams params = new RequestParams();
+        params.put("pwd", pwd);
+
+        client.post(url + "/" + id + "/login", params, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject res) {
+                try {
+                    int success = res.getInt("success");
+                    int failure = res.getInt("failure");
+
+                    if (success == 1) {
+                        JSONObject jsonObject = res.getJSONObject("data");
+                        int correct = jsonObject.optInt("correct");
+
+                        Boolean result;
+                        if (correct == 1)
+                            result = true;
+                        else
+                            result = false;
+
+                        handler.onResponse(result);
+                    } else if (failure == 1)
+                        Log.e(tag, "Internal server failure");
+                } catch (JSONException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
     }
 
     /**
@@ -107,21 +175,5 @@ public class UserHttp extends Http {
                 }
             }
         });
-    }
-
-    /**
-     * res:
-     * 비밀번호 일치 --> { success: 1, failure: 0, correct: 1 }
-     * 비밀번호 틀림 --> { success: 1, failure: 0, correct: 0 }
-     *
-     * @param id
-     * @param pwd
-     * @param handler
-     */
-    public static void login(String id, String pwd, JsonHttpResponseHandler handler) {
-        RequestParams params = new RequestParams();
-        params.put("pwd", pwd);
-
-        client.post(url + "/" + id, params, handler);
     }
 }

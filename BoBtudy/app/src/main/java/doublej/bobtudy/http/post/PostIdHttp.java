@@ -34,7 +34,7 @@ public class PostIdHttp extends Http {
                     int success = res.getInt("success");
                     int failure = res.getInt("failure");
 
-                    if (success == 1) {
+                    if (success == 1 && !res.isNull("data")) {
                         JSONObject postJsonObj = res.getJSONObject("data");
                         Post post = Post.parseJsonObject(postJsonObj);
 

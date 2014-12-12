@@ -23,12 +23,16 @@ import doublej.bobtudy.form.post.Access;
 import doublej.bobtudy.form.post.Post;
 import doublej.bobtudy.form.user.User;
 import doublej.bobtudy.http.handler.AccessHandler;
+import doublej.bobtudy.http.handler.BoolResultHandler;
 import doublej.bobtudy.http.handler.PostHandler;
 import doublej.bobtudy.http.handler.PostListHandler;
 import doublej.bobtudy.http.handler.ResponseHandler;
+import doublej.bobtudy.http.handler.UserHandler;
 import doublej.bobtudy.http.post.NewPost;
 import doublej.bobtudy.http.post.PostHttp;
 import doublej.bobtudy.http.post.PostIdHttp;
+import doublej.bobtudy.http.user.NewUser;
+import doublej.bobtudy.http.user.UserHttp;
 import doublej.bobtudy.util.ISODate;
 import doublej.bobtudy.Control.BackPressCloseHandler;
 import doublej.bobtudy.R;
@@ -103,6 +107,36 @@ public class LoginActivity extends Activity {
                         Log.i(tag, "vote access: " + response.toString());
                     }
                 });
+            }
+        });
+
+        final String userId = "newUser1234567";
+        UserHttp.checkIdExists(userId, new BoolResultHandler() {
+            @Override
+            public void onResponse(Boolean result) {
+                if (result) {
+                    UserHttp.getUser(userId, new UserHandler() {
+                        @Override
+                        public void onResponse(User user) {
+                            Log.i(tag, userId + " exists");
+                            Log.i(tag, user.toString());
+                        }
+                    });
+                } else {
+                    UserHttp.join(new NewUser(userId, "newuserpwd", "이이름", "학과과", "202022020", "123", "asdfadf"), new ResponseHandler() {
+                        @Override
+                        public void onResponse(JSONObject jsonObject) {
+                            Log.i(tag, "User created: " + userId + " / response: " + jsonObject.toString());
+
+                            UserHttp.login(userId, "newuserpwd", new BoolResultHandler() {
+                                @Override
+                                public void onResponse(Boolean result) {
+                                    Log.i(tag, userId + " login result: " + Boolean.toString(result));
+                                }
+                            });
+                        }
+                    });
+                }
             }
         });
     }

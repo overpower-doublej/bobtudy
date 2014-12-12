@@ -30,6 +30,11 @@ public class User {
         this.meetLog = meetLog;
     }
 
+    @Override
+    public String toString() {
+        return this.id + "/" + this.name + "/" + meetLog.toString();
+    }
+
     public static User parseJsonObj(JSONObject jsonObject) {
         String id = jsonObject.optString("_id");
         String name = jsonObject.optString("name");
