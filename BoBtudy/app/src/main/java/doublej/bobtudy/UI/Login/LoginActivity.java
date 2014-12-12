@@ -23,6 +23,8 @@ import doublej.bobtudy.UI.CurrentBoBRoom.CurrentBoBroom;
 import doublej.bobtudy.UI.Join.JoinActivity;
 import doublej.bobtudy.form.post.Access;
 import doublej.bobtudy.form.post.Post;
+import doublej.bobtudy.form.user.User;
+import doublej.bobtudy.gcm.Gcm;
 import doublej.bobtudy.http.handler.AccessHandler;
 import doublej.bobtudy.http.handler.BoolResultHandler;
 import doublej.bobtudy.http.handler.PostHandler;
@@ -150,6 +152,21 @@ public class LoginActivity extends Activity {
                     public void onResponse(User user2) {
                         Log.i(tag, "find user1 #2");
                         Log.i(tag, "#1 == #2 ?: " + Boolean.toString(user1 == user2));
+                    }
+                });
+            }
+        });
+
+        Gcm gcm = new Gcm(this);
+        gcm.getRegId(new Gcm.RegIdHandler() {
+            @Override
+            public void onResponse(String regId) {
+                Log.i(tag, "REGISTRATION_ID: " + regId);
+                NewUser newUser = new NewUser("newnewnew", "newnewnew", "newName", "과과", "123123", "information", regId);
+                newUser.join(new ResponseHandler() {
+                    @Override
+                    public void onResponse(JSONObject jsonObject) {
+                        Log.i(tag, "User created with registration id: " + jsonObject.toString());
                     }
                 });
             }

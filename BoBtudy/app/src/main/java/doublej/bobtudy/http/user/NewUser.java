@@ -1,6 +1,8 @@
 package doublej.bobtudy.http.user;
 
 import doublej.bobtudy.form.user.User;
+import doublej.bobtudy.http.handler.ResponseHandler;
+import doublej.bobtudy.http.handler.UserHandler;
 
 /**
  * Created by Jun on 2014-12-08.
@@ -22,6 +24,10 @@ public class NewUser extends User {
         this.stuId = stuId;
         this.info = info;
         this.regId = regId;
+    }
+
+    public void join(ResponseHandler handler) {
+        UserHttp.join(this, handler);
     }
 
     public String getId() {
