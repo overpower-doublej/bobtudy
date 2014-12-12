@@ -60,7 +60,7 @@ public class User {
         return user;
     }
 
-    public static User getUser(String id) {
+    public static User findUser(String id) {
         return (User) userMap.get(id);
     }
 }
