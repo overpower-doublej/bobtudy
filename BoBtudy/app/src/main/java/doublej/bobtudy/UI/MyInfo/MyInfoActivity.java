@@ -42,7 +42,6 @@ public class MyInfoActivity extends Activity {
         myinfoName = (TextView) findViewById(R.id.myinfoName);
         myinfoDept = (TextView) findViewById(R.id.myinfoDept);
         myinfoStuID = (TextView) findViewById(R.id.myinfoStuID);
-        myinfoComment = (TextView) findViewById(R.id.myinfoComment);
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();

@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import doublej.bobtudy.Control.MyDatabase;
 import doublej.bobtudy.R;
@@ -171,6 +172,9 @@ public class CurrentBoBroom extends Activity implements View.OnClickListener {
                 Bundle bundle = new Bundle();
                 bundle.putString("title", curItem.getData(0));
                 bundle.putString("user", ID);
+
+                Toast.makeText(CurrentBoBroom.this, ID,
+                        Toast.LENGTH_SHORT).show();
 
 
                 Intent intent = new Intent(getApplicationContext(), MyBoBRoomActivity.class);
