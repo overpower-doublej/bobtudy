@@ -139,6 +139,20 @@ public class LoginActivity extends Activity {
                 }
             }
         });
+
+        User.findUser("user1", new UserHandler() {
+            @Override
+            public void onResponse(final User user1) {
+                Log.i(tag, "find user1 #1");
+                User.findUser("user1", new UserHandler() {
+                    @Override
+                    public void onResponse(User user2) {
+                        Log.i(tag, "find user1 #2");
+                        Log.i(tag, "#1 == #2 ?: " + Boolean.toString(user1 == user2));
+                    }
+                });
+            }
+        });
     }
 
     @Override

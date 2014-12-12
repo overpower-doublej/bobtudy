@@ -10,12 +10,12 @@ import doublej.bobtudy.util.ISODate;
  */
 public class Chat {
     private ISODate date;
-    private User user;
+    private String userId;
     private String msg;
 
-    public Chat(ISODate date, User user, String msg) {
+    public Chat(ISODate date, String userId, String msg) {
         this.date = date;
-        this.user = user;
+        this.userId = userId;
         this.msg = msg;
     }
 
@@ -25,8 +25,6 @@ public class Chat {
 
         String userId = jsonObject.optString("userId");
         String msg = jsonObject.optString("msg");
-
-        User user = User.findUser(userId);
 
         return new Chat(date, userId, msg);
     }

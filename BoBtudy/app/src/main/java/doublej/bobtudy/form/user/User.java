@@ -1,28 +1,38 @@
 package doublej.bobtudy.form.user;
 
+import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.lang.reflect.Field;
 import java.util.HashMap;
+import java.util.Properties;
 
+import doublej.bobtudy.http.Http;
 import doublej.bobtudy.http.handler.BoolResultHandler;
+import doublej.bobtudy.http.handler.UserHandler;
 import doublej.bobtudy.http.user.UserHttp;
 
 /**
  * Created by Jun on 2014-12-08.
  */
 public class User {
+    private static final String tag = "UserPool";
+
     protected String id;
     protected String name;
     private int[] meetLog;
 
     private static HashMap userMap = new HashMap();
 
-    public User(String id, String name) {
+    protected User(String id, String name) {
         this.id = id;
         this.name = name;
 
         userMap.put(id, this);
+
+        Log.i(tag, "User Pool size: " + Integer.toString(userMap.keySet().size()));
     }
 
     public String getId() {
@@ -40,6 +50,10 @@ public class User {
     public void setMeetLog(int[] meetLog) {
         this.meetLog = meetLog;
     }
+
+//    public void refresh(UserHandler handler) {
+//        UserHttp.getUser(this.id, handler);
+//    }
 
     @Override
     public String toString() {
@@ -60,7 +74,10 @@ public class User {
         return user;
     }
 
-    public static User findUser(String id) {
-        return (User) userMap.get(id);
+    public static void findUser(String id, UserHandler handler) {
+        if (userMap.containsKey(id))
+            handler.onResponse((User) userMap.get(id));
+        else
+            UserHttp.getUser(id, handler);
     }
 }

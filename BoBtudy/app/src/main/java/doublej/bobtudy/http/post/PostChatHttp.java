@@ -25,7 +25,7 @@ public class PostChatHttp extends Http {
     private static final String tag = "PostHttp";
     private static final String url = Config.SERVER_URL + "/post";
 
-    public void listChatAfter(String postId, ISODate after, ChatListHandler handler) {
+    public void listChatAfter(String postId, ISODate after, final ChatListHandler handler) {
         client.get(url + "/" + postId + "chat/after/" + after.toISOString(), new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject res) {
@@ -36,11 +36,11 @@ public class PostChatHttp extends Http {
                     if (success == 1) {
                         JSONArray chatJsonArr = res.getJSONArray("data");
 
-                        ArrayList<Chat> chats = new ArrayList<Post>();
+                        ArrayList<Chat> chats = new ArrayList<Chat>();
                         for (int i = 0; i < chatJsonArr.length(); i++) {
-                            JSONObject postObj = chatJsonArr.getJSONObject(i);
-                            Post post = Post.parseJsonObject(postObj);
-                            chats.add(post);
+                            JSONObject chatJsonObj = chatJsonArr.getJSONObject(i);
+                            Chat chat = Chat.parseJsonObj(chatJsonObj);
+                            chats.add(chat);
                         }
                         // Callback
                         handler.onResponse(chats);
