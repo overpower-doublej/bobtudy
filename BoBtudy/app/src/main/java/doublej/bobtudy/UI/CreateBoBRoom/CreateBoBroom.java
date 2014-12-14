@@ -77,13 +77,14 @@ public class CreateBoBroom extends Activity {
 
                 /* 임시 쿼리
                  * post.id = null --> 수정
-                 * 출석률 값 입력 --> 수정*/
+                 * 출석률 값 입력 --> 수정
+                 * 지금은 아래 쿼리문의 숫자 바꿔야댐*/
 
-                db.execSQL("INSERT INTO post VALUES ( 3, '"+ BoBroomTitle.getText().toString() +"', '"+ Time+"', '"+
+                db.execSQL("INSERT INTO post VALUES ( 6, '"+ BoBroomTitle.getText().toString() +"', '"+ Time+"', '"+
                         BoBroomGoto.getText().toString()+"', '"+ BoBroomPlace.getText().toString()+"', '"+
                         BoBroomComment.getText().toString()+"', '"+ ID +"' );");
 
-                db.execSQL("INSERT INTO post_user VALUES ( '"+ BoBroomTitle.getText().toString() +"', '"+ ID+"', '"+
+                db.execSQL("INSERT INTO post_user VALUES ( 6, '"+ ID+"', '"+
                         "출석률 값 입력"+"' );");
 
 

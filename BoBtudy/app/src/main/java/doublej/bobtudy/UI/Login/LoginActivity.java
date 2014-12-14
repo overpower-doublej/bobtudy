@@ -226,6 +226,7 @@ public class LoginActivity extends Activity {
                 final String userId = loginID.getText().toString();
                 String pwd = loginPW.getText().toString();
 
+
                 UserHttp.login(userId, pwd, new BoolResultHandler() {
                     @Override
                     public void onResponse(Boolean result) {
@@ -247,7 +248,9 @@ public class LoginActivity extends Activity {
                 });
 
 
-                /*String searchId = loginID.getText().toString();
+                /* 로그인 내장디비
+
+                String searchId = loginID.getText().toString();
 
                 Cursor cursor = db.rawQuery("SELECT * FROM myInfo WHERE id LIKE ?", new String[]{searchId});
 

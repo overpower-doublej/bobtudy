@@ -20,6 +20,7 @@ import android.widget.Toast;
 import doublej.bobtudy.Control.MyDatabase;
 import doublej.bobtudy.R;
 import doublej.bobtudy.Control.SimpleSideDrawer;
+import doublej.bobtudy.UI.BoBRoomApply.ApplyBoBtudyActivitiy;
 import doublej.bobtudy.UI.CreateBoBRoom.CreateBoBroom;
 import doublej.bobtudy.UI.MyBoBRoom.MyBoBRoomActivity;
 import doublej.bobtudy.UI.MyInfo.MyInfoActivity;
@@ -127,9 +128,7 @@ public class CurrentBoBroom extends Activity implements View.OnClickListener {
                 bundle.putString("user", ID);
                 Intent intent = new Intent(getApplicationContext(), CreateBoBroom.class);
                 intent.putExtras(bundle);
-
                 startActivity(intent);
-
 
             }
         });
@@ -173,16 +172,27 @@ public class CurrentBoBroom extends Activity implements View.OnClickListener {
                 bundle.putString("title", curItem.getData(0));
                 bundle.putString("user", ID);
 
-                Toast.makeText(CurrentBoBroom.this, ID,
-                        Toast.LENGTH_SHORT).show();
 
+                MyDatabase myDB = new MyDatabase(CurrentBoBroom.this);
+                SQLiteDatabase db = myDB.getReadableDatabase();
 
-                Intent intent = new Intent(getApplicationContext(), MyBoBRoomActivity.class);
-                intent.putExtras(bundle);
+                String sql = "SELECT boss FROM post WHERE title LIKE ?";
+                Cursor cursor = db.rawQuery(sql, new String[]{curItem.getData(0)});
+                int bossCol = cursor.getColumnIndex("boss");
+                cursor.moveToNext();
+                String boss = cursor.getString(bossCol);
 
-                startActivity(intent);
-
-
+                if (boss.equals(ID)) {
+                    Intent intent = new Intent(getApplicationContext(), MyBoBRoomActivity.class);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                } else {
+                    Intent intent = new Intent(getApplicationContext(), ApplyBoBtudyActivitiy.class);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }
+                cursor.close();
+                myDB.close();
             }
         });
 

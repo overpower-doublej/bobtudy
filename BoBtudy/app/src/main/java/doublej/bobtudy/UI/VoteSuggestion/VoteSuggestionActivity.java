@@ -2,6 +2,7 @@ package doublej.bobtudy.UI.VoteSuggestion;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -9,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import doublej.bobtudy.Control.MyDatabase;
 import doublej.bobtudy.R;
 
 /**
@@ -35,6 +37,7 @@ public class VoteSuggestionActivity extends Activity {
         voteSuggestionOK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
 
                 finish();
 

@@ -64,6 +64,19 @@
         <activity
             android:name=".UI.PreviousBoBRoom.PreviousBoBtudyActivity"
             android:label="BoBtudy"></activity>
+        <activity
+            android:name=".UI.BoBRoomApply.ApplyBoBtudyActivitiy"
+            android:label="BoBtudy"></activity>
+        <activity
+            android:name=".UI.BoBRoomApplyVote.ApplyVoteBoBtudyActivity"
+            android:label="BoBtudy"></activity>
+        <activity
+            android:name=".UI.BoBtudyParticipationCheck.BoBtudyParticipationActivity"
+            android:label="BoBtudy"></activity>
+        <activity
+            android:name=".UI.Vote.VoteActivity"
+            android:label="BoBtudy"></activity>
+
 
 
     </application>

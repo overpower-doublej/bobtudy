@@ -26,7 +26,7 @@ public class MyBoBRoomActivity extends Activity {
     private final String tag = "MyBoBRoomActivity";
 
 
-    static String ID;
+    static String ID, post_id;
 
 
     ListView list;
@@ -89,17 +89,14 @@ public class MyBoBRoomActivity extends Activity {
         }
         cursor.moveToFirst();
 
-        String id = cursor.getString(idCol);
+        post_id = cursor.getString(idCol);
         String boss = cursor.getString(bossCol);
-
-        Toast.makeText(MyBoBRoomActivity.this, id+"   "+boss,
-                Toast.LENGTH_SHORT).show();
 
         cursor.close();
 
 
-        sql = "SELECT * FROM post_user ps, user u  WHERE ps.userId = u.id and id LIKE ?";
-        cursor = db.rawQuery(sql, new String[]{id});
+        sql = "SELECT * FROM post_user ps, user u  WHERE ps.userId = u.id and ps.postId LIKE ?";
+        cursor = db.rawQuery(sql, new String[]{post_id});
 
         int recordCount = cursor.getCount();
         Log.d(tag, "cursor count : " + recordCount + "\n");
@@ -133,7 +130,7 @@ public class MyBoBRoomActivity extends Activity {
                 MyDatabase myDB = new MyDatabase(MyBoBRoomActivity.this);
                 SQLiteDatabase db = myDB.getReadableDatabase();
 
-                db.execSQL("DELETE FROM  post_user WHERE userId = "+ ID +";");
+                db.execSQL("DELETE FROM post_user WHERE postId = "+post_id+"and userId = '"+ ID +"';");
 
                 myDB.close();
 
@@ -146,9 +143,11 @@ public class MyBoBRoomActivity extends Activity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(getBaseContext(),
-                        ChattingActivity.class);
-                startActivityForResult(intent, REQUEST_CODE_ANOTHER);
+                Bundle bundle = new Bundle();
+                bundle.putString("user", ID);
+                Intent intent = new Intent(getApplicationContext(), ChattingActivity.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
 
             }
         });

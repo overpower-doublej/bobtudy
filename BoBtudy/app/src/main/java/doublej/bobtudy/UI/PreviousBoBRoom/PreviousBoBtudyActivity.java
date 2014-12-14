@@ -53,7 +53,7 @@ public class PreviousBoBtudyActivity extends Activity {
         list = (ListView) findViewById(R.id.previousBoBroomList);
         adapter = new IconTextListAdapterPreviousBoBroom(this);
 
-        String sql = "SELECT * FROM post_user ps, post p WHERE ps.postId = p.id AND ps.postId LIKE ?";
+        String sql = "SELECT * FROM post_user ps, post p WHERE ps.postId = p.id AND ps.userId LIKE ?";
         Cursor cursor = db.rawQuery(sql, new String[]{ID});
 
         int recordCount = cursor.getCount();
@@ -62,7 +62,6 @@ public class PreviousBoBtudyActivity extends Activity {
         int titleCol = cursor.getColumnIndex("title");
         int dateCol = cursor.getColumnIndex("date");
         int placeCol = cursor.getColumnIndex("place");
-
 
         Resources res = getResources();
 
@@ -79,6 +78,9 @@ public class PreviousBoBtudyActivity extends Activity {
 
         cursor.close();
         myDB.close();
+
+        list.setAdapter(adapter);
+
 
 
         backToMain.setOnClickListener(new View.OnClickListener() {

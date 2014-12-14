@@ -49,9 +49,9 @@ public class ModifyInfoActivtiy extends Activity {
                 MyDatabase myDB = new MyDatabase(ModifyInfoActivtiy.this);
                 SQLiteDatabase db = myDB.getWritableDatabase();
 
-                db.execSQL("UPDATE myInfo SET nickName ="+modifyinfoNickName.getText().toString()+
-                        ", pwd="+modifyinfoPWNew.getText().toString()+" WHERE id = "+ID+";");
-                db.execSQL("UPDATE user SET nickName ="+modifyinfoNickName.getText().toString()+" WHERE id = "+ID+";");
+                db.execSQL("UPDATE myInfo SET nickName = '"+modifyinfoNickName.getText().toString()+
+                        "', pwd= '"+modifyinfoPWNew.getText().toString()+"' WHERE id = '"+ID+"' ;");
+                db.execSQL("UPDATE user SET nickName = '"+modifyinfoNickName.getText().toString()+"' WHERE id = '"+ID+"' ;");
 
                 finish();
 
