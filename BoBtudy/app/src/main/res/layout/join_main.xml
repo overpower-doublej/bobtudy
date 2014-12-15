@@ -57,7 +57,7 @@
             android:textColor="#ffffff"
             android:textSize="20sp"
             android:layout_margin="5sp"
-            android:background="#ff5433"
+            android:background="@anim/selector"
             android:text="중복확인" />
     </LinearLayout>
 
@@ -197,7 +197,7 @@
             android:layout_height="wrap_content"
             android:textColor="#ffffff"
             android:layout_margin="10sp"
-            android:background="#ff5433"
+            android:background="@anim/selector"
             android:text="가입" />
 
         <Button
@@ -206,7 +206,7 @@
             android:layout_height="wrap_content"
             android:textColor="#ffffff"
             android:layout_margin="10sp"
-            android:background="#ff5433"
+            android:background="@anim/selector"
             android:text="취소" />
     </LinearLayout>
 

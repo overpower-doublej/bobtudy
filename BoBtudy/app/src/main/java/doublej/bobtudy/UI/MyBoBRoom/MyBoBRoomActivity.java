@@ -7,6 +7,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -16,7 +18,9 @@ import android.widget.Toast;
 
 import doublej.bobtudy.Control.MyDatabase;
 import doublej.bobtudy.R;
+import doublej.bobtudy.UI.BoBtudyParticipationCheck.BoBtudyParticipationActivity;
 import doublej.bobtudy.UI.Chatting.ChattingActivity;
+import doublej.bobtudy.UI.CurrentBoBRoom.CurrentBoBroom;
 import doublej.bobtudy.UI.VoteSuggestion.VoteSuggestionActivity;
 
 public class MyBoBRoomActivity extends Activity {
@@ -135,6 +139,7 @@ public class MyBoBRoomActivity extends Activity {
                 myDB.close();
 
                 finish();
+                overridePendingTransition(R.anim.leftin, R.anim.leftout);
 
             }
         });
@@ -148,6 +153,7 @@ public class MyBoBRoomActivity extends Activity {
                 Intent intent = new Intent(getApplicationContext(), ChattingActivity.class);
                 intent.putExtras(bundle);
                 startActivity(intent);
+                overridePendingTransition(R.anim.rightin, R.anim.rightout);
 
             }
         });
@@ -159,6 +165,7 @@ public class MyBoBRoomActivity extends Activity {
                 Intent intent = new Intent(getBaseContext(),
                         VoteSuggestionActivity.class);
                 startActivityForResult(intent, REQUEST_CODE_ANOTHER);
+                overridePendingTransition(R.anim.rightin, R.anim.rightout);
 
             }
         });
@@ -166,8 +173,36 @@ public class MyBoBRoomActivity extends Activity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        menu.add(0, 0, 0, "출석체크");
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case 0:
+                //처리할 이벤트
+                Intent intent = new Intent(getBaseContext(),
+                        BoBtudyParticipationActivity.class);
+                startActivityForResult(intent, REQUEST_CODE_ANOTHER);
+                overridePendingTransition(R.anim.rightin, R.anim.rightout);
+                break;
+
+            default:
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+
+
+    @Override
     public void onBackPressed() {
 
         finish();
+        overridePendingTransition(R.anim.leftin, R.anim.leftout);
     }
 }

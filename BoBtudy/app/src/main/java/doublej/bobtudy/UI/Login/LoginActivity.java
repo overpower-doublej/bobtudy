@@ -248,8 +248,8 @@ public class LoginActivity extends Activity {
                 });
 
 
-                /* 로그인 내장디비
-
+                /* 로그인 내장디비*/
+/*
                 String searchId = loginID.getText().toString();
 
                 Cursor cursor = db.rawQuery("SELECT * FROM myInfo WHERE id LIKE ?", new String[]{searchId});
@@ -271,8 +271,9 @@ public class LoginActivity extends Activity {
 
                             Intent intent = new Intent(getApplicationContext(), CurrentBoBroom.class);
                             intent.putExtras(bundle);
-
                             startActivity(intent);
+                            overridePendingTransition(R.anim.leftin, R.anim.leftout);
+
                         } else {
                             Toast.makeText(LoginActivity.this, "PW가 일치하지 않습니다.",
                                     Toast.LENGTH_SHORT).show();
@@ -302,6 +303,8 @@ public class LoginActivity extends Activity {
                 Intent intent = new Intent(getApplicationContext(),
                         JoinActivity.class);
                 startActivityForResult(intent, REQUEST_CODE_ANOTHER);
+                overridePendingTransition(R.anim.rightin, R.anim.rightout);
+
             }
         });
     }

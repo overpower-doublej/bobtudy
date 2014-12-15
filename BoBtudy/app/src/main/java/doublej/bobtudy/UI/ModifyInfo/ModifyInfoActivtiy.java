@@ -54,6 +54,7 @@ public class ModifyInfoActivtiy extends Activity {
                 db.execSQL("UPDATE user SET nickName = '"+modifyinfoNickName.getText().toString()+"' WHERE id = '"+ID+"' ;");
 
                 finish();
+                overridePendingTransition(R.anim.rightin, R.anim.rightout);
 
             }
         });
@@ -63,6 +64,7 @@ public class ModifyInfoActivtiy extends Activity {
             public void onClick(View v) {
 
                 finish();
+                overridePendingTransition(R.anim.rightin, R.anim.rightout);
 
             }
         });
@@ -73,5 +75,6 @@ public class ModifyInfoActivtiy extends Activity {
     public void onBackPressed() {
 
         finish();
+        overridePendingTransition(R.anim.rightin, R.anim.rightout);
     }
 }

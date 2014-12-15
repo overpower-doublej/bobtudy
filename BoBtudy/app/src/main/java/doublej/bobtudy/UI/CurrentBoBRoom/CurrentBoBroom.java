@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -45,7 +46,6 @@ public class CurrentBoBroom extends Activity implements View.OnClickListener {
     Button BoBtudyMenu;
     ImageView CreateRoomImage;
 
-    TextView BoBroomListAlign1, BoBroomListAlign2;
     TextView currentBoBtudy, BoBtudyHistory, myInfo, logout;
     TextView CurrentBoBRoomName, CurrentBoBRoomPlace, CurrentBoBRoomTime;
 
@@ -62,9 +62,6 @@ public class CurrentBoBroom extends Activity implements View.OnClickListener {
         CurrentBoBRoomName = (TextView) findViewById(R.id.dataItem01BoBroom);
         CurrentBoBRoomPlace = (TextView) findViewById(R.id.dataItem02BoBroom);
         CurrentBoBRoomTime = (TextView) findViewById(R.id.dataItem03BoBroom);
-
-        BoBroomListAlign1 = (TextView) findViewById(R.id.BoBroomListAlign1);
-        BoBroomListAlign2 = (TextView) findViewById(R.id.BoBroomListAlign2);
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
@@ -129,6 +126,7 @@ public class CurrentBoBroom extends Activity implements View.OnClickListener {
                 Intent intent = new Intent(getApplicationContext(), CreateBoBroom.class);
                 intent.putExtras(bundle);
                 startActivity(intent);
+                overridePendingTransition(R.anim.fade, R.anim.hold);
 
             }
         });
@@ -138,22 +136,6 @@ public class CurrentBoBroom extends Activity implements View.OnClickListener {
             public void onClick(View v) {
 
                 mNav.toggleRightDrawer();
-
-
-            }
-        });
-
-        BoBroomListAlign1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-            }
-        });
-
-        BoBroomListAlign2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
 
             }
@@ -186,10 +168,12 @@ public class CurrentBoBroom extends Activity implements View.OnClickListener {
                     Intent intent = new Intent(getApplicationContext(), MyBoBRoomActivity.class);
                     intent.putExtras(bundle);
                     startActivity(intent);
+                    overridePendingTransition(R.anim.rightin, R.anim.rightout);
                 } else {
                     Intent intent = new Intent(getApplicationContext(), ApplyBoBtudyActivitiy.class);
                     intent.putExtras(bundle);
                     startActivity(intent);
+                    overridePendingTransition(R.anim.rightin, R.anim.rightout);
                 }
                 cursor.close();
                 myDB.close();
@@ -208,6 +192,7 @@ public class CurrentBoBroom extends Activity implements View.OnClickListener {
             Intent intent = new Intent(getApplicationContext(), MyBoBRoomActivity.class);
             intent.putExtras(bundle);
             startActivity(intent);
+            overridePendingTransition(R.anim.leftin, R.anim.leftout);
 
 
         } else if (v.getId() == R.id.BoBtudyHistory) {
@@ -217,6 +202,7 @@ public class CurrentBoBroom extends Activity implements View.OnClickListener {
             Intent intent = new Intent(getApplicationContext(), PreviousBoBtudyActivity.class);
             intent.putExtras(bundle);
             startActivity(intent);
+            overridePendingTransition(R.anim.leftin, R.anim.leftout);
 
         } else if (v.getId() == R.id.myInfo) {
 
@@ -225,30 +211,43 @@ public class CurrentBoBroom extends Activity implements View.OnClickListener {
             Intent intent = new Intent(getApplicationContext(), MyInfoActivity.class);
             intent.putExtras(bundle);
             startActivity(intent);
+            overridePendingTransition(R.anim.leftin, R.anim.leftout);
 
         } else if (v.getId() == R.id.logout) {
             finish();
+            overridePendingTransition(R.anim.leftin, R.anim.leftout);
         }
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        menu.add(0, 0, 0, "등록 시간 순");
+        menu.add(0, 1, 0, "마감 시간 순");
+
+        return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch (item.getItemId()) {
+            case 0:
+                //처리할 이벤트
+                break;
+            case 1:
+                break;
+            default:
+                break;
         }
-
         return super.onOptionsItemSelected(item);
     }
+
 
     public void onBackPressed() {
         if (!mNav.isClosed()) mNav.closeLeftSide();
         else finish();
+        overridePendingTransition(R.anim.leftin, R.anim.leftout);
 
     }
 }

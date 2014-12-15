@@ -32,7 +32,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5sp"
                 android:layout_marginLeft="30sp"
-                android:background="#ff3333"
+                android:background="@anim/selector2"
                 android:textColor="#ffffff"
                 android:text="menu"
                 android:textSize="20sp" />
@@ -43,44 +43,7 @@
             android:layout_height="wrap_content"
             android:background="#ff4433"
             android:orientation="horizontal"
-            android:padding="3sp"></LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#ff5533"
-            android:orientation="horizontal"
-            android:padding="2sp">
-
-            <TextView
-                android:id="@+id/BoBroomListAlign1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5sp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="등록 시간 순"
-                android:textColor="#ffffff"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/BoBroomListAlign2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5sp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="마감 시간 순"
-                android:textColor="#ffffff"
-                android:textSize="20sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#ff4433"
-            android:orientation="horizontal"
-            android:padding="3sp"></LinearLayout>
+            android:padding="7sp"></LinearLayout>
 
 
         <ListView

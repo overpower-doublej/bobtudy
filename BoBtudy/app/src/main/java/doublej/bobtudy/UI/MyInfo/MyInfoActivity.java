@@ -109,6 +109,7 @@ public class MyInfoActivity extends Activity {
                 startActivity(intent);
 
                 finish();
+                overridePendingTransition(R.anim.leftin, R.anim.leftout);
 
             }
         });
@@ -118,6 +119,7 @@ public class MyInfoActivity extends Activity {
             public void onClick(View v) {
 
                 finish();
+                overridePendingTransition(R.anim.rightin, R.anim.rightout);
 
             }
         });
@@ -129,5 +131,6 @@ public class MyInfoActivity extends Activity {
     public void onBackPressed() {
 
         finish();
+        overridePendingTransition(R.anim.rightin, R.anim.rightout);
     }
 }

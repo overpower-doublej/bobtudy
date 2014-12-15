@@ -93,6 +93,7 @@ public class CreateBoBroom extends Activity {
                 Intent intent = new Intent(getApplicationContext(), MyBoBRoomActivity.class);
                 intent.putExtras(bundle);
                 startActivity(intent);
+                overridePendingTransition(R.anim.rightin, R.anim.rightout);
 
                 finish();
 
@@ -104,6 +105,7 @@ public class CreateBoBroom extends Activity {
             public void onClick(View v) {
 
                 finish();
+                overridePendingTransition(R.anim.fade, R.anim.hold);
 
             }
         });
@@ -114,5 +116,6 @@ public class CreateBoBroom extends Activity {
     public void onBackPressed() {
 
         finish();
+        overridePendingTransition(R.anim.fade, R.anim.hold);
     }
 }

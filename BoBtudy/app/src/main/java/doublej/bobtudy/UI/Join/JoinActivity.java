@@ -152,6 +152,7 @@ public class JoinActivity extends Activity {
 
                                 RequestParams params = new RequestParams();
                                 finish();
+                                overridePendingTransition(R.anim.leftin, R.anim.leftout);
 
                                 Toast.makeText(JoinActivity.this, "가입이 완료되었습니다.",
                                         Toast.LENGTH_SHORT).show();
@@ -179,6 +180,7 @@ public class JoinActivity extends Activity {
             @Override
             public void onClick(View view) {
                 finish();
+                overridePendingTransition(R.anim.leftin, R.anim.leftout);
             }
         });
     }
@@ -203,5 +205,6 @@ public class JoinActivity extends Activity {
     public void onBackPressed() {
 
         finish();
+        overridePendingTransition(R.anim.leftin, R.anim.leftout);
     }
 }
