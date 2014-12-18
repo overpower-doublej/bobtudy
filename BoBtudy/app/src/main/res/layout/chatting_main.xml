@@ -53,7 +53,8 @@
             android:layout_height="wrap_content"
             android:ems="15"
             android:layout_margin="10sp"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:inputType="textPersonName"/>
 
         <Button
             android:id="@+id/ChattingInputOK"

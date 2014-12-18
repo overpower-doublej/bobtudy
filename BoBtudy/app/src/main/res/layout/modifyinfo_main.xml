@@ -55,7 +55,8 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:textSize="15sp"
-                android:ems="10"/>
+                android:ems="10"
+                android:inputType="textPersonName"/>
         </TableRow>
 
 
@@ -76,7 +77,8 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:textSize="15sp"
-                android:ems="10"/>
+                android:ems="10"
+                android:inputType="textPersonName"/>
         </TableRow>
 
         <TableRow
@@ -116,7 +118,8 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:textSize="15sp"
-                android:ems="10"/>
+                android:ems="10"
+                android:inputType="textPersonName"/>
         </TableRow>
 
 

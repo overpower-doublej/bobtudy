@@ -249,8 +249,7 @@ public class LoginActivity extends Activity {
 
 
                 /* 로그인 내장디비*/
-/*
-                String searchId = loginID.getText().toString();
+                /*String searchId = loginID.getText().toString();
 
                 Cursor cursor = db.rawQuery("SELECT * FROM myInfo WHERE id LIKE ?", new String[]{searchId});
 
