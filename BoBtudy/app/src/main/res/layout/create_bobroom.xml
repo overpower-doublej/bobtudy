@@ -56,7 +56,8 @@
                         android:layout_margin="15sp"
                         android:gravity="center"
                         android:text="방 이름"
-                        android:textSize="20sp" />
+                        android:textSize="20sp"
+                        android:inputType="" />
 
 
                     <EditText
