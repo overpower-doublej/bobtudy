@@ -37,6 +37,8 @@ public class ChattingActivity extends Activity {
         ChattingInputContent = (EditText) findViewById(R.id.ChattingInputContent);
         ChattingInputOK = (Button) findViewById(R.id.ChattingInputOK);
 
+        //ChattingContent.setMaxHeight(16);
+
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         ID = bundle.getString("user");
@@ -55,6 +57,8 @@ public class ChattingActivity extends Activity {
                 /* postId에 값 입력 */
                 db.execSQL("INSERT INTO post_chat VALUES ( 'postId','" + ID + "', '" + str + "', '" +
                         ChattingInputContent.getText().toString() + "' );");
+
+                ChattingContent.append(ID+" ("+str+") : " +ChattingInputContent.getText().toString()+"\r\n");
             }
         });
 

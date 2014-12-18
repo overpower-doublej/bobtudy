@@ -206,7 +206,6 @@ public class LoginActivity extends Activity {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_login);
-        test();
 
         backPressCloseHandler = new BackPressCloseHandler(this);
 
@@ -283,8 +282,8 @@ public class LoginActivity extends Activity {
                 } else {
                     Toast.makeText(LoginActivity.this, "ID가 일치하지 않습니다.",
                             Toast.LENGTH_SHORT).show();
-                }*/
-
+                }
+*/
 
 
                 /*int logbinPWCol = cursorID.getColumnIndex("pwd");

@@ -14,19 +14,14 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
+import android.widget.Toast;
 
 import doublej.bobtudy.Control.MyDatabase;
 import doublej.bobtudy.R;
 import doublej.bobtudy.UI.BoBtudyParticipationCheck.BoBtudyParticipationActivity;
 import doublej.bobtudy.UI.Chatting.ChattingActivity;
+import doublej.bobtudy.UI.CurrentBoBRoom.CurrentBoBroom;
 import doublej.bobtudy.UI.VoteSuggestion.VoteSuggestionActivity;
-import doublej.bobtudy.form.post.Post;
-import doublej.bobtudy.form.user.User;
-import doublej.bobtudy.http.handler.UserHandler;
 
 public class MyBoBRoomActivity extends Activity {
 
@@ -62,9 +57,8 @@ public class MyBoBRoomActivity extends Activity {
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
-        String postId = bundle.getString("postId");
         title = bundle.getString("title");
-//        ID = bundle.getString("user");
+        ID = bundle.getString("user");
 
         MyDatabase myDB = new MyDatabase(this);
         SQLiteDatabase db = myDB.getReadableDatabase();
@@ -72,17 +66,7 @@ public class MyBoBRoomActivity extends Activity {
         list = (ListView) findViewById(R.id.bobroomMemberList);
         adapter = new IconTextListAdapterBoBroomMember(this);
 
-
-        Post post = (Post) bundle.getSerializable("post");
-
-        mybobroomTitle.setText(post.getTitle());
-        mybobroomTime.setText(post.getDate().toLocaleString());
-        mybobroomPlace.setText(post.getPlace());
-        mybobroomGoto.setText(post.getMenu());
-        mybobroomComment.setText(post.getContent());
-
-
-        /*String sql = "SELECT * FROM post WHERE title LIKE ?";
+        String sql = "SELECT * FROM post WHERE title LIKE ?";
         Cursor cursor = db.rawQuery(sql, new String[]{title});
 
         int idCol = cursor.getColumnIndex("id");
@@ -122,36 +106,28 @@ public class MyBoBRoomActivity extends Activity {
         Log.d(tag, "cursor count : " + recordCount + "\n");
 
         int nickNameCol = cursor.getColumnIndex("nickName");
-        //int meetCol = cursor.getColumnIndex("meet");
-        //int totalMeetCol = cursor.getColumnIndex("totalMeet");
-*/
 
-        final Resources res = getResources();
-        HashSet<String> userIds = post.getUserIds();
-        Iterator<String> it = userIds.iterator();
-        while (it.hasNext()) {
-            String userId = it.next();
-            User.findUser(userId, new UserHandler() {
-                @Override
-                public void onResponse(User user) {
-                    adapter.addItem(new IconTextItemBoBroomMember(res.getDrawable(R.drawable.member), user.getName(), "출석률 값 입력"));
-                    list.setAdapter(adapter);
-                }
-            });
-        }
+        Resources res = getResources();
 
-        /*for (int i = 0; i < cursor.getCount(); i++) {
+        for(int i=0;i<cursor.getCount();i++) {
             while (cursor.moveToNext()) {
                 String nickName = cursor.getString(nickNameCol);
 
-                *//* 출석률 값 입력 --> 수정*//*
-                adapter.addItem(new IconTextItemBoBroomMember(res.getDrawable(R.drawable.member), nickName, "출석률 값 입력"));
+                /* 출석률 값 입력 --> 수정*/
+                if(ID.toString().equals(boss)) {
+                    adapter.addItem(new IconTextItemBoBroomMember(res.getDrawable(R.drawable.member),nickName +" (방장)", "출석률 값 입력"));
+                } else {
+                    adapter.addItem(new IconTextItemBoBroomMember(res.getDrawable(R.drawable.member),nickName, "출석률 값 입력"));
+                }
+
 
             }
         }
 
         cursor.close();
-        myDB.close();*/
+        myDB.close();
+
+        list.setAdapter(adapter);
 
 
         getOutBoBtudy.setOnClickListener(new View.OnClickListener() {
@@ -160,7 +136,7 @@ public class MyBoBRoomActivity extends Activity {
                 MyDatabase myDB = new MyDatabase(MyBoBRoomActivity.this);
                 SQLiteDatabase db = myDB.getReadableDatabase();
 
-                db.execSQL("DELETE FROM post_user WHERE postId = " + post_id + " and userId = '" + ID + "';");
+                db.execSQL("DELETE FROM post_user WHERE postId = "+post_id+" and userId = '"+ ID +"';");
 
                 myDB.close();
 
@@ -226,6 +202,7 @@ public class MyBoBRoomActivity extends Activity {
         }
         return super.onOptionsItemSelected(item);
     }
+
 
 
     @Override

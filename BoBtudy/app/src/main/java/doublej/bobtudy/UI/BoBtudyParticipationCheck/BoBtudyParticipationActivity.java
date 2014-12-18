@@ -19,10 +19,14 @@ import android.widget.Button;
 
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 
 import doublej.bobtudy.Control.MyDatabase;
 import doublej.bobtudy.R;
+import doublej.bobtudy.UI.CreateBoBRoom.CreateBoBroom;
+import doublej.bobtudy.UI.CurrentBoBRoom.CurrentBoBroom;
+import doublej.bobtudy.UI.MyBoBRoom.MyBoBRoomActivity;
 
 /**
  * Created by YeomJi on 14. 12. 12..
@@ -32,7 +36,7 @@ public class BoBtudyParticipationActivity extends Activity {
     ListView list;
     IconTextListAdapterParticipation adapter;
 
-    static String title, post_id;
+    static String title, post_id, ID;
 
     public static final int REQUEST_CODE_ANOTHER = 1001;
 
@@ -54,6 +58,7 @@ public class BoBtudyParticipationActivity extends Activity {
         Bundle bundle = intent.getExtras();
         title = bundle.getString("title");
         post_id = bundle.getString("post_id");
+        ID = bundle.getString("user");
 
 
         MyDatabase myDB = new MyDatabase(this);
@@ -92,8 +97,42 @@ public class BoBtudyParticipationActivity extends Activity {
             @Override
             public void onClick(View v) {
 
-                finish();
-                overridePendingTransition(R.anim.rightin, R.anim.rightout);
+                AlertDialog.Builder alert = new AlertDialog.Builder(
+                        BoBtudyParticipationActivity.this);
+
+                alert.setTitle("밥터디 마감");
+                alert.setMessage("밥터디가 끝나셨나요? 마감 버튼을 누르면 밥터디가 종료됩니다.");
+
+
+                alert.setPositiveButton("예",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,
+                                                int whichButton) {
+
+                                Bundle bundle = new Bundle();
+                                bundle.putString("user", ID);
+                                Intent intent = new Intent(getApplicationContext(), CurrentBoBroom.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                intent.putExtras(bundle);
+                                startActivity(intent);
+                                overridePendingTransition(R.anim.rightin, R.anim.rightout);
+                                Toast.makeText(BoBtudyParticipationActivity.this, "밥터디가 성공적으로 마감됐습니다.",
+                                        Toast.LENGTH_SHORT).show();
+
+
+                            }
+                        });
+
+                alert.setNegativeButton("아니요",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,
+                                                int whichButton) {
+
+                            }
+                        });
+
+                alert.show();
+
 
             }
         });
