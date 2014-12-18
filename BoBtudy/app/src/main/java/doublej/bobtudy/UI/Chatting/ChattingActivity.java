@@ -37,6 +37,8 @@ public class ChattingActivity extends Activity {
         ChattingInputContent = (EditText) findViewById(R.id.ChattingInputContent);
         ChattingInputOK = (Button) findViewById(R.id.ChattingInputOK);
 
+
+
         //ChattingContent.setMaxHeight(16);
 
         Intent intent = getIntent();
