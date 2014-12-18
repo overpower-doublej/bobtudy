@@ -30,7 +30,7 @@ public class MyBoBRoomActivity extends Activity {
     private final String tag = "MyBoBRoomActivity";
 
 
-    static String ID, post_id, title;
+    static String ID, post_id, title, Nick;
 
 
     ListView list;
@@ -98,6 +98,13 @@ public class MyBoBRoomActivity extends Activity {
 
         cursor.close();
 
+        sql = "SELECT * FROM myInfo";
+        cursor = db.rawQuery(sql, null);
+        int nickNameCol1 = cursor.getColumnIndex("nickName");
+        cursor.moveToNext();
+            Nick = cursor.getString(nickNameCol1);
+        cursor.close();
+
 
         sql = "SELECT * FROM post_user ps, user u  WHERE ps.userId = u.id and ps.postId LIKE ?";
         cursor = db.rawQuery(sql, new String[]{post_id});
@@ -151,7 +158,9 @@ public class MyBoBRoomActivity extends Activity {
             public void onClick(View v) {
 
                 Bundle bundle = new Bundle();
+                bundle.putString("nickName", Nick);
                 bundle.putString("user", ID);
+                bundle.putString("post_id", post_id);
                 Intent intent = new Intent(getApplicationContext(), ChattingActivity.class);
                 intent.putExtras(bundle);
                 startActivity(intent);

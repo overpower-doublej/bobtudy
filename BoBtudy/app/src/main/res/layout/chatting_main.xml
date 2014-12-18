@@ -32,31 +32,28 @@
         android:orientation="horizontal"
         android:padding="7sp"></LinearLayout>
 
+
+
     <ScrollView
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="0sp"
+        android:layout_weight="1">
 
-        <LinearLayout
+
+        <TextView
+            android:id="@+id/ChattingContent"
             android:layout_width="match_parent"
-            android:layout_height="300sp"
-            android:orientation="vertical"
-            android:padding="2sp">
-
-            <TextView
-                android:id="@+id/ChattingContent"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="20sp"
-                android:minLines="16"
-                android:textSize="16sp" />
-
-        </LinearLayout>
+            android:layout_height="match_parent"
+            android:layout_margin="20sp"
+            android:textSize="16sp"
+            android:singleLine="false"/>
 
     </ScrollView>
 
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="2sp">
 
@@ -82,5 +79,6 @@
             android:textSize="16sp" />
 
     </LinearLayout>
+
 
 </LinearLayout>

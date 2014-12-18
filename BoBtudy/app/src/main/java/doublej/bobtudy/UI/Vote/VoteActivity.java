@@ -36,6 +36,7 @@ public class VoteActivity  extends Activity {
             public void onClick(View v) {
 
                 finish();
+                overridePendingTransition(R.anim.leftin, R.anim.leftout);
 
             }
         });
@@ -45,6 +46,7 @@ public class VoteActivity  extends Activity {
             public void onClick(View v) {
 
                 finish();
+                overridePendingTransition(R.anim.leftin, R.anim.leftout);
 
             }
         });
