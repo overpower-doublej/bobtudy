@@ -1,8 +1,12 @@
 package doublej.bobtudy.form.post;
 
+import android.util.Log;
+
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -11,10 +15,13 @@ import java.util.Set;
 import doublej.bobtudy.form.user.User;
 import doublej.bobtudy.http.handler.PostHandler;
 import doublej.bobtudy.http.handler.ResponseHandler;
+import doublej.bobtudy.http.handler.UserHandler;
 import doublej.bobtudy.http.post.PostIdHttp;
 import doublej.bobtudy.util.ISODate;
 
-public class Post {
+public class Post implements Serializable {
+    private static final String tag = "POST";
+
     private String id;
     protected String title;
     protected ISODate date;
@@ -23,6 +30,8 @@ public class Post {
     protected String content;
     protected String bossId;
     private ISODate postedDate;
+
+    private HashSet<String> userIds;
 
     private HashSet<User> users;
     private HashMap<String, Access> accesses;
@@ -40,6 +49,7 @@ public class Post {
 
         this.users = new HashSet<User>();
         this.accesses = new HashMap<String, Access>();
+        this.userIds = new HashSet<String>();
 
         postMap.put(id, this);
     }
@@ -56,6 +66,7 @@ public class Post {
 
         this.users = new HashSet<User>();
         this.accesses = new HashMap<String, Access>();
+        this.userIds = new HashSet<String>();
 
         postMap.put(id, this);
     }
@@ -116,6 +127,20 @@ public class Post {
         return this.accesses;
     }
 
+    /*public ArrayList<User> getUsers() {
+        Object[] userArr = this.users.toArray();
+        ArrayList<User> users = new ArrayList<User>();
+        for (int i = 0; i < userArr.length; i++) {
+            users.add((User) userArr[i]);
+        }
+
+        return users;
+    }*/
+
+    public HashSet<String> getUserIds() {
+        return this.userIds;
+    }
+
 
     public static Post getPost(String postId) {
         return (Post) postMap.get(postId);
@@ -141,7 +166,14 @@ public class Post {
         String postedDateString = jsonObject.optString("postedDate");
         ISODate postedDate = ISODate.getInstanceByIsoString(postedDateString);
 
-        Post post = new Post(id, title, date, menu, place, content, bossId, postedDate);
+        final Post post = new Post(id, title, date, menu, place, content, bossId, postedDate);
+
+        JSONArray userJsonArr = jsonObject.optJSONArray("users");
+        for (int i = 0; i < userJsonArr.length(); i++) {
+            Object obj = userJsonArr.opt(i);
+            String userId = (String) obj;
+            post.userIds.add(userId);
+        }
 
         return post;
     }
