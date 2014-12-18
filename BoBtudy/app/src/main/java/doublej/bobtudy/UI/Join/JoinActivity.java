@@ -16,8 +16,15 @@ import android.widget.Toast;
 
 import com.loopj.android.http.RequestParams;
 
+import org.json.JSONObject;
+
 import doublej.bobtudy.Control.MyDatabase;
 import doublej.bobtudy.R;
+import doublej.bobtudy.gcm.Gcm;
+import doublej.bobtudy.http.handler.BoolResultHandler;
+import doublej.bobtudy.http.handler.ResponseHandler;
+import doublej.bobtudy.http.user.NewUser;
+import doublej.bobtudy.http.user.UserHttp;
 
 
 public class JoinActivity extends Activity {
@@ -67,8 +74,8 @@ public class JoinActivity extends Activity {
         editName = (EditText) findViewById(R.id.editName);
         editStuId = (EditText) findViewById(R.id.editStuId);
 
-        MyDatabase myDB = new MyDatabase(this);
-        final SQLiteDatabase db = myDB.getWritableDatabase();
+//        MyDatabase myDB = new MyDatabase(this);
+//        final SQLiteDatabase db = myDB.getWritableDatabase();
 
         final String[] dept = new String[1];
         dept[0] = null;
@@ -97,10 +104,22 @@ public class JoinActivity extends Activity {
         certifyID.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
                 String searchId = editId.getText().toString();
-                String sql = "SELECT * FROM myInfo WHERE id LIKE ?";
+                UserHttp.checkIdExists(searchId, new BoolResultHandler() {
+                    @Override
+                    public void onResponse(Boolean result) {
+                        if (!result) {
+                            Toast.makeText(JoinActivity.this, "사용하실 수 있습니다.", Toast.LENGTH_SHORT).show();
+                            isIDvalid = 1;
+                        } else {
+                            Toast.makeText(JoinActivity.this, "중복된 ID입니다.", Toast.LENGTH_SHORT).show();
+                            isIDvalid = 0;
+                        }
+                    }
+                });
+
+
+                /*String sql = "SELECT * FROM myInfo WHERE id LIKE ?";
 
                 Cursor cursor = db.rawQuery(sql, new String[]{searchId});
 
@@ -112,15 +131,13 @@ public class JoinActivity extends Activity {
                     Toast.makeText(JoinActivity.this, "중복된 ID입니다.",
                             Toast.LENGTH_SHORT).show();
                     isIDvalid = 0;
-                }
-
+                }*/
             }
         });
 
         confirmJoin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
 
                 if (isIDvalid == 1) {
                     if (!(editPwd1.getText().toString().equals(null)) || !(editPwd2.getText().toString().equals(null)) ||
@@ -130,13 +147,6 @@ public class JoinActivity extends Activity {
                                 .equals(editPwd2.getText().toString())) {
                             if (editPwd1.getText().toString()
                                     .equals(editPwd2.getText().toString())) {
-
-                                db.execSQL("INSERT INTO myInfo VALUES ('" + editNickName.getText().toString() + "', '" + editId.getText().toString() + "', '" +
-                                        editPwd1.getText().toString() + "', '" + editName.getText().toString() + "', '" +
-                                        dept[0] + "', '" + editStuId.getText().toString() + "' , 0, 0 );");
-
-                                db.execSQL("INSERT INTO user VALUES ('" + editId.getText().toString() + "', '" + editNickName.getText().toString()
-                                        + "', '" + editName.getText().toString() + "' );");
 
                                 /*
 
@@ -150,13 +160,30 @@ public class JoinActivity extends Activity {
 
                                 db.insert("myInfo", null, values); */
 
-                                RequestParams params = new RequestParams();
-                                finish();
-                                overridePendingTransition(R.anim.leftin, R.anim.leftout);
+                                new Gcm(JoinActivity.this).getRegId(new Gcm.RegIdHandler() {
+                                    @Override
+                                    public void onResponse(String registrationId) {
+                                        String id = editId.getText().toString();
+                                        String pwd = editPwd1.getText().toString();
+                                        String name = editName.getText().toString();
+                                        String department = dept[0];
+                                        final String stuId = editStuId.getText().toString();
+                                        final String regId = registrationId;
 
-                                Toast.makeText(JoinActivity.this, "가입이 완료되었습니다.",
-                                        Toast.LENGTH_SHORT).show();
+                                        NewUser newUser = new NewUser(id, pwd, name, department, stuId, "", regId);
 
+                                        UserHttp.join(newUser, new ResponseHandler() {
+                                            @Override
+                                            public void onResponse(JSONObject jsonObject) {
+                                                finish();
+                                                overridePendingTransition(R.anim.leftin, R.anim.leftout);
+
+                                                Toast.makeText(JoinActivity.this, "가입이 완료되었습니다.",
+                                                        Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                                    }
+                                });
                             }
 
                         } else {

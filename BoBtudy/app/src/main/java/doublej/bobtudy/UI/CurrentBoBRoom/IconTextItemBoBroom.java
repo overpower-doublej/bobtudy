@@ -52,6 +52,24 @@ public class IconTextItemBoBroom {
     }
 
     /**
+     * Initialize with icon and strings
+     *
+     * @param icon
+     * @param obj01
+     * @param obj02
+     * @param obj03
+     */
+    public IconTextItemBoBroom(Drawable icon, String obj01, String obj02, String obj03, String obj04) {
+        mIcon = icon;
+
+        mData = new String[4];
+        mData[0] = obj01;
+        mData[1] = obj02;
+        mData[2] = obj03;
+        mData[3] = obj04;
+    }
+
+    /**
      * True if this item is selectable
      */
     public boolean isSelectable() {

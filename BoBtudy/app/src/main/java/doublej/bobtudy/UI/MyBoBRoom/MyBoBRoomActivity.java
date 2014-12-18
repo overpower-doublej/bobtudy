@@ -102,7 +102,7 @@ public class MyBoBRoomActivity extends Activity {
         cursor = db.rawQuery(sql, null);
         int nickNameCol1 = cursor.getColumnIndex("nickName");
         cursor.moveToNext();
-            Nick = cursor.getString(nickNameCol1);
+        Nick = cursor.getString(nickNameCol1);
         cursor.close();
 
 
@@ -120,7 +120,7 @@ public class MyBoBRoomActivity extends Activity {
             while (cursor.moveToNext()) {
                 String nickName = cursor.getString(nickNameCol);
 
-                /* 출석률 값 입력 --> 수정*/
+                /* 출석률 값 입력 --> 수정*/ 
                 if(ID.toString().equals(boss)) {
                     adapter.addItem(new IconTextItemBoBroomMember(res.getDrawable(R.drawable.member),nickName +" (방장)", "출석률 값 입력"));
                 } else {

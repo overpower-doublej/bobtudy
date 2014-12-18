@@ -6,10 +6,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import org.json.JSONObject;
 
 import doublej.bobtudy.R;
+import doublej.bobtudy.form.post.Post;
+import doublej.bobtudy.http.handler.ResponseHandler;
 
 /**
  * Created by YeomJi on 14. 12. 12..
@@ -18,7 +22,7 @@ public class ApplyBoBtudyActivitiy extends Activity {
 
     public static final int REQUEST_CODE_ANOTHER = 1001;
 
-    static String ID;
+    static String userId;
 
 
     TextView ApplyforBoBtudy;
@@ -36,7 +40,10 @@ public class ApplyBoBtudyActivitiy extends Activity {
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         String bobRoomTitle = bundle.getString("title");
-        ID = bundle.getString("user");
+        userId = bundle.getString("user");
+
+        final Post post = (Post) bundle.getSerializable("post");
+        String postId = bundle.getString("postId");
 
         ApplyforBoBtudy.setText(bobRoomTitle);
 
@@ -44,9 +51,13 @@ public class ApplyBoBtudyActivitiy extends Activity {
         applyYes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                finish();
-
+                post.createAccess(userId, new ResponseHandler() {
+                    @Override
+                    public void onResponse(JSONObject jsonObject) {
+                        Toast.makeText(getApplicationContext(), "멤버들이 참석여부를 결정중입니다.", Toast.LENGTH_LONG).show();
+                        finish();
+                    }
+                });
             }
         });
 
