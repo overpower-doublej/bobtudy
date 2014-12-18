@@ -2,9 +2,11 @@ package doublej.bobtudy.UI.Login;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -54,9 +56,9 @@ public class LoginActivity extends Activity {
     private BackPressCloseHandler backPressCloseHandler;
 
     EditText loginID, loginPW;
-    Button enterLogin, createID;
+    Button btnLogin, btnJoin;
 
-    private void test() {
+    /*private void test() {
         NewPost newPost = new NewPost("sdfsad", new ISODate(new Date()), "sadf", "asdf", "asdf", "asdf");
         PostHttp.create(newPost, new PostHandler() {
             @Override
@@ -199,28 +201,42 @@ public class LoginActivity extends Activity {
                 });
             }
         });
-    }
+    }*/
+    // Save login data
+    SharedPreferences pref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_login);
+//        test();
+
+        pref = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
 
         backPressCloseHandler = new BackPressCloseHandler(this);
 
         loginID = (EditText) findViewById(R.id.loginID);
         loginPW = (EditText) findViewById(R.id.loginPW);
-        enterLogin = (Button) findViewById(R.id.enterLogin);
-        createID = (Button) findViewById(R.id.createID);
+        btnLogin = (Button) findViewById(R.id.enterLogin);
+        btnJoin = (Button) findViewById(R.id.createID);
 
-        MyDatabase myDB = new MyDatabase(this);
-        final SQLiteDatabase db = myDB.getWritableDatabase();
+//        MyDatabase myDB = new MyDatabase(this);
+//        final SQLiteDatabase db = myDB.getWritableDatabase();
 
-        enterLogin.setOnClickListener(new View.OnClickListener() {
+
+        String id = pref.getString("id", "");
+        String pwd = pref.getString("pwd", "");
+
+        if (!id.isEmpty() && !pwd.isEmpty()) {
+            btnLogin.setEnabled(false);
+            login(id, pwd);
+        }
+
+        btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                enterLogin.setEnabled(false);
+                btnLogin.setEnabled(false);
 
                 final String userId = loginID.getText().toString();
                 String pwd = loginPW.getText().toString();
@@ -228,52 +244,24 @@ public class LoginActivity extends Activity {
 
 
                  /* 서버 */
-                UserHttp.login(userId, pwd, new BoolResultHandler() {
-                    @Override
-                    public void onResponse(Boolean result) {
-                        if (result) {
-                            Bundle bundle = new Bundle();
-                            bundle.putString("user", userId);
-
-                            Intent intent = new Intent(getApplicationContext(), CurrentBoBroom.class);
-                            intent.putExtras(bundle);
-
-                            startActivity(intent);
-                        } else {
-                            Toast.makeText(LoginActivity.this, "PW가 일치하지 않습니다.",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-
-                        enterLogin.setEnabled(true);
-                    }
-                });
+                login(userId, pwd);
 
 
                 /* 로그인 내장디비*/
                 /*String searchId = loginID.getText().toString();
-
                 Cursor cursor = db.rawQuery("SELECT * FROM myInfo WHERE id LIKE ?", new String[]{searchId});
-
                 int loginPWCol = cursor.getColumnIndex("pwd");
-
                 if (cursor.getCount() != 0) {
-
                     while (cursor.moveToNext()) {
-
                         String PW = cursor.getString(loginPWCol);
-
                         if (loginPW.getText().toString().equals(PW)) {
-
                             cursor.close();
-
                             Bundle bundle = new Bundle();
                             bundle.putString("user", searchId);
-
                             Intent intent = new Intent(getApplicationContext(), CurrentBoBroom.class);
                             intent.putExtras(bundle);
                             startActivity(intent);
                             overridePendingTransition(R.anim.leftin, R.anim.leftout);
-
                         } else {
                             Toast.makeText(LoginActivity.this, "PW가 일치하지 않습니다.",
                                     Toast.LENGTH_SHORT).show();
@@ -282,13 +270,11 @@ public class LoginActivity extends Activity {
                 } else {
                     Toast.makeText(LoginActivity.this, "ID가 일치하지 않습니다.",
                             Toast.LENGTH_SHORT).show();
-                }
-*/
+                }*/
+
 
 
                 /*int logbinPWCol = cursorID.getColumnIndex("pwd");
-
-
                 Intent intent = new Intent(getBaseContext(),
                         CurrentBoBroom.class);
                 startActivityForResult(intent, REQUEST_CODE_ANOTHER);
@@ -297,7 +283,7 @@ public class LoginActivity extends Activity {
             }
         });
 
-        createID.setOnClickListener(new View.OnClickListener() {
+        btnJoin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(),
@@ -305,6 +291,33 @@ public class LoginActivity extends Activity {
                 startActivityForResult(intent, REQUEST_CODE_ANOTHER);
                 overridePendingTransition(R.anim.rightin, R.anim.rightout);
 
+            }
+        });
+    }
+
+    private void login(final String id, final String pwd) {
+        UserHttp.login(id, pwd, new BoolResultHandler() {
+            @Override
+            public void onResponse(Boolean result) {
+                if (result) {
+                    SharedPreferences.Editor editor = pref.edit();
+                    editor.putString("id", id);
+                    editor.putString("pwd", pwd);
+                    editor.commit();
+
+                    Bundle bundle = new Bundle();
+                    bundle.putString("user", id);
+
+                    Intent intent = new Intent(getApplicationContext(), CurrentBoBroom.class);
+                    intent.putExtras(bundle);
+
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(LoginActivity.this, "PW가 일치하지 않습니다.",
+                            Toast.LENGTH_SHORT).show();
+                }
+
+                btnLogin.setEnabled(true);
             }
         });
     }

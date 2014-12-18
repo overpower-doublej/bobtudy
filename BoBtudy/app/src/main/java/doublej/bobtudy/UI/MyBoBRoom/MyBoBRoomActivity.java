@@ -1,6 +1,7 @@
 package doublej.bobtudy.UI.MyBoBRoom;
 
 import android.app.Activity;
+import android.app.NotificationManager;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.database.Cursor;
@@ -26,7 +27,9 @@ import doublej.bobtudy.UI.Chatting.ChattingActivity;
 import doublej.bobtudy.UI.VoteSuggestion.VoteSuggestionActivity;
 import doublej.bobtudy.form.post.Post;
 import doublej.bobtudy.form.user.User;
+import doublej.bobtudy.http.handler.PostHandler;
 import doublej.bobtudy.http.handler.UserHandler;
+import doublej.bobtudy.http.post.PostIdHttp;
 
 public class MyBoBRoomActivity extends Activity {
 
@@ -66,21 +69,71 @@ public class MyBoBRoomActivity extends Activity {
         title = bundle.getString("title");
 //        ID = bundle.getString("user");
 
-        MyDatabase myDB = new MyDatabase(this);
-        SQLiteDatabase db = myDB.getReadableDatabase();
+//        MyDatabase myDB = new MyDatabase(this);
+//        SQLiteDatabase db = myDB.getReadableDatabase();
+
+        int nid = bundle.getInt("nid");
+        if (nid != 0) {
+            // notification 매니저 생성
+            NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+            // 등록된 notification 을 제거 한다.
+            nm.cancel(nid);
+        }
 
         list = (ListView) findViewById(R.id.bobroomMemberList);
         adapter = new IconTextListAdapterBoBroomMember(this);
 
-
         Post post = (Post) bundle.getSerializable("post");
+        if (post == null) {
+            PostIdHttp.getPost(postId, new PostHandler() {
+                @Override
+                public void onResponse(Post post) {
+                    mybobroomTitle.setText(post.getTitle());
+                    mybobroomTime.setText(post.getDate().toLocaleString());
+                    mybobroomPlace.setText(post.getPlace());
+                    mybobroomGoto.setText(post.getMenu());
+                    mybobroomComment.setText(post.getContent());
 
-        mybobroomTitle.setText(post.getTitle());
-        mybobroomTime.setText(post.getDate().toLocaleString());
-        mybobroomPlace.setText(post.getPlace());
-        mybobroomGoto.setText(post.getMenu());
-        mybobroomComment.setText(post.getContent());
+                    final Resources res = getResources();
+                    HashSet<String> userIds = post.getUserIds();
+                    Iterator<String> it = userIds.iterator();
+                    while (it.hasNext()) {
+                        String userId = it.next();
+                        User.findUser(userId, new UserHandler() {
+                            @Override
+                            public void onResponse(User user) {
+                                adapter.addItem(new IconTextItemBoBroomMember(res.getDrawable(R.drawable.member), user.getName(), "출석률 값 입력"));
+                                list.setAdapter(adapter);
+                            }
+                        });
+                    }
 
+                    list.setAdapter(adapter);
+                }
+            });
+        } else {
+            mybobroomTitle.setText(post.getTitle());
+            mybobroomTime.setText(post.getDate().toLocaleString());
+            mybobroomPlace.setText(post.getPlace());
+            mybobroomGoto.setText(post.getMenu());
+            mybobroomComment.setText(post.getContent());
+
+            final Resources res = getResources();
+            HashSet<String> userIds = post.getUserIds();
+            Iterator<String> it = userIds.iterator();
+            while (it.hasNext()) {
+                String userId = it.next();
+                User.findUser(userId, new UserHandler() {
+                    @Override
+                    public void onResponse(User user) {
+                        adapter.addItem(new IconTextItemBoBroomMember(res.getDrawable(R.drawable.member), user.getName(), "출석률 값 입력"));
+                        list.setAdapter(adapter);
+                    }
+                });
+            }
+
+            list.setAdapter(adapter);
+        }
 
         /*String sql = "SELECT * FROM post WHERE title LIKE ?";
         Cursor cursor = db.rawQuery(sql, new String[]{title});
@@ -116,19 +169,6 @@ public class MyBoBRoomActivity extends Activity {
         //int totalMeetCol = cursor.getColumnIndex("totalMeet");
 */
 
-        final Resources res = getResources();
-        HashSet<String> userIds = post.getUserIds();
-        Iterator<String> it = userIds.iterator();
-        while (it.hasNext()) {
-            String userId = it.next();
-            User.findUser(userId, new UserHandler() {
-                @Override
-                public void onResponse(User user) {
-                    adapter.addItem(new IconTextItemBoBroomMember(res.getDrawable(R.drawable.member), user.getName(), "출석률 값 입력"));
-                    list.setAdapter(adapter);
-                }
-            });
-        }
 
         /*for (int i = 0; i < cursor.getCount(); i++) {
             while (cursor.moveToNext()) {
@@ -139,8 +179,6 @@ public class MyBoBRoomActivity extends Activity {
         }
         cursor.close();
         myDB.close();*/
-
-        list.setAdapter(adapter);
 
 
         getOutBoBtudy.setOnClickListener(new View.OnClickListener() {
