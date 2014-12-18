@@ -169,11 +169,12 @@ public class Post implements Serializable {
         final Post post = new Post(id, title, date, menu, place, content, bossId, postedDate);
 
         JSONArray userJsonArr = jsonObject.optJSONArray("users");
-        for (int i = 0; i < userJsonArr.length(); i++) {
-            Object obj = userJsonArr.opt(i);
-            String userId = (String) obj;
-            post.userIds.add(userId);
-        }
+        if (userJsonArr != null)
+            for (int i = 0; i < userJsonArr.length(); i++) {
+                Object obj = userJsonArr.opt(i);
+                String userId = (String) obj;
+                post.userIds.add(userId);
+            }
 
         return post;
     }

@@ -28,7 +28,12 @@ import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import doublej.bobtudy.R;
+import doublej.bobtudy.UI.BoBRoomApplyVote.ApplyVoteBoBtudyActivity;
+import doublej.bobtudy.UI.CurrentBoBRoom.CurrentBoBroom;
 
 /**
  * This {@code IntentService} does the actual handling of the GCM message.
@@ -38,6 +43,10 @@ import doublej.bobtudy.R;
  * wake lock.
  */
 public class GcmIntentService extends IntentService {
+    private static final int CODE_ACCESS_JOIN = 0;
+    private static final int CODE_VOTE_FINISH = 1;
+    private static final int CODE_NEW_CHAT = 2;
+
     public static final int NOTIFICATION_ID = 7147;
     private NotificationManager mNotificationManager;
     NotificationCompat.Builder builder;
@@ -77,7 +86,7 @@ public class GcmIntentService extends IntentService {
                     .equals(messageType)) {
                 // If it's a regular GCM message, do some work.
                 /*
-				 * @@@ REGULAR GCM MESSAGE HANDLER
+                 * @@@ REGULAR GCM MESSAGE HANDLER
 				 */
                 // Post notification of received message.
                 sendNotification(extras);
@@ -92,23 +101,60 @@ public class GcmIntentService extends IntentService {
     // This is just one simple example of what you might choose to do with
     // a GCM message.
     private void sendNotification(Bundle extras) {
-        String msg = extras.getString("msg");
+        int code = extras.getInt("CODE");
+        String dataJsonString = extras.getString("data");
+        try {
+            JSONObject data = new JSONObject(dataJsonString);
 
-        mNotificationManager = (NotificationManager) this
-                .getSystemService(Context.NOTIFICATION_SERVICE);
+            if (code == CODE_ACCESS_JOIN) {
+                String userId = data.getString("userId");
+                String accessId = data.getString("accessId");
+                String postId = data.getString("postId");
 
-        Intent intent = new Intent(this, Gcm.class);
-        intent.putExtra("data", extras);
+                mNotificationManager = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
 
-        PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
-                intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                Intent intent = new Intent(this, ApplyVoteBoBtudyActivity.class);
+                intent.putExtra("userId", userId);
+                intent.putExtra("accessId", accessId);
+                intent.putExtra("postId", postId);
+                intent.putExtra("nid", NOTIFICATION_ID);
 
-        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(
-                this).setSmallIcon(R.drawable.ic_stat_gcm).setContentTitle(msg)
-                .setStyle(new NotificationCompat.BigTextStyle().bigText(msg))
-                .setContentText(msg);
+                PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
+                        intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        mBuilder.setContentIntent(contentIntent);
-        mNotificationManager.notify(NOTIFICATION_ID, mBuilder.build());
+                NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(
+                        this).setSmallIcon(R.drawable.ic_stat_gcm).setContentTitle("밥터디 참가 신청")
+                        .setStyle(new NotificationCompat.BigTextStyle().bigText("title 2!"))
+                        .setContentText(userId);
+
+                mBuilder.setContentIntent(contentIntent);
+                mNotificationManager.notify(NOTIFICATION_ID, mBuilder.build());
+            } else if (code == CODE_NEW_CHAT) {
+
+            } else if (code == CODE_VOTE_FINISH) {
+                String accessId = data.getString("accessId");
+                String postId = data.getString("postId");
+
+                mNotificationManager = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
+
+                Intent intent = new Intent(this, ApplyVoteBoBtudyActivity.class);
+                intent.putExtra("accessId", accessId);
+                intent.putExtra("postId", postId);
+                intent.putExtra("nid", NOTIFICATION_ID);
+
+                PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
+                        intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+                NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(
+                        this).setSmallIcon(R.drawable.ic_stat_gcm).setContentTitle("밥터디 참가 신청 결과")
+                        .setStyle(new NotificationCompat.BigTextStyle().bigText(""))
+                        .setContentText("결과는?!");
+
+                mBuilder.setContentIntent(contentIntent);
+                mNotificationManager.notify(NOTIFICATION_ID, mBuilder.build());
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 }

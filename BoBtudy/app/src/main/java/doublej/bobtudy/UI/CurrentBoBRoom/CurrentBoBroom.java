@@ -18,6 +18,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 import doublej.bobtudy.Control.MyDatabase;
 import doublej.bobtudy.R;
 import doublej.bobtudy.Control.SimpleSideDrawer;
@@ -26,6 +28,11 @@ import doublej.bobtudy.UI.CreateBoBRoom.CreateBoBroom;
 import doublej.bobtudy.UI.MyBoBRoom.MyBoBRoomActivity;
 import doublej.bobtudy.UI.MyInfo.MyInfoActivity;
 import doublej.bobtudy.UI.PreviousBoBRoom.PreviousBoBtudyActivity;
+import doublej.bobtudy.form.post.Post;
+import doublej.bobtudy.http.handler.PostHandler;
+import doublej.bobtudy.http.handler.PostListHandler;
+import doublej.bobtudy.http.post.PostHttp;
+import doublej.bobtudy.http.post.PostIdHttp;
 
 /**
  * Created by YeomJi on 2014. 12. 1..
@@ -68,13 +75,16 @@ public class CurrentBoBroom extends Activity implements View.OnClickListener {
         ID = bundle.getString("user");
 
 
-        MyDatabase myDB = new MyDatabase(this);
-        SQLiteDatabase db = myDB.getReadableDatabase();
+//        MyDatabase myDB = new MyDatabase(this);
+//        SQLiteDatabase db = myDB.getReadableDatabase();
+
+        final Resources res = getResources();
+
 
         list = (ListView) findViewById(R.id.bobroomList);
         adapter = new IconTextListAdapterBoBroom(this);
 
-        String sql = "SELECT title, date, place  FROM post";
+        /*String sql = "SELECT title, date, place  FROM post";
         Cursor cursor = db.rawQuery(sql, null);
 
         int recordCount = cursor.getCount();
@@ -84,7 +94,6 @@ public class CurrentBoBroom extends Activity implements View.OnClickListener {
         int dateCol = cursor.getColumnIndex("date");
         int placeCol = cursor.getColumnIndex("place");
 
-        Resources res = getResources();
 
         for (int i = 0; i < cursor.getCount(); i++) {
             while (cursor.moveToNext()) {
@@ -95,11 +104,22 @@ public class CurrentBoBroom extends Activity implements View.OnClickListener {
                 adapter.addItem(new IconTextItemBoBroom(res.getDrawable(R.drawable.bobroom_image), title, date, place));
 
             }
-        }
+        }*/
 
-        cursor.close();
 
-        list.setAdapter(adapter);
+        PostHttp.list(new PostListHandler() {
+            @Override
+            public void onResponse(ArrayList<Post> posts) {
+                Log.i(tag, "Post count: " + posts.size());
+                for (int i = 0; i < posts.size(); i++) {
+                    Post post = posts.get(i);
+                    adapter.addItem(new IconTextItemBoBroom(res.getDrawable(R.drawable.bobroom_image), post.getTitle(), post.getDate().toLocaleString(), post.getMenu(), post.getId()));
+                }
+                list.setAdapter(adapter);
+            }
+        });
+
+//        cursor.close();
 
 
         mNav = new SimpleSideDrawer(this);
@@ -143,19 +163,28 @@ public class CurrentBoBroom extends Activity implements View.OnClickListener {
 
 
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
             @Override
-            public void onItemClick(AdapterView<?> parent, View v,
-                                    int position, long id) {
-                // TODO Auto-generated method stub
-                IconTextItemBoBroom curItem = (IconTextItemBoBroom) adapter.getItem(position);
+            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                final IconTextItemBoBroom curItem = (IconTextItemBoBroom) adapter.getItem(position);
 
-                Bundle bundle = new Bundle();
-                bundle.putString("title", curItem.getData(0));
-                bundle.putString("user", ID);
+                String postId = curItem.getData()[3];
+                PostIdHttp.getPost(postId, new PostHandler() {
+                    @Override
+                    public void onResponse(Post post) {
+                        Bundle bundle = new Bundle();
+                        bundle.putString("title", curItem.getData(0));
+                        bundle.putString("user", ID);
+                        // Jun
+                        bundle.putSerializable("post", post);
+                        bundle.putString("userId", ID);
+                        bundle.putString("postId", post.getId());
 
-
-                MyDatabase myDB = new MyDatabase(CurrentBoBroom.this);
+                        Intent intent = new Intent(getApplicationContext(), ApplyBoBtudyActivitiy.class);
+                        intent.putExtras(bundle);
+                        startActivity(intent);
+                    }
+                });
+                /*MyDatabase myDB = new MyDatabase(CurrentBoBroom.this);
                 SQLiteDatabase db = myDB.getReadableDatabase();
 
                 String sql = "SELECT boss FROM post WHERE title LIKE ?";
@@ -176,7 +205,7 @@ public class CurrentBoBroom extends Activity implements View.OnClickListener {
                     overridePendingTransition(R.anim.rightin, R.anim.rightout);
                 }
                 cursor.close();
-                myDB.close();
+                myDB.close();*/
             }
         });
 

@@ -32,12 +32,11 @@
         android:padding="7sp"></LinearLayout>
 
 
-
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20sp"
-        android:layout_gravity="center" >
+        android:layout_gravity="center">
 
         <TableRow
             android:layout_width="fill_parent"
@@ -59,7 +58,6 @@
                 android:layout_margin="5sp"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:text="aaaaa"
                 android:textSize="20sp" />
         </TableRow>
 
@@ -82,7 +80,6 @@
                 android:layout_height="match_parent"
                 android:layout_margin="5sp"
                 android:gravity="center"
-                android:text="bbbbb"
                 android:layout_gravity="center"
                 android:textSize="20sp" />
         </TableRow>
@@ -96,8 +93,7 @@
         android:orientation="horizontal"
         android:background="#ff4433"
         android:layout_marginTop="10sp"
-        android:padding="2sp">
-    </LinearLayout>
+        android:padding="2sp"></LinearLayout>
 
 
     <TextView
@@ -107,7 +103,6 @@
         android:layout_gravity="center"
         android:textSize="20sp"
         android:text="밥터디원 수락을 하시겠습니까?" />
-
 
 
     <LinearLayout

@@ -121,8 +121,6 @@ public class CreateBoBroom extends Activity {
                         startActivity(intent);
                         overridePendingTransition(R.anim.rightin, R.anim.rightout);
 
-                        Toast.makeText(getApplicationContext(), "asdfsadf", Toast.LENGTH_SHORT).show();
-
                         finish();
                     }
                 });
