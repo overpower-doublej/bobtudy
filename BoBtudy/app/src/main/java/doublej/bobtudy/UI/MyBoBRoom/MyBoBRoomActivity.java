@@ -187,6 +187,7 @@ public class MyBoBRoomActivity extends Activity {
                 //처리할 이벤트
                 Bundle bundle = new Bundle();
                 bundle.putString("title", title);
+                bundle.putString("post_id", post_id);
 
                 Intent intent = new Intent(getApplicationContext(), BoBtudyParticipationActivity.class);
                 intent.putExtras(bundle);

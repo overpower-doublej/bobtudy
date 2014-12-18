@@ -3,9 +3,9 @@ package doublej.bobtudy.UI.BoBtudyParticipationCheck;
 import android.graphics.drawable.Drawable;
 
 /**
- * Created by YeomJi on 14. 12. 12..
+ * Created by YeomJi on 14. 12. 18..
  */
-public class IconTextItemNewMember {
+public class IconTextItemParticipation {
 
     /**
      * Icon
@@ -18,12 +18,6 @@ public class IconTextItemNewMember {
     private String[] mData;
 
     /**
-     * IsChecked
-     */
-    private boolean mCheck;
-
-
-    /**
      * True if this item is selectable
      */
     private boolean mSelectable = true;
@@ -34,7 +28,7 @@ public class IconTextItemNewMember {
      * @param icon
      * @param obj
      */
-    public IconTextItemNewMember(Drawable icon, String[] obj) {
+    public IconTextItemParticipation(Drawable icon, String[] obj) {
         mIcon = icon;
         mData = obj;
     }
@@ -43,15 +37,14 @@ public class IconTextItemNewMember {
      * Initialize with icon and strings
      *
      * @param icon
-     * @param obj
-     * @param check
+     * @param obj01
      */
-    public IconTextItemNewMember(Drawable icon, String obj, boolean check) {
+    public IconTextItemParticipation(Drawable icon, String obj01) {
         mIcon = icon;
 
         mData = new String[3];
-        mData[0] = obj;
-        mCheck = check;
+        mData[0] = obj01;
+
     }
 
     /**
@@ -77,6 +70,11 @@ public class IconTextItemNewMember {
         return mData;
     }
 
+
+    public String[] getCheck() {
+        return mData;
+    }
+
     /**
      * Get data
      */
@@ -98,15 +96,6 @@ public class IconTextItemNewMember {
     }
 
     /**
-     * Set check
-     *
-     * @param check
-     */
-    public void setCheck(boolean check) {
-        mCheck = check;
-    }
-
-    /**
      * Set icon
      *
      * @param icon
@@ -124,17 +113,13 @@ public class IconTextItemNewMember {
         return mIcon;
     }
 
-    public boolean getCheck() {
-        return mCheck;
-    }
-
     /**
      * Compare with the input object
      *
      * @param other
      * @return
      */
-    public int compareTo(IconTextItemNewMember other) {
+    public int compareTo(IconTextItemParticipation other) {
         if (mData != null) {
             String[] otherData = other.getData();
             if (mData.length == otherData.length) {
@@ -152,4 +137,6 @@ public class IconTextItemNewMember {
 
         return 0;
     }
+
+
 }

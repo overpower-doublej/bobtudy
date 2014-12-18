@@ -8,24 +8,25 @@ import android.widget.BaseAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
+
 /**
- * Created by YeomJi on 14. 12. 12..
+ * Created by YeomJi on 14. 12. 18..
  */
-public class IconTextListAdapterNewMember extends BaseAdapter {
+public class IconTextListAdapterParticipation  extends BaseAdapter {
 
     private Context mContext;
 
-    private List<IconTextItemNewMember> mItems = new ArrayList<IconTextItemNewMember>();
+    private List<IconTextItemParticipation> mItems = new ArrayList<IconTextItemParticipation>();
 
-    public IconTextListAdapterNewMember(Context context) {
+    public IconTextListAdapterParticipation(Context context) {
         mContext = context;
     }
 
-    public void addItem(IconTextItemNewMember it) {
+    public void addItem(IconTextItemParticipation it) {
         mItems.add(it);
     }
 
-    public void setListItems(List<IconTextItemNewMember> lit) {
+    public void setListItems(List<IconTextItemParticipation> lit) {
         mItems = lit;
     }
 
@@ -54,17 +55,17 @@ public class IconTextListAdapterNewMember extends BaseAdapter {
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
-        IconTextViewNewMember itemView;
+        IconTextViewParticipation itemView;
         if (convertView == null) {
-            itemView = new IconTextViewNewMember(mContext, mItems.get(position));
+            itemView = new IconTextViewParticipation(mContext, mItems.get(position));
         } else {
-            itemView = (IconTextViewNewMember) convertView;
+            itemView = (IconTextViewParticipation) convertView;
 
             itemView.setIcon(mItems.get(position).getIcon());
             itemView.setText(0, mItems.get(position).getData(0));
-
         }
 
         return itemView;
     }
+
 }

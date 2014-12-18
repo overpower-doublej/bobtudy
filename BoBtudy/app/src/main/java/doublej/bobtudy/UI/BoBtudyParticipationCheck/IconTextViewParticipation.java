@@ -3,7 +3,6 @@ package doublej.bobtudy.UI.BoBtudyParticipationCheck;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
-import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -11,9 +10,9 @@ import android.widget.TextView;
 import doublej.bobtudy.R;
 
 /**
- * Created by YeomJi on 14. 12. 12..
+ * Created by YeomJi on 14. 12. 18..
  */
-public class IconTextViewNewMember extends LinearLayout {
+public class IconTextViewParticipation extends LinearLayout {
 
     /**
      * Icon
@@ -23,18 +22,9 @@ public class IconTextViewNewMember extends LinearLayout {
     /**
      * TextView 01
      */
-    private TextView mText;
+    private TextView mText01;
 
-    /**
-     * TextView 02
-     */
-    private CheckBox mCheck;
-
-    /**
-     * TextView 03
-     */
-
-    public IconTextViewNewMember(Context context, IconTextItemNewMember aItem) {
+    public IconTextViewParticipation(Context context, IconTextItemParticipation aItem) {
         super(context);
 
         // Layout Inflation
@@ -45,12 +35,10 @@ public class IconTextViewNewMember extends LinearLayout {
         mIcon = (ImageView) findViewById(R.id.iconItemNewMember);
         mIcon.setImageDrawable(aItem.getIcon());
 
-        // Set Text
-        mText = (TextView) findViewById(R.id.dataItem01NewMember);
-        mText.setText(aItem.getData(0));
+        // Set Text 01
+        mText01 = (TextView) findViewById(R.id.dataItem01NewMember);
+        mText01.setText(aItem.getData(0));
 
-        // Set Check
-        mCheck = (CheckBox) findViewById(R.id.participationCheck);
 
 
     }
@@ -63,7 +51,7 @@ public class IconTextViewNewMember extends LinearLayout {
      */
     public void setText(int index, String data) {
         if (index == 0) {
-            mText.setText(data);
+            mText01.setText(data);
         } else {
             throw new IllegalArgumentException();
         }

@@ -52,10 +52,12 @@
                 android:orientation="horizontal"
                 android:padding="2sp"></LinearLayout>
 
+
             <ListView
                 android:id="@+id/bobroomParticipationList"
                 android:layout_width="match_parent"
                 android:layout_height="300sp"></ListView>
+
 
             <LinearLayout
                 android:layout_width="match_parent"

@@ -229,7 +229,7 @@ public class LoginActivity extends Activity {
 
 
                  /* 서버 */
-                UserHttp.login(userId, pwd, new BoolResultHandler() {
+                /*UserHttp.login(userId, pwd, new BoolResultHandler() {
                     @Override
                     public void onResponse(Boolean result) {
                         if (result) {
@@ -247,11 +247,11 @@ public class LoginActivity extends Activity {
 
                         enterLogin.setEnabled(true);
                     }
-                });
+                });*/
 
 
                 /* 로그인 내장디비*/
-                /*String searchId = loginID.getText().toString();
+                String searchId = loginID.getText().toString();
 
                 Cursor cursor = db.rawQuery("SELECT * FROM myInfo WHERE id LIKE ?", new String[]{searchId});
 
@@ -283,7 +283,7 @@ public class LoginActivity extends Activity {
                 } else {
                     Toast.makeText(LoginActivity.this, "ID가 일치하지 않습니다.",
                             Toast.LENGTH_SHORT).show();
-                }*/
+                }
 
 
 
