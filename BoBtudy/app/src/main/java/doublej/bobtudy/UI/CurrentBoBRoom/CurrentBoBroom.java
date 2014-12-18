@@ -189,6 +189,7 @@ public class CurrentBoBroom extends Activity implements View.OnClickListener {
 
             Bundle bundle = new Bundle();
             bundle.putString("user", ID);
+
             Intent intent = new Intent(getApplicationContext(), MyBoBRoomActivity.class);
             intent.putExtras(bundle);
             startActivity(intent);

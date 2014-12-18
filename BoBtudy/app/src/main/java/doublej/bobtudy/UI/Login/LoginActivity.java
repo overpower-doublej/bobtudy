@@ -227,6 +227,8 @@ public class LoginActivity extends Activity {
                 String pwd = loginPW.getText().toString();
 
 
+
+                 /* 서버 */
                 UserHttp.login(userId, pwd, new BoolResultHandler() {
                     @Override
                     public void onResponse(Boolean result) {

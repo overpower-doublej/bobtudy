@@ -30,7 +30,7 @@ public class MyBoBRoomActivity extends Activity {
     private final String tag = "MyBoBRoomActivity";
 
 
-    static String ID, post_id;
+    static String ID, post_id, title;
 
 
     ListView list;
@@ -57,7 +57,7 @@ public class MyBoBRoomActivity extends Activity {
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
-        String bobRoomTitle = bundle.getString("title");
+        title = bundle.getString("title");
         ID = bundle.getString("user");
 
         MyDatabase myDB = new MyDatabase(this);
@@ -67,7 +67,7 @@ public class MyBoBRoomActivity extends Activity {
         adapter = new IconTextListAdapterBoBroomMember(this);
 
         String sql = "SELECT * FROM post WHERE title LIKE ?";
-        Cursor cursor = db.rawQuery(sql, new String[]{bobRoomTitle});
+        Cursor cursor = db.rawQuery(sql, new String[]{title});
 
         int idCol = cursor.getColumnIndex("id");
         int titleCol = cursor.getColumnIndex("title");
@@ -134,7 +134,7 @@ public class MyBoBRoomActivity extends Activity {
                 MyDatabase myDB = new MyDatabase(MyBoBRoomActivity.this);
                 SQLiteDatabase db = myDB.getReadableDatabase();
 
-                db.execSQL("DELETE FROM post_user WHERE postId = "+post_id+"and userId = '"+ ID +"';");
+                db.execSQL("DELETE FROM post_user WHERE postId = "+post_id+" and userId = '"+ ID +"';");
 
                 myDB.close();
 
@@ -185,9 +185,12 @@ public class MyBoBRoomActivity extends Activity {
         switch (item.getItemId()) {
             case 0:
                 //처리할 이벤트
-                Intent intent = new Intent(getBaseContext(),
-                        BoBtudyParticipationActivity.class);
-                startActivityForResult(intent, REQUEST_CODE_ANOTHER);
+                Bundle bundle = new Bundle();
+                bundle.putString("title", title);
+
+                Intent intent = new Intent(getApplicationContext(), BoBtudyParticipationActivity.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
                 overridePendingTransition(R.anim.rightin, R.anim.rightout);
                 break;
 
