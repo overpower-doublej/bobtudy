@@ -33,20 +33,18 @@
         android:padding="7sp"></LinearLayout>
 
 
-
     <ScrollView
-        android:layout_width="fill_parent"
-        android:layout_height="0sp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:layout_weight="1">
-
 
         <TextView
             android:id="@+id/ChattingContent"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="20sp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:textSize="16sp"
-            android:singleLine="false"/>
+            android:singleLine="false" />
 
     </ScrollView>
 
@@ -54,15 +52,15 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="2sp">
+        android:orientation="horizontal">
 
         <EditText
             android:id="@+id/ChattingInputContent"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:ems="15"
-            android:layout_margin="10sp"
+            android:layout_margin="10dp"
             android:textSize="16sp"
             android:inputType="textPersonName" />
 
@@ -70,8 +68,7 @@
             android:id="@+id/ChattingInputOK"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10sp"
-            android:layout_weight="1"
+            android:layout_marginRight="10dp"
             android:background="@anim/selector"
             android:gravity="center"
             android:text=" 입력"

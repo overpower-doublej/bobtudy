@@ -2,8 +2,10 @@ package doublej.bobtudy.UI.CreateBoBRoom;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.JsonWriter;
 import android.view.View;
 import android.view.Window;
@@ -113,6 +115,11 @@ public class CreateBoBroom extends Activity {
                 PostHttp.create(newPost, new PostHandler() {
                     @Override
                     public void onResponse(Post post) {
+                        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(CreateBoBroom.this);
+                        SharedPreferences.Editor editor = pref.edit();
+                        editor.putString("mypost", post.getId());
+                        editor.commit();
+
                         Bundle bundle = new Bundle();
                         bundle.putSerializable("post", post);
                         bundle.putString("title", post.getTitle());

@@ -23,7 +23,9 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
@@ -32,6 +34,7 @@ import org.json.JSONObject;
 
 import doublej.bobtudy.R;
 import doublej.bobtudy.UI.BoBRoomApplyVote.ApplyVoteBoBtudyActivity;
+import doublej.bobtudy.UI.Chatting.ChattingActivity;
 import doublej.bobtudy.UI.MyBoBRoom.MyBoBRoomActivity;
 import doublej.bobtudy.http.post.PostIdHttp;
 
@@ -126,13 +129,11 @@ public class GcmIntentService extends IntentService {
 
                 NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(
                         this).setSmallIcon(R.drawable.ic_stat_gcm).setContentTitle("밥터디 참가 신청")
-                        .setStyle(new NotificationCompat.BigTextStyle().bigText("title 2!"))
+                        .setStyle(new NotificationCompat.BigTextStyle().bigText(userId))
                         .setContentText(userId);
 
                 mBuilder.setContentIntent(contentIntent);
                 mNotificationManager.notify(NOTIFICATION_ID, mBuilder.build());
-            } else if (code == CODE_NEW_CHAT) {
-
             } else if (code == CODE_VOTE_FINISH) {
                 String accessId = data.getString("accessId");
                 String postId = data.getString("postId");
@@ -145,6 +146,11 @@ public class GcmIntentService extends IntentService {
                     intent.putExtra("accessId", accessId);
                     intent.putExtra("postId", postId);
                     intent.putExtra("nid", NOTIFICATION_ID);
+
+                    SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(GcmIntentService.this);
+                    SharedPreferences.Editor editor = pref.edit();
+                    editor.putString("mypost", postId);
+                    editor.commit();
 
                     PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
                             intent, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -171,6 +177,32 @@ public class GcmIntentService extends IntentService {
                             .setContentText("ㅠㅠ");
 
 //                    mBuilder.setContentIntent(contentIntent);
+                    mNotificationManager.notify(NOTIFICATION_ID, mBuilder.build());
+                }
+            } else if (code == CODE_NEW_CHAT) {
+                String postId = data.getString("postId");
+                String userId = data.getString("userId");
+                String msg = data.getString("msg");
+
+                SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(GcmIntentService.this);
+                SharedPreferences.Editor editor = pref.edit();
+                String id = pref.getString("id", "");
+
+                if (id != userId) {
+                    mNotificationManager = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
+
+                    Intent intent = new Intent(this, ChattingActivity.class);
+                    intent.putExtra("nid", NOTIFICATION_ID);
+
+                    PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
+                            intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+                    NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(
+                            this).setSmallIcon(R.drawable.ic_stat_gcm).setContentTitle(userId)
+                            .setStyle(new NotificationCompat.BigTextStyle().bigText(""))
+                            .setContentText(msg);
+
+                    mBuilder.setContentIntent(contentIntent);
                     mNotificationManager.notify(NOTIFICATION_ID, mBuilder.build());
                 }
             }

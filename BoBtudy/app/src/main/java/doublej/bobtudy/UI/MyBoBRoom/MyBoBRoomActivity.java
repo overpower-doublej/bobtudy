@@ -3,10 +3,12 @@ package doublej.bobtudy.UI.MyBoBRoom;
 import android.app.Activity;
 import android.app.NotificationManager;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -37,9 +39,7 @@ public class MyBoBRoomActivity extends Activity {
 
     private final String tag = "MyBoBRoomActivity";
 
-
     static String ID, post_id, title;
-
 
     ListView list;
     IconTextListAdapterBoBroomMember adapter;
@@ -84,7 +84,37 @@ public class MyBoBRoomActivity extends Activity {
         adapter = new IconTextListAdapterBoBroomMember(this);
 
         Post post = (Post) bundle.getSerializable("post");
-        if (post == null) {
+        if (postId == null && post == null) {
+            SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(MyBoBRoomActivity.this);
+            postId = pref.getString("mypost", "");
+
+            PostIdHttp.getPost(postId, new PostHandler() {
+                @Override
+                public void onResponse(Post post) {
+                    mybobroomTitle.setText(post.getTitle());
+                    mybobroomTime.setText(post.getDate().toLocaleString());
+                    mybobroomPlace.setText(post.getPlace());
+                    mybobroomGoto.setText(post.getMenu());
+                    mybobroomComment.setText(post.getContent());
+
+                    final Resources res = getResources();
+                    HashSet<String> userIds = post.getUserIds();
+                    Iterator<String> it = userIds.iterator();
+                    while (it.hasNext()) {
+                        String userId = it.next();
+                        User.findUser(userId, new UserHandler() {
+                            @Override
+                            public void onResponse(User user) {
+                                adapter.addItem(new IconTextItemBoBroomMember(res.getDrawable(R.drawable.member), user.getName(), "출석률 값 입력"));
+                                list.setAdapter(adapter);
+                            }
+                        });
+                    }
+
+                    list.setAdapter(adapter);
+                }
+            });
+        } else if (post == null) {
             PostIdHttp.getPost(postId, new PostHandler() {
                 @Override
                 public void onResponse(Post post) {
@@ -207,7 +237,6 @@ public class MyBoBRoomActivity extends Activity {
                 intent.putExtras(bundle);
                 startActivity(intent);
                 overridePendingTransition(R.anim.rightin, R.anim.rightout);
-
             }
         });
 

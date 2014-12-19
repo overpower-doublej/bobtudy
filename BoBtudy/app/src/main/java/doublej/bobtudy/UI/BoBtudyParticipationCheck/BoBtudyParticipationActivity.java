@@ -67,6 +67,8 @@ public class BoBtudyParticipationActivity extends Activity {
         list = (ListView) findViewById(R.id.bobroomParticipationList);
         adapter = new IconTextListAdapterParticipation(this);
 
+        if (post_id == null)
+            post_id = "post id";
         String sql = "SELECT * FROM post_user ps, user u  WHERE ps.userId = u.id and ps.postId LIKE ?";
         Cursor cursor = db.rawQuery(sql, new String[]{post_id});
 

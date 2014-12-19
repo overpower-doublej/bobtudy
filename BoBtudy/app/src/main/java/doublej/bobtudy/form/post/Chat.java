@@ -19,9 +19,13 @@ public class Chat {
         this.msg = msg;
     }
 
+    public ISODate getDate() {
+        return this.date;
+    }
+
     @Override
     public String toString() {
-        return date.toISOString() + "/" + userId + ": " + msg;
+        return date.getHours() + ":" + date.getMinutes() + " - " + userId + ": " + msg;
     }
 
     public static Chat parseJsonObj(JSONObject jsonObject) {
